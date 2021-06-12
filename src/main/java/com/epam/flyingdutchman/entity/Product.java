@@ -3,7 +3,7 @@ package com.epam.flyingdutchman.entity;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Entity{
     private long productId;
     private long name;
     private String imagePath;

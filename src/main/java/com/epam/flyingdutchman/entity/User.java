@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Aliaksei Halkin
  * @version 1.0
  */
-public class User {
+public class User implements Entity{
     public static final int ROLE_ADMIN = 1;
     public static final int ROLE_MANAGER = 2;
     public static final int ROLE_COOK = 3;

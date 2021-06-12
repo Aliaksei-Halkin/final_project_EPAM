@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Order {
+public class Order implements Entity{
     private long orderId;
     private String userName;
     private LocalDateTime orderDate;
