@@ -1,11 +1,11 @@
-DROP database is exists flying_dutchman;
+DROP database if exists flying_dutchman;
 CREATE database flying_dutchman;
 USE flying_dutchman;
 CREATE TABLE products
 (
     product_id   int primary key auto_increment,
     product_name varchar(100)  not null,
-    image_path   varchar(100),
+    image_path   varchar(100) default 'src/main/webapp/images/logo.jpg',
     cost         decimal(5, 2) not null,
     description  text(2000),
     active       boolean default true
@@ -15,9 +15,9 @@ CREATE TABLE users
     username     varchar(50) primary key not null,
     password     varchar(50)             not null,
     first_name   varchar(50)             not null,
-    last_name    varchar(50),
-    phone_number varchar(22)             not null,
-    e_mail       varchar(50)             not null,
+    last_name    varchar(50) default 'not filled',
+    phone_number varchar(22)             not null unique,
+    e_mail       varchar(50)             not null unique ,
     user_role    int     default 4,
     active       boolean default true
 );
