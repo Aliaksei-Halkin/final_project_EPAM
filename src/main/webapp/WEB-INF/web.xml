@@ -19,7 +19,7 @@
   </context-param>
   <context-param>
     <param-name>dbPassword</param-name>
-    <param-value>admin</param-value>
+    <param-value>root</param-value>
   </context-param>
   <context-param>
     <param-name>redirectLink</param-name>
