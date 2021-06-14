@@ -5,7 +5,7 @@
                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID"
          version="3.0">
-  <display-name>H-plus</display-name>
+  <display-name>FlyingDutchman</display-name>
   <error-page>
     <location>/jsp/error.jsp</location>
   </error-page>
