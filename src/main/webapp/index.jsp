@@ -183,8 +183,8 @@
     </div>
 </section>
 
-<%--<jsp:include page="jsp/searchSection.jsp"/>--%>
-<%--<jsp:include page="jsp/footer.jsp"/>--%>
+<jsp:include page="jsp/searchSection.jsp"/>
+<jsp:include page="jsp/footer.jsp"/>
 
 </body>
 </html>
