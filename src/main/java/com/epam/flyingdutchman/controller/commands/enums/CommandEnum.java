@@ -11,7 +11,6 @@ public enum CommandEnum {
     CommandEnum(Command command) {
         this.command = command;
     }
-
     public Command getCommand() {
         return command;
     }
