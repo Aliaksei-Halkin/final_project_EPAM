@@ -8,7 +8,7 @@
 <nav class="nav" role="navigation">
   <div class="container nav-elements">
     <div class="branding">
-      <a href="#home"><img src="images/hpluslogo.svg" alt="Logo - H Plus Sports"></a>
+      <a href="#home"><img src="images/logo.jpg" alt="Logo - Fl.Dutchman"></a>
     </div>
     <ul class="navbar">
       <li>

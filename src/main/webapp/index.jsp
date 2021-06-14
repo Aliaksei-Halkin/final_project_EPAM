@@ -37,78 +37,77 @@
     </div>
     <ul class="product-list">
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-a.jpg" alt="Vitamin A - Product Photo">
-            <h2 class="product-name">Vitamin A</h2>
+            <img class="product-image" src="images/img1.jpg" alt="Food1-photo Octopus tentacles">
+            <h2 class="product-name">Octopus tentacles</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-bcomplex.jpg" alt="B Complex - Product Photo">
-            <h2 class="product-name">Vitamin-B Complex</h2>
+            <img class="product-image" src="images/img2.jpg" alt="Food2-photo Tiger prawns grilled">
+            <h2 class="product-name">Tiger prawns grilled</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-blueberry.jpg" alt="Blueberry Mineral Water - Product Photo">
-            <h2 class="product-name">Blueberry Mineral Water</h2>
+            <img class="product-image" src="images/img3.jpg" alt="Food3-photo Tuna grilled">
+            <h2 class="product-name">Tuna grilled</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-c.jpg" alt="Vitamin C - Product Photo">
-            <h2 class="product-name">Vitamin C</h2>
+            <img class="product-image" src="images/img4.jpg" alt="Food4-photo Squid grilled">
+            <h2 class="product-name">Squid grilled</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/proteinbar-chocolate.jpg" alt="Protein Bar Chocolate - Product Photo">
-            <h2 class="product-name">Chocolate Protein Bar</h2>
+            <img class="product-image" src="images/img5.jpg" alt="Chilean mussels in wine sauce - Product Photo">
+            <h2 class="product-name">Chilean mussels</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-calcium.jpg" alt="Vitamin Calcium - Product Photo">
-            <h2 class="product-name">Calcium Vitamin</h2>
+            <img class="product-image" src="images/img6.jpg" alt="Giant mussels baked in dough - Product Photo">
+            <h2 class="product-name">Giant mussels baked in dough</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-d.jpg" alt="Vitamin D - Product Photo">
-            <h2 class="product-name">Vitamin D</h2>
+            <img class="product-image" src="images/img7.jpg" alt="Cod fillet in cream sauce - Product Photo">
+            <h2 class="product-name">Cod fillet in cream sauce</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-flaxseed-oil.jpg" alt="Flaxseed Oil - Product Photo">
-            <h2 class="product-name">Flaxseed Oil Vitamin</h2>
+            <img class="product-image" src="images/img8.jpg" alt="Cappuccino coffee - Product Photo">
+            <h2 class="product-name">Cappuccino coffee</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-iron.jpg" alt="Vitamin Iron - Product Photo">
-            <h2 class="product-name">Iron Vitamin</h2>
+            <img class="product-image" src="images/img9.jpg" alt="Americano coffee - Product Photo">
+            <h2 class="product-name">Americano coffee</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-lemonlime.jpg" alt="Mineral Water Lemon Lime - Product Photo">
-            <h2 class="product-name">Lemon Lime Mineral Water</h2>
+            <img class="product-image" src="images/img12.jpg" alt="Caesar salad - Product Photo">
+            <h2 class="product-name">Caesar salad</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-magnesium.jpg" alt="Vitamin Magnesium - Product Photo">
-            <h2 class="product-name">Magnesium Vitamin</h2>
+            <img class="product-image" src="images/img13.jpg" alt="Mashed potatoes - Product Photo">
+            <h2 class="product-name">Mashed potatoes</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/vitamin-multi.jpg" alt="Vitamin Multivitamin - Product Photo">
-            <h2 class="product-name">Multi-vitamin</h2>
+            <img class="product-image" src="images/img14.jpg" alt="Basmati rice - Product Photo">
+            <h2 class="product-name">Basmati rice</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/proteinbar-peanutbutter.jpg"
-                 alt="Vitamin Protein Bar Peanut Butter - Product Photo">
-            <h2 class="product-name">Peanut Butter Protein Bar</h2>
+            <img class="product-image" src="images/img10.jpg" alt="Green tea - Product Photo">
+            <h2 class="product-name">Green tea</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-strawberry.jpg"
-                 alt="Mineral Water Strawberry - Product Photo">
-            <h2 class="product-name">Strawberry Mineral Water</h2>
+            <img class="product-image" src="images/img11.jpg"
+                 alt="Black tea - Product Photo">
+            <h2 class="product-name">Black tea</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/proteinbar-lemon.jpg" alt="Protein Bar Lemon - Product Photo">
-            <h2 class="product-name">Lemon Protein Bar</h2>
+            <img class="product-image" src="images/img15.jpg" alt="Soup Tam-Yam - Product Photo">
+            <h2 class="product-name">Soup Tam-Yam</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-orange.jpg" alt="Mineral Water Orange - Product Photo">
-            <h2 class="product-name">Orange Mineral Water</h2>
+            <img class="product-image" src="images/img16.jpg" alt="Beer Krušovice - Product Photo">
+            <h2 class="product-name">OBeer Krušovice</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-peach.jpg" alt="Mineral Water Peach - Product Photo">
-            <h2 class="product-name">Peach Mineral Water</h2>
+            <img class="product-image" src="images/img7.jpg" alt="Cod fillet in cream sauce - Product Photo">
+            <h2 class="product-name">Cod fillet in cream sauce</h2>
         </li>
         <li class="product-item">
-            <img class="product-image" src="images/mineralwater-raspberry.jpg" alt="Mineral Water Raspberry - Product Photo">
-            <h2 class="product-name">Raspberry Mineral Water</h2>
+            <img class="product-image" src="images/img1.jpg" alt="Food1-photo Octopus tentacles">
+            <h2 class="product-name">Octopus tentacles</h2>
         </li>
     </ul>
 </section>
@@ -184,8 +183,8 @@
     </div>
 </section>
 
-<jsp:include page="jsp/searchSection.jsp"/>
-<jsp:include page="jsp/footer.jsp"/>
+<%--<jsp:include page="jsp/searchSection.jsp"/>--%>
+<%--<jsp:include page="jsp/footer.jsp"/>--%>
 
 </body>
 </html>
