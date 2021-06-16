@@ -18,16 +18,7 @@
 
 <jsp:include page="jsp/headerForMainPage.jsp"/>
 
-<section id="history" class="section">
-    <div class="container">
-        <div class="text-content">
-            <h2 class="headline"><fmt:message key="ui.headline.companyHistory"/></h2>
-            <p><fmt:message key="ui.history.firstPart"/></p>
-            <p><fmt:message key="ui.history.secondPart"/></p>
-            <p><fmt:message key="ui.history.thirdPart"/></p>
-        </div>
-    </div>
-</section>
+
 
 <section id="products" class="section">
     <header class="imageheader"></header>
@@ -99,7 +90,7 @@
         </li>
         <li class="product-item">
             <img class="product-image" src="images/img16.jpg" alt="Beer Krušovice - Product Photo">
-            <h2 class="product-name">OBeer Krušovice</h2>
+            <h2 class="product-name">Beer Krušovice</h2>
         </li>
         <li class="product-item">
             <img class="product-image" src="images/img7.jpg" alt="Cod fillet in cream sauce - Product Photo">
@@ -182,7 +173,16 @@
         </div>
     </div>
 </section>
-
+<section id="history" class="section">
+    <div class="container">
+        <div class="text-content">
+            <h2 class="headline"><fmt:message key="ui.headline.companyHistory"/></h2>
+            <p><fmt:message key="ui.history.firstPart"/></p>
+            <p><fmt:message key="ui.history.secondPart"/></p>
+            <p><fmt:message key="ui.history.thirdPart"/></p>
+        </div>
+    </div>
+</section>
 <jsp:include page="jsp/searchSection.jsp"/>
 <jsp:include page="jsp/footer.jsp"/>
 

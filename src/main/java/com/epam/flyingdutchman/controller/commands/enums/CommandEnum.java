@@ -1,10 +1,12 @@
 package com.epam.flyingdutchman.controller.commands.enums;
 
 import com.epam.flyingdutchman.controller.commands.Command;
+import com.epam.flyingdutchman.controller.commands.impl.LanguageCommand;
 import com.epam.flyingdutchman.controller.commands.impl.RegisterUserCommand;
 
 public enum CommandEnum {
-    REGISTER_USER(new RegisterUserCommand());
+    REGISTER_USER(new RegisterUserCommand()),
+    LANGUAGE(new LanguageCommand());
 
     private final Command command;
 

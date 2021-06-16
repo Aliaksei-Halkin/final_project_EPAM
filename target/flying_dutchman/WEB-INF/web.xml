@@ -6,9 +6,9 @@
          id="WebApp_ID"
          version="3.0">
   <display-name>FlyingDutchman</display-name>
-<!--  <error-page>-->
-<!--    <location>/jsp/error.jsp</location>-->
-<!--  </error-page>-->
+  <error-page>
+    <location>/jsp/error.jsp</location>
+  </error-page>
   <context-param>
     <param-name>dbUrl</param-name>
     <param-value>jdbc:mysql://127.0.0.1:3306</param-value>
