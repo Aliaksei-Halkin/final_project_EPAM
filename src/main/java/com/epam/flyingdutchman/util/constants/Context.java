@@ -6,6 +6,7 @@ public class Context {
     public static final String REQUEST_ERROR_MESSAGE = "errorMessage";
     public static final String REQUEST_LANGUAGE = "language";
     public static final String SESSION_LANGUAGE = "language";
+    public static final String HOME = "home";
 
 
 }
