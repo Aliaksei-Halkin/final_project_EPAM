@@ -1,16 +1,14 @@
 package com.epam.flyingdutchman.controller.commands.enums;
 
 import com.epam.flyingdutchman.controller.commands.Command;
-import com.epam.flyingdutchman.controller.commands.impl.HomePageCommand;
-import com.epam.flyingdutchman.controller.commands.impl.LanguageCommand;
-import com.epam.flyingdutchman.controller.commands.impl.RedirectToGitHub;
-import com.epam.flyingdutchman.controller.commands.impl.RegisterUserCommand;
+import com.epam.flyingdutchman.controller.commands.impl.*;
 
 public enum CommandEnum {
     REGISTER_USER(new RegisterUserCommand()),
     LANGUAGE(new LanguageCommand()),
     HOME(new HomePageCommand()),
-    REDIRECT(new RedirectToGitHub())
+    REDIRECT(new RedirectToGitHub()),
+    SEARCH(new SearchCommand())
     ;
 
     private final Command command;
