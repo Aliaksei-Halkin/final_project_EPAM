@@ -11,6 +11,6 @@ public class Context {
     public static final String SESSION_LANGUAGE = "language";
     public static final String HOME = "home";
     public static final String REQUEST_SEARCH = "searchString";
-
+    public static final String SESSION_SEARCH_STRING = "searchString";
 
 }
