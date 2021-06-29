@@ -12,5 +12,7 @@ public class Context {
     public static final String HOME = "home";
     public static final String REQUEST_SEARCH = "searchString";
     public static final String SESSION_SEARCH_STRING = "searchString";
+    public static final String REQUEST_PAGE = "page";
+    public static final String REQUEST_CURRENT_INDEX = "index";
 
 }
