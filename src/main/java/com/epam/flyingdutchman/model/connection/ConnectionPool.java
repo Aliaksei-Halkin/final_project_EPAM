@@ -12,6 +12,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class ConnectionPool {
     private static final int POOL_SIZE = 10;
+    private static final ConnectionPool pool = new ConnectionPool();
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenConnections;
 
@@ -33,6 +34,15 @@ public class ConnectionPool {
             e.printStackTrace();
 
         }
+    }
+
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
+    public static ConnectionPool getInstance() {
+        return pool;
     }
 
     public Connection getConnection() {

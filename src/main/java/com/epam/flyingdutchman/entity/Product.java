@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Product implements Entity{
     private long productId;
-    private long name;
+    private String name;
     private String imagePath;
     private BigDecimal cost;
     private String description;
@@ -14,7 +14,7 @@ public class Product implements Entity{
     public Product() {
     }
 
-    public Product(long name, String imagePath, BigDecimal cost, String description, boolean active) {
+    public Product(String name, String imagePath, BigDecimal cost, String description, boolean active) {
         this.name = name;
         this.imagePath = imagePath;
         this.cost = cost;
@@ -30,11 +30,11 @@ public class Product implements Entity{
         this.productId = productId;
     }
 
-    public long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
