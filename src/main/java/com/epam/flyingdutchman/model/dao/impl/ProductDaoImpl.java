@@ -4,10 +4,7 @@ import com.epam.flyingdutchman.entity.Product;
 import com.epam.flyingdutchman.model.connection.ConnectionPool;
 import com.epam.flyingdutchman.model.dao.ProductDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +19,8 @@ public class ProductDaoImpl implements ProductDao {
     private static final String ANY_CHAR = "%";
     private static final int INVALID_COUNT = -1;
     private static final int INVALID_ID = -1;
+    private static final int SELECT_ALL_LIMIT_CURRENT_INDEX = 1;
+    private static final int SELECT_ALL_LIMIT_ON_PAGE_INDEX = 2;
 
     private ProductDaoImpl() {
     }
@@ -69,22 +68,70 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int countSearchResults(String searchString) {
-        return 0;
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(COUNT_SEARCH_RESULTS)) {
+            String searchPattern = ANY_CHAR + searchString + ANY_CHAR;
+            statement.setString(1, searchPattern);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+            resultSet.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return INVALID_COUNT;
     }
 
     @Override
     public List<Product> getAll(int currentIndex, int itemsOnPage) {
-        return null;
+        List<Product> listOfAllProducts = new ArrayList<>();
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS)) {
+            statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
+            statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    listOfAllProducts.add(createInstanceOfProduct(resultSet));
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return listOfAllProducts;
     }
 
     @Override
     public int countProducts() {
-        return 0;
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(COUNT_PRODUCTS)) {
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return INVALID_COUNT;
     }
 
     @Override
     public Product getById(int productId) {
-        return null;
+        Product product = new Product();
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                product = createInstanceOfProduct(resultSet);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return product;
     }
 
     @Override
