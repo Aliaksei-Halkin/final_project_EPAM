@@ -14,5 +14,8 @@ public class Context {
     public static final String SESSION_SEARCH_STRING = "searchString";
     public static final String REQUEST_PAGE = "page";
     public static final String REQUEST_CURRENT_INDEX = "index";
-
+    public static final String REQUEST_PRODUCTS = "products";
+    public static final String REQUEST_NUMBER_OF_ITEMS = "numberOfItems";
+    public static final String REQUEST_NUMBER_OF_PAGES = "numberOfPages";
+    public static final String REQUEST_PAGINATOR_COMMAND = "paginatorCommand";
 }

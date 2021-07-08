@@ -9,7 +9,7 @@ import java.util.List;
 public class ProductService {
     private static ProductDao productDao = ProductDaoImpl.getInstance();
 
-    private ProductService() {
+    public ProductService() {
     }
 
     public Product getById(int productId) {
@@ -23,21 +23,26 @@ public class ProductService {
     public int countSearchResult(String searchString) {
         return productDao.countSearchResults(searchString);
     }
-    public List<Product> getAll(int currentIndex, int itemsOnPage){
-        return productDao.getAll(currentIndex,itemsOnPage);
+
+    public List<Product> getAll(int currentIndex, int itemsOnPage) {
+        return productDao.getAll(currentIndex, itemsOnPage);
     }
-    public int countProducts(){
+
+    public int countProducts() {
         return productDao.countProducts();
     }
-    public  boolean deactivateProduct(int productId){
-       Product product = productDao.getById(productId);
-       product.setActive(false);
-       return productDao.update(product);
+
+    public boolean deactivateProduct(int productId) {
+        Product product = productDao.getById(productId);
+        product.setActive(false);
+        return productDao.update(product);
     }
-    public boolean updateProduct(Product product){
-        return  productDao.update(product);
+
+    public boolean updateProduct(Product product) {
+        return productDao.update(product);
     }
-    public int createProduct(Product product){
+
+    public int createProduct(Product product) {
         return productDao.save(product);
     }
 }
