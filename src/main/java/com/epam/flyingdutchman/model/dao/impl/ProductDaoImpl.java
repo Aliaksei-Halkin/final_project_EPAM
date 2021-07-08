@@ -25,6 +25,10 @@ public class ProductDaoImpl implements ProductDao {
     private ProductDaoImpl() {
     }
 
+    public static ProductDaoImpl getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public int save(Product product) {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
