@@ -26,7 +26,6 @@ public class SearchCommand implements Command {
         int currentIndex = Paginator.countCurrentIndex(currentPage);
         request.setAttribute(REQUEST_CURRENT_INDEX, currentIndex);
         List<Product> products = productService.searchProducts(searchString, currentIndex, ITEMS_ON_PAGE);
-        System.out.println(products);
         request.setAttribute(REQUEST_PRODUCTS, products);
         int numberOfProducts = productService.countSearchResult(searchString);
         request.setAttribute(REQUEST_NUMBER_OF_ITEMS, numberOfProducts);
