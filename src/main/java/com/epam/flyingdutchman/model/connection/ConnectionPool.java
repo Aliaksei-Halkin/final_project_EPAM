@@ -25,11 +25,12 @@ public class ConnectionPool {
         String userDB = ConfigurationManager.getProperty("db.user");
         String passwordDB = ConfigurationManager.getProperty("db.password");
         try {
+            Class.forName(driverDB);
             for (int i = 0; i < POOL_SIZE; i++) {
                 Connection connection = DriverManager.getConnection(urlDB, userDB, passwordDB);
                 freeConnection.offer(new ProxyConnection(connection));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             // TODO: 6/19/2021 will add a logger
             e.printStackTrace();
 
