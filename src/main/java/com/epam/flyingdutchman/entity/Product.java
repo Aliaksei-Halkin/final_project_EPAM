@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Product implements Entity{
     private long productId;
     private String name;
-    private String imagePath;
+    private String productImgPath;
     private BigDecimal cost;
     private String description;
     private boolean active;
@@ -16,7 +16,7 @@ public class Product implements Entity{
 
     public Product(String name, String imagePath, BigDecimal cost, String description, boolean active) {
         this.name = name;
-        this.imagePath = imagePath;
+        this.productImgPath = imagePath;
         this.cost = cost;
         this.description = description;
         this.active = active;
@@ -38,12 +38,12 @@ public class Product implements Entity{
         this.name = name;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getProductImgPath() {
+        return productImgPath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setProductImgPath(String productImgPath) {
+        this.productImgPath = productImgPath;
     }
 
     public BigDecimal getCost() {
@@ -75,19 +75,19 @@ public class Product implements Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return name == product.name && active == product.active && imagePath.equals(product.imagePath) && cost.equals(product.cost) && description.equals(product.description);
+        return name == product.name && active == product.active && productImgPath.equals(product.productImgPath) && cost.equals(product.cost) && description.equals(product.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, imagePath, cost, description, active);
+        return Objects.hash(name, productImgPath, cost, description, active);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Product{");
         sb.append(", name=").append(name);
-        sb.append(", imagePath='").append(imagePath);
+        sb.append(", imagePath='").append(productImgPath);
         sb.append(", cost=").append(cost);
         sb.append(", description='").append(description);
         sb.append(", active=").append(active);

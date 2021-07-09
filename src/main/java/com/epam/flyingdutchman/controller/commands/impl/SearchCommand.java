@@ -3,7 +3,7 @@ package com.epam.flyingdutchman.controller.commands.impl;
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.Paginator;
 import com.epam.flyingdutchman.entity.Product;
-import com.epam.flyingdutchman.model.service.ProductService;
+import com.epam.flyingdutchman.model.service.impl.ProductServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -15,7 +15,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 public class SearchCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        ProductService productService = new ProductService();
+        ProductServiceImpl productService = new ProductServiceImpl();
         String searchString = request.getParameter(REQUEST_SEARCH);
         if (searchString == null) {
             searchString = (String) request.getSession().getAttribute(SESSION_SEARCH_STRING);

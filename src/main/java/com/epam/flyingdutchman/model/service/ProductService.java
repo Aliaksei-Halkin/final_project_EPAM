@@ -1,48 +1,23 @@
 package com.epam.flyingdutchman.model.service;
 
 import com.epam.flyingdutchman.entity.Product;
-import com.epam.flyingdutchman.model.dao.ProductDao;
-import com.epam.flyingdutchman.model.dao.impl.ProductDaoImpl;
 
 import java.util.List;
 
-public class ProductService {
-    private static ProductDao productDao = ProductDaoImpl.getInstance();
+public interface ProductService {
+    Product getById(int productId);
 
-    public ProductService() {
-    }
+    List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage);
 
-    public Product getById(int productId) {
-        return productDao.getById(productId);
-    }
+    int countSearchResult(String searchString);
 
-    public List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) {
-        return productDao.searchProducts(searchString, currentIndex, itemsOnPage);
-    }
+    List<Product> getAll(int currentIndex, int itemsOnPage);
 
-    public int countSearchResult(String searchString) {
-        return productDao.countSearchResults(searchString);
-    }
+    int countProducts();
 
-    public List<Product> getAll(int currentIndex, int itemsOnPage) {
-        return productDao.getAll(currentIndex, itemsOnPage);
-    }
+    boolean deactivateProduct(int productId);
 
-    public int countProducts() {
-        return productDao.countProducts();
-    }
+    boolean updateProduct(Product product);
 
-    public boolean deactivateProduct(int productId) {
-        Product product = productDao.getById(productId);
-        product.setActive(false);
-        return productDao.update(product);
-    }
-
-    public boolean updateProduct(Product product) {
-        return productDao.update(product);
-    }
-
-    public int createProduct(Product product) {
-        return productDao.save(product);
-    }
+    int createProduct(Product product);
 }

@@ -35,7 +35,7 @@ public class ProductDaoImpl implements ProductDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT)) {
             statement.setString(PRODUCT_NAME_INDEX, product.getName());
-            statement.setString(PRODUCT_IMG_INDEX, product.getImagePath());
+            statement.setString(PRODUCT_IMG_INDEX, product.getProductImgPath());
             statement.setBigDecimal(PRODUCT_COST_INDEX, product.getCost());
             statement.setString(PRODUCT_DESCRIPTION_INDEX, product.getDescription());
             statement.setBoolean(PRODUCT_ACTIVE_INDEX, product.isActive());
@@ -144,7 +144,7 @@ public class ProductDaoImpl implements ProductDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
             statement.setString(PRODUCT_NAME_INDEX, product.getName());
-            statement.setString(PRODUCT_IMG_INDEX, product.getImagePath());
+            statement.setString(PRODUCT_IMG_INDEX, product.getProductImgPath());
             statement.setBigDecimal(PRODUCT_COST_INDEX, product.getCost());
             statement.setString(PRODUCT_DESCRIPTION_INDEX, product.getDescription());
             statement.setBoolean(PRODUCT_ACTIVE_INDEX, product.isActive());
@@ -161,8 +161,8 @@ public class ProductDaoImpl implements ProductDao {
         Product product = new Product();
         try {
             product.setProductId(resultSet.getLong(PRODUCTS_PRODUCT_ID));
-            product.setName(resultSet.getString(PRODUCTS_PRODUCT_ID));
-            product.setImagePath(resultSet.getString(PRODUCTS_IMAGE_PATH));
+            product.setName(resultSet.getString(PRODUCTS_PRODUCT_NAME));
+            product.setProductImgPath(resultSet.getString(PRODUCTS_IMAGE_PATH));
             product.setCost(resultSet.getBigDecimal(PRODUCTS_COST));
             product.setDescription(resultSet.getString(PRODUCTS_DESCRIPTION));
             product.setActive(resultSet.getBoolean(PRODUCTS_ACTIVE));
