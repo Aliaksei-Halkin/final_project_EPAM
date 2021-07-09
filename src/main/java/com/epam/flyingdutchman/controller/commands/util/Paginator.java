@@ -11,7 +11,7 @@ public class Paginator {
     }
 
     public static int countCurrentIndex(int currentPage) {
-        if (currentPage < 0) {
+        if (currentPage < 1) {
             return 0;
         }
         return (currentPage - 1) * ITEMS_ON_PAGE;
