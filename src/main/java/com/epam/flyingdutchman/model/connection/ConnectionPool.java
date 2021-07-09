@@ -50,7 +50,7 @@ public class ConnectionPool {
         ProxyConnection connection = null;
         try {
             connection = freeConnection.take();
-
+            givenConnections.offer(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
             // TODO: 6/19/2021 will add a logger
