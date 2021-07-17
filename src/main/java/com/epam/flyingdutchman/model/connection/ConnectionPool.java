@@ -1,6 +1,8 @@
 package com.epam.flyingdutchman.model.connection;
 
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +12,11 @@ import java.util.Queue;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+
 public class ConnectionPool {
     private static final int POOL_SIZE = 10;
     private static final ConnectionPool pool = new ConnectionPool();
+    private final Logger logger = LogManager.getLogger();
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenConnections;
 
@@ -26,14 +30,14 @@ public class ConnectionPool {
         String passwordDB = ConfigurationManager.getProperty("db.password");
         try {
             Class.forName(driverDB);
+            logger.info("JDBC driver loaded");
             for (int i = 0; i < POOL_SIZE; i++) {
                 Connection connection = DriverManager.getConnection(urlDB, userDB, passwordDB);
                 freeConnection.offer(new ProxyConnection(connection));
+                logger.info("DB connection created");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            // TODO: 6/19/2021 will add a logger
-            e.printStackTrace();
-
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -53,7 +57,7 @@ public class ConnectionPool {
             givenConnections.offer(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            // TODO: 6/19/2021 will add a logger
+            logger.error(e.getMessage(), e);
         }
         return connection;
     }
@@ -62,7 +66,7 @@ public class ConnectionPool {
         if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
             freeConnection.offer((ProxyConnection) connection);
         } else {
-            // TODO: 6/19/2021 will add logger
+            logger.warn("Not original connection returned to the pool");
         }
     }
 
@@ -70,8 +74,9 @@ public class ConnectionPool {
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 freeConnection.take().reallyClose();
+                logger.info("DB connection closed");
             } catch (InterruptedException | SQLException e) {
-                e.printStackTrace();             // TODO: 6/19/2021 will add logger
+                logger.error(e.getMessage(), e);
             }
         }
         deregisterDrivers();
@@ -81,9 +86,9 @@ public class ConnectionPool {
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {
                 DriverManager.deregisterDriver(driver);
-
+                logger.info("JDBC driver deregistered");
             } catch (SQLException e) {
-
+                logger.error(e.getMessage(), e);
             }
         });
     }

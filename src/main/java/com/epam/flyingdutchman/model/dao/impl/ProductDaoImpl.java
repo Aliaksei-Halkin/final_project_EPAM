@@ -3,6 +3,8 @@ package com.epam.flyingdutchman.model.dao.impl;
 import com.epam.flyingdutchman.entity.Product;
 import com.epam.flyingdutchman.model.connection.ConnectionPool;
 import com.epam.flyingdutchman.model.dao.ProductDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class ProductDaoImpl implements ProductDao {
     private static final int INVALID_ID = -1;
     private static final int SELECT_ALL_LIMIT_CURRENT_INDEX = 1;
     private static final int SELECT_ALL_LIMIT_ON_PAGE_INDEX = 2;
+    private final Logger logger = LogManager.getLogger();
 
     private ProductDaoImpl() {
     }
@@ -44,7 +47,8 @@ public class ProductDaoImpl implements ProductDao {
                     return keys.getInt(1);
                 }
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return INVALID_ID;
     }
@@ -64,8 +68,8 @@ public class ProductDaoImpl implements ProductDao {
                     products.add(createInstanceOfProduct(resultSet));
                 }
             }
-        } catch (SQLException throwables) {
-
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return products;
     }
@@ -82,8 +86,8 @@ public class ProductDaoImpl implements ProductDao {
                 return resultSet.getInt(1);
             }
             resultSet.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return INVALID_COUNT;
     }
@@ -95,14 +99,14 @@ public class ProductDaoImpl implements ProductDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS)) {
             statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
-            statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
+            statement.setInt(SELECT_ALL_LIMIT_ON_PAGE_INDEX, currentIndex);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     listOfAllProducts.add(createInstanceOfProduct(resultSet));
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return listOfAllProducts;
     }
@@ -116,8 +120,8 @@ public class ProductDaoImpl implements ProductDao {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return INVALID_COUNT;
     }
@@ -132,8 +136,8 @@ public class ProductDaoImpl implements ProductDao {
             if (resultSet.next()) {
                 product = createInstanceOfProduct(resultSet);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return product;
     }
@@ -152,7 +156,8 @@ public class ProductDaoImpl implements ProductDao {
             if (statement.executeUpdate() == 1) {
                 return true;
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return false;
     }
@@ -166,8 +171,8 @@ public class ProductDaoImpl implements ProductDao {
             product.setCost(resultSet.getBigDecimal(PRODUCTS_COST));
             product.setDescription(resultSet.getString(PRODUCTS_DESCRIPTION));
             product.setActive(resultSet.getBoolean(PRODUCTS_ACTIVE));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
         return product;
     }
