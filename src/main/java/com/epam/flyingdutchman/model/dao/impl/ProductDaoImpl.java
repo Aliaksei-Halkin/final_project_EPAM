@@ -1,6 +1,7 @@
 package com.epam.flyingdutchman.model.dao.impl;
 
 import com.epam.flyingdutchman.entity.Product;
+import com.epam.flyingdutchman.exception.DaoException;
 import com.epam.flyingdutchman.model.connection.ConnectionPool;
 import com.epam.flyingdutchman.model.dao.ProductDao;
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +34,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int save(Product product) {
+    public int save(Product product) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT)) {
@@ -49,12 +50,13 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error adding a new product to the database", e);
         }
         return INVALID_ID;
     }
 
     @Override
-    public List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) {
+    public List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) throws DaoException {
         List<Product> products = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -70,12 +72,13 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error searching a word in the database", e);
         }
         return products;
     }
 
     @Override
-    public int countSearchResults(String searchString) {
+    public int countSearchResults(String searchString) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(COUNT_SEARCH_RESULTS)) {
@@ -88,12 +91,13 @@ public class ProductDaoImpl implements ProductDao {
             resultSet.close();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error counting words in the string query", e);
         }
         return INVALID_COUNT;
     }
 
     @Override
-    public List<Product> getAll(int currentIndex, int itemsOnPage) {
+    public List<Product> getAll(int currentIndex, int itemsOnPage) throws DaoException {
         List<Product> listOfAllProducts = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -107,12 +111,13 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw  new DaoException("Error getting all products in the database ",e);
         }
         return listOfAllProducts;
     }
 
     @Override
-    public int countProducts() {
+    public int countProducts() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
@@ -122,12 +127,13 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error counting products in the string query", e);
         }
         return INVALID_COUNT;
     }
 
     @Override
-    public Product getById(int productId) {
+    public Product getById(int productId) throws DaoException {
         Product product = new Product();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -138,12 +144,13 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error getting product by ID in the database", e);
         }
         return product;
     }
 
     @Override
-    public boolean update(Product product) {
+    public boolean update(Product product) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
@@ -158,11 +165,12 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error updating product in the database", e);
         }
         return false;
     }
 
-    private Product createInstanceOfProduct(ResultSet resultSet) {
+    private Product createInstanceOfProduct(ResultSet resultSet) throws DaoException {
         Product product = new Product();
         try {
             product.setProductId(resultSet.getLong(PRODUCTS_PRODUCT_ID));
@@ -173,6 +181,7 @@ public class ProductDaoImpl implements ProductDao {
             product.setActive(resultSet.getBoolean(PRODUCTS_ACTIVE));
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new DaoException("Error taking product from the database", e);
         }
         return product;
     }
