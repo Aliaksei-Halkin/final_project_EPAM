@@ -13,9 +13,9 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 
-public class ConnectionPool {
+public enum ConnectionPool {
+    INSTANCE;
     private static final int POOL_SIZE = 10;
-    private static final ConnectionPool pool = new ConnectionPool();
     private final Logger logger = LogManager.getLogger();
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenConnections;
@@ -37,33 +37,33 @@ public class ConnectionPool {
                 logger.info("DB connection created");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            logger.error(e.getMessage(), e);
+            logger.error("Error while connection pool creating", e);
         }
     }
 
     /**
-     * Gets instance.
+     * Gets connection.
      *
-     * @return the instance
+     * @return the connection
      */
-    public static ConnectionPool getInstance() {
-        return pool;
-    }
-
     public Connection getConnection() {
         ProxyConnection connection = null;
         try {
             connection = freeConnection.take();
             givenConnections.offer(connection);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage(), e);
+            logger.error("Error while getting connection", e);
         }
         return connection;
     }
 
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     */
     public void releaseConnection(Connection connection) {
-        if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
+        if ((connection instanceof ProxyConnection) && givenConnections.remove(connection)) {
             freeConnection.offer((ProxyConnection) connection);
         } else {
             logger.warn("Not original connection returned to the pool");
@@ -76,7 +76,7 @@ public class ConnectionPool {
                 freeConnection.take().reallyClose();
                 logger.info("DB connection closed");
             } catch (InterruptedException | SQLException e) {
-                logger.error(e.getMessage(), e);
+                logger.error("Error while close connection pool", e);
             }
         }
         deregisterDrivers();

@@ -35,8 +35,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int save(Product product) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT)) {
             statement.setString(PRODUCT_NAME_INDEX, product.getName());
             statement.setString(PRODUCT_IMG_INDEX, product.getProductImgPath());
@@ -58,8 +57,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) throws DaoException {
         List<Product> products = new ArrayList<>();
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCTS_LIKE)) {
             String searchPattern = ANY_CHAR + searchString + ANY_CHAR;
             statement.setString(SEARCH_PATTERN_INDEX, searchPattern);
@@ -79,8 +77,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int countSearchResults(String searchString) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(COUNT_SEARCH_RESULTS)) {
             String searchPattern = ANY_CHAR + searchString + ANY_CHAR;
             statement.setString(1, searchPattern);
@@ -99,8 +96,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getAll(int currentIndex, int itemsOnPage) throws DaoException {
         List<Product> listOfAllProducts = new ArrayList<>();
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS)) {
             statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
             statement.setInt(SELECT_ALL_LIMIT_ON_PAGE_INDEX, currentIndex);
@@ -111,15 +107,14 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw  new DaoException("Error getting all products in the database ",e);
+            throw new DaoException("Error getting all products in the database ", e);
         }
         return listOfAllProducts;
     }
 
     @Override
     public int countProducts() throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(COUNT_PRODUCTS)) {
             if (resultSet.next()) {
@@ -135,8 +130,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(int productId) throws DaoException {
         Product product = new Product();
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
              ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
@@ -151,8 +145,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean update(Product product) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection();
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
             statement.setString(PRODUCT_NAME_INDEX, product.getName());
             statement.setString(PRODUCT_IMG_INDEX, product.getProductImgPath());
