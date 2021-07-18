@@ -9,7 +9,8 @@ html {
 *, :after, :before {
 	box-sizing: inherit
 }
-
+/*#179ec1
+*/
 body {
 	margin: 0;
 	padding: 0;
@@ -357,17 +358,8 @@ em {
 	}
 }
 
-#products .imageheader {
-	background: -webkit-linear-gradient(top, transparent, transparent),
-	url(../images/backgrounds/swimming.jpg);
-	background: linear-gradient(180deg, transparent, transparent),
-	url(../images/backgrounds/swimming.jpg);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-	height: 60vh;
-	max-height: 100vh
-}
+
+
 
 #products .product-list {
 	padding: 0;

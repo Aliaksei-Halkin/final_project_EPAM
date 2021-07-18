@@ -21,7 +21,7 @@
 
 
 <section id="products" class="section">
-    <header class="imageheader"></header>
+
     <div class="container">
         <h2 class="headline"><fmt:message key="ui.products"/></h2>
         <p><fmt:message key="ui.productsDescription"/></p>
