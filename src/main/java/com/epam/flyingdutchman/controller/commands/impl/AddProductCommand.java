@@ -32,7 +32,6 @@ public class AddProductCommand implements Command {
             Product product = productService.getById(productId);
             CartService.addProduct(cart, product);
             session.setAttribute(SESSION_CART, cart);
-            cart = getCart(session);//check cart-session
             Paginator.transferPageToSession(req);
         } catch (ServiceException e) {
             logger.error("Error adding products to the cart", e);

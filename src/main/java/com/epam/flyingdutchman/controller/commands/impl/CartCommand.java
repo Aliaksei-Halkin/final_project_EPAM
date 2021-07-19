@@ -20,10 +20,10 @@ public class CartCommand implements Command {
         HttpSession session = request.getSession();
         List<Product> products = (ArrayList<Product>) session.getAttribute(SESSION_CART);
         if (products != null) {
-            Map<Product, Long> productsGroupByQuantity = CartService.groupProducts(products);
-            request.setAttribute(REQUEST_GROUPED_PRODUCTS, new ArrayList<>(productsGroupByQuantity.entrySet()));
-            BigDecimal totalCost = CartService.countTotalCost(products);
-            request.setAttribute(REQUEST_CART_TOTAL_COST, totalCost.toString());
+            Map<Product, Long> productsGrouped = CartService.groupProducts(products);
+            request.setAttribute(REQUEST_GROUPED_PRODUCTS, new ArrayList<>(productsGrouped.entrySet()));
+            BigDecimal сost = CartService.countTotalCost(products);
+            request.setAttribute(REQUEST_CART_TOTAL_COST, сost.toString());
             String orderStatus = request.getParameter(REQUEST_ORDER_STATUS);
             request.setAttribute(REQUEST_ORDER_STATUS, orderStatus);
         }
