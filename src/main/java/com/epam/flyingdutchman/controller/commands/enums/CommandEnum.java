@@ -8,7 +8,9 @@ public enum CommandEnum {
     LANGUAGE(new LanguageCommand()),
     HOME(new HomePageCommand()),
     REDIRECT(new RedirectToGitHub()),
-    SEARCH(new SearchCommand())
+    SEARCH(new SearchCommand()),
+    ADD_PRODUCT(new AddProductCommand()),
+    CART(new CartCommand())
     ;
 
     private final Command command;

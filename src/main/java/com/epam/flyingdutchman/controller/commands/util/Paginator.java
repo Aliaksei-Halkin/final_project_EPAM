@@ -1,10 +1,13 @@
 package com.epam.flyingdutchman.controller.commands.util;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PAGE;
 
 public class Paginator {
+    private static final Logger LOGGER = LogManager.getLogger();
     public static final int ITEMS_ON_PAGE = 5;
 
     private Paginator() {
@@ -42,7 +45,7 @@ public class Paginator {
                     currentPage = 1;
                 }
             } catch (ClassCastException e) {
-                //  LOGGER.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
                 currentPage = 1;
             }
         }
