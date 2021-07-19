@@ -86,6 +86,7 @@ public class Product implements Entity{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Product{");
+        sb.append(" id=").append(productId);
         sb.append(", name=").append(name);
         sb.append(", imagePath='").append(productImgPath);
         sb.append(", cost=").append(cost);

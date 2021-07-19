@@ -92,6 +92,7 @@ public class Order implements Entity{
         sb.append("orderId=").append(orderId);
         sb.append(", userName='").append(userName);
         sb.append(", orderDate=").append(orderDate);
+        sb.append(", orderCost=").append(orderCost);
         sb.append(", confirmationStatus=").append(confirmationStatus);
         sb.append(", listOfProducts=").append(listOfProducts);
         sb.append('}');
