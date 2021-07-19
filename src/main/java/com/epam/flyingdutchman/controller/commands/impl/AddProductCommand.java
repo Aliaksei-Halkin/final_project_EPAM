@@ -24,16 +24,17 @@ public class AddProductCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        List<Product> cart = getCart(session);
-        int productId = RequestProcessor.getIntFromRequest(req, REQUEST_PRODUCT);
         try {
-            Product product = new ProductServiceImpl().getById(productId);
+            HttpSession session = req.getSession();
+            List<Product> cart = getCart(session);
+            int productId = RequestProcessor.getIntFromRequest(req, REQUEST_PRODUCT);
+            ProductServiceImpl productService = new ProductServiceImpl();
+            Product product =productService.getById(productId);
             CartService.addProduct(cart, product);
             session.setAttribute(SESSION_CART, cart);
             Paginator.transferPageToSession(req);
         } catch (ServiceException e) {
-            logger.error(e.getMessage());
+            logger.error("Error adding products to the cart", e);
         }
         return ConfigurationManager.getProperty("page.searchRedirect");
     }

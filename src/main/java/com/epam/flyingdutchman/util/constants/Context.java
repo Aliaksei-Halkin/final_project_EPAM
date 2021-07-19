@@ -20,5 +20,8 @@ public class Context {
     public static final String REQUEST_PAGINATOR_COMMAND = "paginatorCommand";
     public static final String SESSION_CART = "cart";
     public static final String REQUEST_PRODUCT = "product";
+    public static final String REQUEST_GROUPED_PRODUCTS = "groupedProducts";
+    public static final String REQUEST_CART_TOTAL_COST = "cartTotalCost";
+    public static final String REQUEST_ORDER_STATUS = "orderStatus";
 
 }

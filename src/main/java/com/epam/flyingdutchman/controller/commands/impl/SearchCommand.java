@@ -39,7 +39,7 @@ public class SearchCommand implements Command {
             request.setAttribute(REQUEST_NUMBER_OF_PAGES, numberOfPages);
             request.setAttribute(REQUEST_PAGINATOR_COMMAND, request.getParameter(REQUEST_COMMAND));
         } catch (ServiceException e) {
-            logger.error(e.getMessage());
+            logger.error("Error getting products",e);
         }
         return ConfigurationManager.getProperty("page.search");
     }

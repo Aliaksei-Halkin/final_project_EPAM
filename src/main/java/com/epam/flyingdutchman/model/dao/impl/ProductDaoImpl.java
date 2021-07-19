@@ -111,7 +111,7 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw  new DaoException("Error getting all products in the database ",e);
+            throw new DaoException("Error getting all products in the database ", e);
         }
         return listOfAllProducts;
     }
@@ -137,11 +137,13 @@ public class ProductDaoImpl implements ProductDao {
         Product product = new Product();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
-             ResultSet resultSet = statement.executeQuery()) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
+            statement.setInt(1, productId);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 product = createInstanceOfProduct(resultSet);
             }
+            resultSet.close();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             throw new DaoException("Error getting product by ID in the database", e);
