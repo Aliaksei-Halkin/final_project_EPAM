@@ -19,7 +19,6 @@
 <jsp:include page="jsp/headerForMainPage.jsp"/>
 
 
-
 <section id="products" class="section">
 
     <div class="container">

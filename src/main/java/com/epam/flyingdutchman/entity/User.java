@@ -11,8 +11,8 @@ import java.util.Objects;
 public class User implements Entity{
     public static final int ROLE_ADMIN = 1;
     public static final int ROLE_MANAGER = 2;
-    public static final int ROLE_COOK = 3;
-    public static final int ROLE_CUSTOMER = 4;
+    public static final int ROLE_COOK = 4;
+    public static final int ROLE_CUSTOMER = 3;
     private long id;
     private String userName;
     private String password;

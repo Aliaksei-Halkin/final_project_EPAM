@@ -18,7 +18,7 @@ CREATE TABLE users
     last_name    varchar(50) default 'not filled',
     phone_number varchar(22)             not null unique,
     e_mail       varchar(50)             not null unique ,
-    user_role    int     default 4,
+    user_role    int     default 3,
     active       boolean default true
 );
 CREATE TABLE orders
@@ -43,10 +43,10 @@ CREATE TABLE orders_details
 INSERT INTO users (username, password, first_name, last_name, phone_number, e_mail, user_role)
 values ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', -- password=admin
         'Bob', 'Morley', '080158742115241', 'morley@yahoo.com', 1),
-       ('alex', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
+       ('manager', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
         'Aliaksei', 'Halkin', '375292597148', 'pochtax3@gmail.com', 2),
-       ('cook1', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Jessika', 'Smith', '375292555148', 'poc3@gmail.com', 3);
+       ('cook', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
+        'Jessika', 'Smith', '375292555148', 'poc3@gmail.com', 4);
 INSERT INTO users (username, password, first_name, last_name, phone_number, e_mail)
 values ('Bob', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
         'Bob', 'Jakobson',  '375291122333', 'bob@gmail.com'),

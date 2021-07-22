@@ -4,7 +4,6 @@ import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.impl.*;
 
 public enum CommandEnum {
-    REGISTER_USER(new RegisterUserCommand()),
     LANGUAGE(new LanguageCommand()),
     HOME(new HomePageCommand()),
     REDIRECT(new RedirectToGitHub()),
@@ -12,8 +11,8 @@ public enum CommandEnum {
     ADD_PRODUCT(new AddProductCommand()),
     CART(new CartCommand()),
     REMOVE_PRODUCT(new RemoveProductCommand()),
-    MAKE_ORDER(new MakeOrderCommand())
-    ;
+    MAKE_ORDER(new MakeOrderCommand()),
+    REGISTER_USER(new RegisterUserCommand());
 
     private final Command command;
 
