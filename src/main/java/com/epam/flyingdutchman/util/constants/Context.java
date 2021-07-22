@@ -23,5 +23,4 @@ public class Context {
     public static final String REQUEST_GROUPED_PRODUCTS = "groupedProducts";
     public static final String REQUEST_CART_TOTAL_COST = "cartTotalCost";
     public static final String REQUEST_ORDER_STATUS = "orderStatus";
-
-}
+   }

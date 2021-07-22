@@ -11,7 +11,8 @@ public enum CommandEnum {
     SEARCH(new SearchCommand()),
     ADD_PRODUCT(new AddProductCommand()),
     CART(new CartCommand()),
-    REMOVE_PRODUCT(new RemoveProductCommand())
+    REMOVE_PRODUCT(new RemoveProductCommand()),
+    MAKE_ORDER(new MakeOrderCommand())
     ;
 
     private final Command command;
