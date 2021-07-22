@@ -27,7 +27,7 @@ public class SearchCommand implements Command {
                 searchString = (String) request.getSession().getAttribute(SESSION_SEARCH_STRING);
             }
             request.getSession().setAttribute(SESSION_SEARCH_STRING, searchString);
-            Integer currentPage = Paginator.getCurrentPage(request);
+            int currentPage = Paginator.getCurrentPage(request);
             request.setAttribute(REQUEST_PAGE, currentPage);
             int currentIndex = Paginator.countCurrentIndex(currentPage);
             request.setAttribute(REQUEST_CURRENT_INDEX, currentIndex);

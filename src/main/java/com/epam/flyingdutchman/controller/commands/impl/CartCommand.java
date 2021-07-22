@@ -22,8 +22,8 @@ public class CartCommand implements Command {
         if (products != null) {
             Map<Product, Long> productsGrouped = CartService.groupProducts(products);
             request.setAttribute(REQUEST_GROUPED_PRODUCTS, new ArrayList<>(productsGrouped.entrySet()));
-            BigDecimal сost = CartService.countTotalCost(products);
-            request.setAttribute(REQUEST_CART_TOTAL_COST, сost.toString());
+            BigDecimal cost = CartService.countTotalCost(products);
+            request.setAttribute(REQUEST_CART_TOTAL_COST, cost.toString());
             String orderStatus = request.getParameter(REQUEST_ORDER_STATUS);
             request.setAttribute(REQUEST_ORDER_STATUS, orderStatus);
         }

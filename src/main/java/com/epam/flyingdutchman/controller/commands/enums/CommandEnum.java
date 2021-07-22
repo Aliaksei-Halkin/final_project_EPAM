@@ -10,7 +10,8 @@ public enum CommandEnum {
     REDIRECT(new RedirectToGitHub()),
     SEARCH(new SearchCommand()),
     ADD_PRODUCT(new AddProductCommand()),
-    CART(new CartCommand())
+    CART(new CartCommand()),
+    REMOVE_PRODUCT(new RemoveProductCommand())
     ;
 
     private final Command command;

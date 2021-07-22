@@ -36,12 +36,12 @@ public class Paginator {
         req.getSession().setAttribute(REQUEST_PAGE, currentPage);
     }
 
-    public static Integer getCurrentPage(HttpServletRequest req) {
-        Integer currentPage = RequestProcessor.getIntFromRequest(req, REQUEST_PAGE);
+    public static int getCurrentPage(HttpServletRequest req) {
+        int currentPage = RequestProcessor.getIntFromRequest(req, REQUEST_PAGE);
         if (currentPage == 0) {
             try {
-                currentPage = (Integer) req.getSession().getAttribute(REQUEST_PAGE);
-                if (currentPage == null) {
+                currentPage = (int) req.getSession().getAttribute(REQUEST_PAGE);
+                if (currentPage == 0) {
                     currentPage = 1;
                 }
             } catch (ClassCastException e) {

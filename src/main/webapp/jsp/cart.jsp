@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>H+ Sport - <fmt:message key="ui.cart"/></title>
+    <title>Fluing Dutchman - <fmt:message key="ui.cart"/></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
