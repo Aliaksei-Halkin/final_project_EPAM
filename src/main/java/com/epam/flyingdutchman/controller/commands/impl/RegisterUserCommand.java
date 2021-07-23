@@ -1,6 +1,7 @@
 package com.epam.flyingdutchman.controller.commands.impl;
 
 import com.epam.flyingdutchman.controller.commands.Command;
+import com.epam.flyingdutchman.controller.commands.util.PasswordEncryptor;
 import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.model.validation.UserValidator;
@@ -29,7 +30,7 @@ public class RegisterUserCommand implements Command {
             UserServiceImpl userService = new UserServiceImpl();
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
-            if (userService.registerNewUser(user)) {
+            if (encryptedPassword != null && userService.registerNewUser(user)) {
                 registrationStatus = MessageManager.getMessage("msg.registeredSuccess");
                 logger.info(MessageManager.getMessage("log.registeredSuccess"));
             } else {
