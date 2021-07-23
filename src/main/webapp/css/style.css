@@ -9,8 +9,7 @@ html {
 *, :after, :before {
 	box-sizing: inherit
 }
-/*#179ec1
-*/
+
 body {
 	margin: 0;
 	padding: 0;
@@ -32,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 	font-family: Raleway, Helvetica, Arial, sans-serif;
-	color: #bfc406
+	color: #486591
 }
 
 img {
@@ -42,7 +41,7 @@ img {
 
 a {
 	font-weight: 700;
-	color: #d14348
+	color: #df7021
 }
 
 a:focus, a:hover {
@@ -52,15 +51,15 @@ a:focus, a:hover {
 em {
 	font-weight: 700;
 	font-size: 140%;
-	color: #f3d350;
+	color: #d6e6f3;
 	font-style: normal
 }
 
 .header {
 	background: -webkit-linear-gradient(top, rgba(0, 0, 0, .2),
-	rgba(0, 0, 0, .5)), url(../images/backgrounds/running.jpg);
+	rgba(0, 0, 0, .5)), url(../images/backgrounds/head.jpg);
 	background: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)),
-	url(../images/backgrounds/running.jpg);
+	url(../images/backgrounds/head.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -89,9 +88,9 @@ em {
 @media screen and (min-width:750px) {
 	.header {
 		background: -webkit-linear-gradient(top, rgba(0, 0, 0, .2),
-		rgba(0, 0, 0, .5)), url(../images/backgrounds/running.jpg);
+		rgba(0, 0, 0, .5)), url(../images/backgrounds/head.jpg);
 		background: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)),
-		url(../images/backgrounds/running.jpg);
+		url(../images/backgrounds/head.jpg);
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -103,9 +102,9 @@ em {
 @media screen and (max-width:750px) {
 	.header {
 		background: -webkit-linear-gradient(top, rgba(0, 0, 0, .2),
-		rgba(0, 0, 0, .5)), url(../images/backgrounds/running.jpg);
+		rgba(0, 0, 0, .5)), url(../images/backgrounds/head.jpg);
 		background: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)),
-		url(../images/backgrounds/running.jpg);
+		url(../images/backgrounds/head.jpg);
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -127,7 +126,7 @@ em {
 	}
 	.header .tagline em {
 		font-size: 140%;
-		color: #f3d350;
+		color: #d6e6f3;
 		font-style: normal
 	}
 }
@@ -179,13 +178,13 @@ em {
 
 .nav .nav-elements .navbar a:hover,
 .nav input:hover {
-	color: #f3d350
+	color: #d6e6f3
 }
 
 .nav .nav-elements .navbar a:hover:after,
 .nav input:hover:after {
 	width: 100%;
-	background: #f3d350
+	background: #d6e6f3
 }
 
 @media screen and (min-width:600px) {
@@ -242,9 +241,9 @@ em {
 	-ms-flex-align: end;
 	align-items: flex-end;
 	background: -webkit-linear-gradient(top, transparent, #312a10),
-	url(../images/backgrounds/discthrower.jpg);
+	url(../images/backgrounds/footer.jpg);
 	background: linear-gradient(180deg, transparent, #312a10),
-	url(../images/backgrounds/discthrower.jpg);
+	url(../images/backgrounds/footer.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -334,15 +333,15 @@ em {
 }
 
 #history {
-	background-color: #f3d350
+	background-color: #d6e6f3
 }
 
 #history .headline {
-	color: #d14348
+	color: #df7021
 }
 
 #history em {
-	color: #e69f2a
+	color: #d6e6f3
 }
 
 @media screen and (min-width:1200px) {
@@ -385,7 +384,7 @@ em {
 }
 
 #products .product-list .product-item .product-name {
-	background: #d14348;
+	background: #df7021;
 	color: #f3d350;
 	font-weight: 700;
 	font-size: 80%;
@@ -437,14 +436,14 @@ em {
 #guarantee {
 	color: #fff;
 	font-size: 2rem;
-	background-color: #8f9305
+	background-color: #96c4de
 }
 
 #guarantee .imageheader {
-	background: -webkit-linear-gradient(top, transparent, #8f9305),
-	url(../images/backgrounds/cycling.jpg);
-	background: linear-gradient(180deg, transparent, #8f9305),
-	url(../images/backgrounds/cycling.jpg);
+	background: -webkit-linear-gradient(top, transparent, #96c4de),
+	url(../images/backgrounds/fish_gril.jpg);
+	background: linear-gradient(180deg, transparent, #96c4de),
+	url(../images/backgrounds/fish_gril.jpg);
 	background-repeat: no-repeat;
 	background-position: bottom;
 	background-size: cover;
@@ -466,9 +465,9 @@ em {
 
 #people .imageheader {
 	background: -webkit-linear-gradient(top, transparent, #e7c84c),
-	url(../images/backgrounds/soccer.jpg);
+	url(../images/backgrounds/seafood.jpg);
 	background: linear-gradient(180deg, transparent, #e7c84c),
-	url(../images/backgrounds/soccer.jpg);
+	url(../images/backgrounds/seafood.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
 	background-size: cover;
@@ -501,7 +500,7 @@ em {
 #people .people-cards .person-card .card-info .card-name {
 	font-size: 2rem;
 	line-height: 110%;
-	color: #d14348
+	color: #df7021
 }
 
 #people .people-cards .person-card .card-info .card-title {
@@ -560,7 +559,7 @@ em {
 #search {
 	color: #fff;
 	font-size: 2rem;
-	background-color: #8f9305;
+	background-color: #179ec1;
 }
 
 #search .card-title {
@@ -600,7 +599,7 @@ section#products>li>button {
 }
 
 section#registration {
-	background-color: #8f9305;
+	background-color: #179ec1;
 }
 
 .productContainer {
@@ -628,7 +627,7 @@ section#registration {
 .productContainerItem input[type="text"] {
 	border: 1px solid white;
 	font-family: Raleway, Helvetica, Arial, sans-serif;
-	color: #bfc406;
+	color: #486591;
 	font-size: 15px;
 	font-weight: 700;
 	width: 100%;
@@ -637,14 +636,14 @@ section#registration {
 
 span#size{
 	font-family: Raleway, Helvetica, Arial, sans-serif;
-	color: #bfc406;
+	color: #486591;
 	font-size: 20px;
 	font-weight: 700;
 	width: 100%;
 }
 
 section#login {
-	background-color: #8f9305;
+	background-color: #179ec1;
 }
 
 #login input#password{
