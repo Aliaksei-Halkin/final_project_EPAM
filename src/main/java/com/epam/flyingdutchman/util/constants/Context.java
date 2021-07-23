@@ -23,4 +23,12 @@ public class Context {
     public static final String REQUEST_GROUPED_PRODUCTS = "groupedProducts";
     public static final String REQUEST_CART_TOTAL_COST = "cartTotalCost";
     public static final String REQUEST_ORDER_STATUS = "orderStatus";
-   }
+    public static final String REQUEST_REGISTRATION_STATUS = "registrationStatus";
+    public static final String SESSION_REGISTRATION_STATUS = "registrationStatus";
+    public static final String REQUEST_PASSWORD = "password";
+    public static final String REQUEST_USERNAME = "username";
+    public static final String REQUEST_FIRST_NAME = "fname";
+    public static final String REQUEST_LAST_NAME = "lname";
+    public static final String REQUEST_PHONE = "phone";
+    public static final String REQUEST_EMAIL = "email";
+}

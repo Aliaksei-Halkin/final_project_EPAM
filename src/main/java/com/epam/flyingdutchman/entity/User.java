@@ -24,9 +24,18 @@ public class User implements Entity{
     private boolean active;
 
     /**
-     * аа
+     * Explicit default constructor.
      */
     public User() {
+    }
+
+    public User(String userName, String password, String firstName, String lastName, String phoneNumber, String eMail) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.eMail = eMail;
     }
 
     /**

@@ -12,6 +12,7 @@ public enum CommandEnum {
     CART(new CartCommand()),
     REMOVE_PRODUCT(new RemoveProductCommand()),
     MAKE_ORDER(new MakeOrderCommand()),
+    REGISTER_USER_PAGE(new RegisterUserPageCommand()),
     REGISTER_USER(new RegisterUserCommand());
 
     private final Command command;

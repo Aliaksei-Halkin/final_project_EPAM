@@ -1,4 +1,4 @@
-package com.epam.flyingdutchman.controller.commands.enums;
+package com.epam.flyingdutchman.controller.commands.impl;
 
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
