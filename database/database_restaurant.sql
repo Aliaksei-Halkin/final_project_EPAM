@@ -12,7 +12,7 @@ CREATE TABLE products
 );
 CREATE TABLE users
 (
-    username     varchar(50) primary key not null,
+    username     varchar(50) primary key not null unique ,
     password     varchar(50)             not null,
     first_name   varchar(50)             not null,
     last_name    varchar(50) default 'not filled',

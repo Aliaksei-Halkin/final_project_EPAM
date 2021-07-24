@@ -30,7 +30,7 @@ public class RegisterUserCommand implements Command {
             UserServiceImpl userService = new UserServiceImpl();
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
-            if (encryptedPassword != null && userService.registerNewUser(user)) {
+            if (userService.registerNewUser(user)) {
                 registrationStatus = MessageManager.getMessage("msg.registeredSuccess");
                 logger.info(MessageManager.getMessage("log.registeredSuccess"));
             } else {
@@ -70,6 +70,14 @@ public class RegisterUserCommand implements Command {
             return false;
         }
         if (userService.isUsernameNotFree(userName)) {
+            status.append(MessageManager.getMessage("msg.nameNotFree"));
+            return false;
+        }
+        if (userService.isPhoneNotFree(userName)) {
+            status.append(MessageManager.getMessage("msg.nameNotFree"));
+            return false;
+        }
+        if (userService.isEmailNotFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
