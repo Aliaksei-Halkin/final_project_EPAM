@@ -24,22 +24,26 @@
             <input type="hidden" name="command" value="register_user"/>
 
             <label for="username"><fmt:message key="ui.username"/></label>
-            <input type="text" minlength="4" maxlength="30" name="username" id="username" required>
+            <input type="text" pattern="^[a-zA-Z0-9-_\.]{4,30}$" minlength="4" maxlength="30"
+                   name="username" id="username" required>
             <br/>
             <label for="password"><fmt:message key="ui.label.password"/></label>
-            <input type="password" minlength="8" maxlength="40" name="password" id="password" required>
+            <input type="password" pattern="[a-zA-Z0-9]{4,40}" minlength="4"
+                   maxlength="40" name="password" id="password" required>
             <br/>
             <label for="fname"><fmt:message key="ui.firsName"/></label>
-            <input type="text" minlength="2" name="fname" id="fname" required>
+            <input type="text" pattern="^[A-ZА-Я][a-zA-Zа-яА-Я]{1,50}$" minlength="2" maxlength="50"
+                   name="fname" id="fname" required>
             <br/>
             <label for="lname"><fmt:message key="ui.lastName"/></label>
-            <input type="text" minlength="2" name="lname" id="lname" required>
+            <input type="text"pattern="^[A-ZА-Я][a-zA-Zа-яА-Я-]{1,50}$"  minlength="2" maxlength="50"
+                   name="lname" id="lname" required>
             <br/>
             <label for="phone"><fmt:message key="ui.phone"/></label>
-            <input type="tel" name="phone" pattern="\+[0-9]{5,21}" id="phone" required>
+            <input type="tel" pattern="^[\+][0-9]{5,21}$" name="phone"  id="phone" required>
             <br/>
             <label for="email"><fmt:message key="ui.email"/></label>
-            <input type="email" maxlength="50" name="email" id="email" required>
+            <input type="email" pattern= "^[-\w._]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" maxlength="50" name="email" id="email" required>
             <br/>
             <input type="submit" value='<fmt:message key="ui.login.button.submit"/>' id="submit">
         </form>

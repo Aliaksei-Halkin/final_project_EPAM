@@ -57,15 +57,15 @@ public class RegisterUserCommand implements Command {
             status.append(MessageManager.getMessage("msg.notValidPassword"));
             return false;
         }
-        if (validator.isValidName(firstName) || validator.isValidName(lastName)) {
+        if (!validator.isValidName(firstName) && !validator.isValidName(lastName)) {
             status.append(MessageManager.getMessage("msg.notValidName"));
             return false;
         }
-        if (validator.isValidPhone(phoneNumber)) {
+        if (!validator.isValidPhone(phoneNumber)) {
             status.append(MessageManager.getMessage("msg.notValidPhone"));
             return false;
         }
-        if (validator.isValidEmail(eMail)) {
+        if (!validator.isValidEmail(eMail)) {
             status.append(MessageManager.getMessage("msg.notValidEmail"));
             return false;
         }
