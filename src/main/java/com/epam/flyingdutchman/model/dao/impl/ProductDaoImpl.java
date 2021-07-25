@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
 import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
@@ -139,7 +140,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Product getById(int productId) throws DaoException {
+    public Optional<Product> getById(int productId) throws DaoException {
         Product product = new Product();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -154,7 +155,7 @@ public class ProductDaoImpl implements ProductDao {
             logger.error(e.getMessage(), e);
             throw new DaoException("Error getting product by ID in the database", e);
         }
-        return product;
+        return Optional.of(product);
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
 import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
@@ -56,7 +57,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getByUsername(String username) throws DaoException {
+    public Optional<User> getByUsername(String username) throws DaoException {
         User user = null;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -71,12 +72,49 @@ public class UserDaoImpl implements UserDao {
             logger.error("Error getting user bu ID", e);
             throw new DaoException("Error getting user bu ID in the database", e);
         }
-        return user;
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public Optional<User> getByPhone(String phoneNumber) throws DaoException {
+        User user = null;
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_PHONE)) {
+            statement.setString(1, phoneNumber);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = createInstanceOfUser(resultSet);
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            logger.error("Error getting user by phone", e);
+            throw new DaoException("Error getting user by phone in the database", e);
+        }
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public Optional<User> getByEmail(String eMail) throws DaoException {
+        User user = null;
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
+            statement.setString(1, eMail);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = createInstanceOfUser(resultSet);
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            logger.error("Error getting user by eMail", e);
+            throw new DaoException("Error getting user by eMail in the database", e);
+        }
+        return Optional.ofNullable(user);
     }
 
     private User createInstanceOfUser(@NotNull ResultSet resultSet) throws DaoException {
-        String username = null, password = null, firstName = null,
-                lastName = null, phone = null, eMail = null;
+        String username, password, firstName, lastName, phone, eMail;
         try {
             username = resultSet.getString(USERS_USERNAME);
             password = resultSet.getString(USERS_PASSWORD);
@@ -148,10 +186,5 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Error counting all active users", e);
         }
         return INVALID_COUNT;
-    }
-
-    @Override
-    public boolean validateUserCredentials(String username, String password) {
-        return false;
     }
 }

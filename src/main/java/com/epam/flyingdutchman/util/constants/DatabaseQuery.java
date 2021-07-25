@@ -17,8 +17,9 @@ public class DatabaseQuery {
     public static final String UPDATE_USER = "UPDATE users SET password = ?, "
             + "first_name = ?, last_name = ?, phone_number = ?, e_mail = ?, "
             + "user_role = ?, active = ? WHERE username = ?";
-    public static final String SELECT_USER_BY_CREDENTIALS =
-            "SELECT * FROM users WHERE username = ? AND password = ? AND active = TRUE";
+       public static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
+    public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
+
 
     private DatabaseQuery() {
     }

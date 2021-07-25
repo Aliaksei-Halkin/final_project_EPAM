@@ -20,12 +20,12 @@ public class ProductServiceImpl implements ProductService {
     public Product getById(int productId) throws ServiceException {
         Optional<Product> product;
         try {
-            product = Optional.ofNullable(productDao.getById(productId));
+            product = productDao.getById(productId);
             if (product.isEmpty()) {
                 throw new ServiceException("error while find information about the product by id");
             }
         } catch (DaoException e) {
-            throw new ServiceException("error while find information about the product by id",e);
+            throw new ServiceException("error while find information about the product by id", e);
         }
         return product.get();
     }
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.searchProducts(searchString, currentIndex, itemsOnPage);
         } catch (DaoException e) {
-            throw new ServiceException("Error finding information of searchProducts",e);
+            throw new ServiceException("Error finding information of searchProducts", e);
         }
     }
 
@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.countSearchResults(searchString);
         } catch (DaoException e) {
-            throw new ServiceException("Error counting information of products searchProducts",e);
+            throw new ServiceException("Error counting information of products searchProducts", e);
         }
     }
 
@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.getAll(currentIndex, itemsOnPage);
         } catch (DaoException e) {
-            throw new ServiceException("Error getting all products",e);
+            throw new ServiceException("Error getting all products", e);
         }
     }
 
@@ -63,19 +63,26 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.countProducts();
         } catch (DaoException e) {
-            throw new ServiceException("Error counting products",e);
+            throw new ServiceException("Error counting products", e);
         }
     }
 
     @Override
     public boolean deactivateProduct(int productId) throws ServiceException {
+        Optional<Product> product;
+        Product productWithId;
         try {
-            Product product = productDao.getById(productId);
-            product.setActive(false);
-            return productDao.update(product);
+            product = productDao.getById(productId);
+            if (product.isEmpty()) {
+                throw new ServiceException("error while find information about the product by id");
+            }
+            productWithId = product.get();
+            productWithId.setActive(false);
+            productDao.update(productWithId);
         } catch (DaoException e) {
-            throw new ServiceException("Error deactivating the product by ID",e);
+            throw new ServiceException("Error deactivating the product by ID", e);
         }
+        return true;
     }
 
     @Override
@@ -83,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.update(product);
         } catch (DaoException e) {
-            throw new ServiceException("Error updating information searchProducts",e);
+            throw new ServiceException("Error updating information searchProducts", e);
         }
     }
 

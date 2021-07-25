@@ -1,6 +1,6 @@
 package com.epam.flyingdutchman.exception;
 
-public class ServiceException extends Exception{
+public class ServiceException extends Exception {
     /**
      * Instantiates a new Service Exception.
      */

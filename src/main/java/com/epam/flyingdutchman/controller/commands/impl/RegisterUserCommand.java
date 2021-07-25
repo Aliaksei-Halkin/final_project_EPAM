@@ -3,6 +3,7 @@ package com.epam.flyingdutchman.controller.commands.impl;
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.PasswordEncryptor;
 import com.epam.flyingdutchman.entity.User;
+import com.epam.flyingdutchman.exception.ServiceException;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.model.validation.UserValidator;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
@@ -25,17 +26,21 @@ public class RegisterUserCommand implements Command {
         String phoneNumber = request.getParameter(REQUEST_PHONE);
         String eMail = request.getParameter(REQUEST_EMAIL);
         StringBuilder validationStatus = new StringBuilder();
-        String registrationStatus;
+        String registrationStatus = "";
         if (validationUserData(userName, password, firstName, lastName, phoneNumber, eMail, validationStatus)) {
             UserServiceImpl userService = new UserServiceImpl();
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
-            if (userService.registerNewUser(user)) {
-                registrationStatus = MessageManager.getMessage("msg.registeredSuccess");
-                logger.info(MessageManager.getMessage("log.registeredSuccess"));
-            } else {
-                registrationStatus = MessageManager.getMessage("msg.notRegistered");
-                logger.info(MessageManager.getMessage("log.notRegistered"));
+            try {
+                if (userService.registerNewUser(user)) {
+                    registrationStatus = MessageManager.getMessage("msg.registeredSuccess");
+                    logger.info(MessageManager.getMessage("log.registeredSuccess"));
+                } else {
+                    registrationStatus = MessageManager.getMessage("msg.notRegistered");
+                    logger.info(MessageManager.getMessage("log.notRegistered"));
+                }
+            } catch (ServiceException e) {
+                e.printStackTrace();
             }
         } else {
             registrationStatus = validationStatus.toString();
@@ -48,7 +53,6 @@ public class RegisterUserCommand implements Command {
                                        String phoneNumber, String eMail, StringBuilder status) {
         UserValidator validator = new UserValidator();
         UserServiceImpl userService = new UserServiceImpl();
-
         if (!validator.validateUserName(userName)) {
             status.append(MessageManager.getMessage("msg.notValidUsername"));
             return false;
@@ -69,15 +73,15 @@ public class RegisterUserCommand implements Command {
             status.append(MessageManager.getMessage("msg.notValidEmail"));
             return false;
         }
-        if (userService.isUsernameNotFree(userName)) {
+        if (!userService.isUsernameFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
-        if (userService.isPhoneNotFree(userName)) {
+        if (!userService.isPhoneFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
-        if (userService.isEmailNotFree(userName)) {
+        if (!userService.isEmailFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
