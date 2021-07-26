@@ -33,18 +33,17 @@ public class RegisterUserCommand implements Command {
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
             try {
                 if (userService.registerNewUser(user)) {
-                    registrationStatus = MessageManager.getMessage("msg.registeredSuccess");
-                    logger.info(MessageManager.getMessage("log.registeredSuccess"));
+                    validationStatus.append(MessageManager.getMessage("msg.registeredSuccess"));
+                 logger.info("New user registered success" );
                 } else {
-                    registrationStatus = MessageManager.getMessage("msg.notRegistered");
-                    logger.info(MessageManager.getMessage("log.notRegistered"));
+                    validationStatus.append(MessageManager.getMessage("msg.notRegistered"));
+                 logger.info("New user didn't register success");
                 }
             } catch (ServiceException e) {
-                e.printStackTrace();
+               logger.error("Mistake in registration", e);
             }
-        } else {
-            registrationStatus = validationStatus.toString();
         }
+        registrationStatus = validationStatus.toString();
         request.setAttribute(REQUEST_REGISTRATION_STATUS, registrationStatus);
         return ConfigurationManager.getProperty("page.registerRedirect");
     }

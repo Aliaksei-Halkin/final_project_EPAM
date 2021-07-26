@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private final UserDaoImpl userDao = UserDaoImpl.getInstance();
+
     @Override
     public boolean registerNewUser(User user) throws ServiceException {
         try {
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error adding the user", e);
         }
     }
+
     @Override
     public boolean setUserCustomerRole(User user) throws ServiceException {
         changeRole(user, User.ROLE_CUSTOMER);
@@ -33,16 +35,19 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error changing user role", e);
         }
     }
+
     @Override
     public boolean setUserManagerRole(User user) throws ServiceException {
         changeRole(user, User.ROLE_MANAGER);
         return true;
     }
+
     @Override
     public boolean setUserCookRole(User user) throws ServiceException {
         changeRole(user, User.ROLE_COOK);
         return true;
     }
+
     @Override
     public List<User> getAll(int currentIndex, int itemsOnPage) throws ServiceException {
         try {
@@ -51,6 +56,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error getting all users", e);
         }
     }
+
     @Override
     public int countUsers() throws ServiceException {
         try {
@@ -59,6 +65,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error counting all users", e);
         }
     }
+
     @Override
     public boolean deleteUser(String username) throws ServiceException {
         Optional<User> optionalUser;
@@ -76,6 +83,7 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
     @Override
     public User getUserByUsername(String userName) throws ServiceException {
         Optional<User> optionalUser;
@@ -89,10 +97,17 @@ public class UserServiceImpl implements UserService {
         }
         return optionalUser.get();
     }
+
+    /**
+     * Searching the username in the database and validating
+     *
+     * @param username the username
+     * @return true- If a value is not present, otherwise -false
+     */
     @Override
     public boolean isUsernameFree(String username) {
         Optional<User> optionalUser;
-        boolean result = true;
+        boolean result = false;
         try {
             optionalUser = userDao.getByUsername(username);
             result = optionalUser.isEmpty();
@@ -101,10 +116,17 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
+    /**
+     * Searching the phone in the database and validating
+     *
+     * @param phone the phone
+     * @return true- If a value is not present, otherwise -false
+     */
     @Override
     public boolean isPhoneFree(String phone) {
         Optional<User> optionalUser;
-        boolean result = true;
+        boolean result = false;
         try {
             optionalUser = userDao.getByPhone(phone);
             result = optionalUser.isEmpty();
@@ -113,10 +135,17 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
+    /**
+     * Searching the email in the database and validating
+     *
+     * @param eMail the email
+     * @return true- If a value is not present, otherwise -false
+     */
     @Override
     public boolean isEmailFree(String eMail) {
         Optional<User> optionalUser;
-        boolean result = true;
+        boolean result = false;
         try {
             optionalUser = userDao.getByEmail(eMail);
             result = optionalUser.isEmpty();

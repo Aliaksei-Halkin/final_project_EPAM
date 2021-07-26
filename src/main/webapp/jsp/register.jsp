@@ -19,7 +19,7 @@
 <section id="registration" class="section">
     <div class="container tagline">
         <em><fmt:message key="ui.header.registerUser"/></em><br/>
-        <em>${sessionScope.registrationStatus}</em>
+        <h1 class="custom-colored-h1" ><em>${sessionScope.registrationStatus}</em></h1>
         <form action="controller" method="post">
             <input type="hidden" name="command" value="register_user"/>
 

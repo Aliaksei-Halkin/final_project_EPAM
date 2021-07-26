@@ -42,20 +42,20 @@ CREATE TABLE orders_details
 );
 INSERT INTO users (username, password, first_name, last_name, phone_number, e_mail, user_role)
 values ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', -- password=admin
-        'Bob', 'Morley', '080158742115241', 'morley@yahoo.com', 1),
+        'Bob', 'Morley', '+080158742115241', 'morley@yahoo.com', 1),
        ('manager', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Aliaksei', 'Halkin', '375292597148', 'pochtax3@gmail.com', 2),
+        'Aliaksei', 'Halkin', '+375292597148', 'pochtax3@gmail.com', 2),
        ('cook', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Jessika', 'Smith', '375292555148', 'poc3@gmail.com', 4);
+        'Jessika', 'Smith', '+375292555148', 'poc3@gmail.com', 4);
 INSERT INTO users (username, password, first_name, last_name, phone_number, e_mail)
 values ('Bob', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Bob', 'Jakobson',  '375291122333', 'bob@gmail.com'),
+        'Bob', 'Jakobson',  '+375291122333', 'bob2@gmail.com'),
        ('maroon', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Tom', 'Hornet', '375252584568', 'ff@tut.by'),
+        'Tom', 'Hornet', '+375252584568', 'ff@tut.by'),
        ('kitty17', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Ann', 'Cruise', '375291221333', 'ann@gmail.com'),
+        'Ann', 'Cruise', '+375291221333', 'ann@gmail.com'),
        ('boris', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
-        'Boris', 'Swift', '375297722333', 'bob@gmail.com');
+        'Boris', 'Swift', '+375297722333', 'bob@gmail.com');
 
 
 
