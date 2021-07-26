@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Order implements Entity{
+public class Order implements Entity {
     private long orderId;
     private String userName;
     private LocalDateTime orderDate;
     private BigDecimal orderCost;
-    private boolean confirmationStatus;
+    private Status status;
     private Map<Product, Long> listOfProducts;
 
     public Order() {
@@ -21,7 +21,6 @@ public class Order implements Entity{
         this.userName = userName;
         this.orderDate = orderDate;
         this.orderCost = orderCost;
-        this.confirmationStatus = confirmationStatus;
         this.listOfProducts = listOfProducts;
     }
 
@@ -57,12 +56,12 @@ public class Order implements Entity{
         this.orderCost = orderCost;
     }
 
-    public boolean isConfirmationStatus() {
-        return confirmationStatus;
+    public Status isConfirmationStatus() {
+        return status;
     }
 
-    public void setConfirmationStatus(boolean confirmationStatus) {
-        this.confirmationStatus = confirmationStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Map<Product, Long> getListOfProducts() {
@@ -78,12 +77,12 @@ public class Order implements Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && confirmationStatus == order.confirmationStatus && userName.equals(order.userName) && orderDate.equals(order.orderDate) && orderCost.equals(order.orderCost) && listOfProducts.equals(order.listOfProducts);
+        return orderId == order.orderId && status == order.status && userName.equals(order.userName) && orderDate.equals(order.orderDate) && orderCost.equals(order.orderCost) && listOfProducts.equals(order.listOfProducts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, orderDate, orderCost, confirmationStatus, listOfProducts);
+        return Objects.hash(userName, orderDate, orderCost, status, listOfProducts);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class Order implements Entity{
         sb.append(", userName='").append(userName);
         sb.append(", orderDate=").append(orderDate);
         sb.append(", orderCost=").append(orderCost);
-        sb.append(", confirmationStatus=").append(confirmationStatus);
+        sb.append(", confirmationStatus=").append(status);
         sb.append(", listOfProducts=").append(listOfProducts);
         sb.append('}');
         return sb.toString();
