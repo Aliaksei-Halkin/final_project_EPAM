@@ -21,4 +21,5 @@ public interface UserDao {
 
     int countUsers() throws DaoException;
 
+    boolean validateUserCredentials(String username, String password) throws DaoException;
 }

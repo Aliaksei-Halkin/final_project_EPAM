@@ -13,7 +13,10 @@ public enum CommandEnum {
     REMOVE_PRODUCT(new RemoveProductCommand()),
     MAKE_ORDER(new MakeOrderCommand()),
     REGISTER_USER_PAGE(new RegisterUserPageCommand()),
-    REGISTER_USER(new RegisterUserCommand());
+    REGISTER_USER(new RegisterUserCommand()),
+    LOGIN_PAGE(new LoginPageCommand()),
+    LOGIN(new LoginCommand())
+    ;
 
     private final Command command;
 

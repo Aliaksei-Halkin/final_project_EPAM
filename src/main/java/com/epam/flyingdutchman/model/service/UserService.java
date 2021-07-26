@@ -27,4 +27,6 @@ public interface UserService {
     boolean isPhoneFree(String phone);
 
     boolean isEmailFree(String eMail);
+
+    boolean isValidUser(String username, String password) throws ServiceException;
 }

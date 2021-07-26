@@ -48,7 +48,7 @@ values ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', -- password=admin
        ('cook', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
         'Jessika', 'Smith', '+375292555148', 'poc3@gmail.com', 4);
 INSERT INTO users (username, password, first_name, last_name, phone_number, e_mail)
-values ('Bob', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
+values ('Boby', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
         'Bob', 'Jakobson',  '+375291122333', 'bob2@gmail.com'),
        ('maroon', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
         'Tom', 'Hornet', '+375252584568', 'ff@tut.by'),
@@ -61,7 +61,7 @@ values ('Bob', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', -- password=1234
 
 INSERT into orders (username, order_cost)
 values ('maroon', 45.23),
-       ('Bob', 52.23),
+       ('Boby', 52.23),
        ('kitty17', 58.22),
        ('boris', 585.22);
 

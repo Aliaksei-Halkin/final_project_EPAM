@@ -187,4 +187,23 @@ public class UserDaoImpl implements UserDao {
         }
         return INVALID_COUNT;
     }
+
+    @Override
+    public boolean validateUserCredentials(String username, String password) throws DaoException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_CREDENTIALS)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new DaoException("Error counting all active users", e);
+        }
+        return false;
+    }
 }

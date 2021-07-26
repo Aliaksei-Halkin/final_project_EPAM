@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
      * Searching the username in the database and validating
      *
      * @param username the username
-     * @return true- If a value is not present, otherwise -false
+     * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
     public boolean isUsernameFree(String username) {
@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService {
      * Searching the phone in the database and validating
      *
      * @param phone the phone
-     * @return true- If a value is not present, otherwise -false
+     * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
     public boolean isPhoneFree(String phone) {
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
      * Searching the email in the database and validating
      *
      * @param eMail the email
-     * @return true- If a value is not present, otherwise -false
+     * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
     public boolean isEmailFree(String eMail) {
@@ -153,5 +153,22 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return result;
+    }
+    /**
+     * Validate users credentials. User considered valid if DAO object contains information that
+     * there is active user account with such username and password
+     *
+     * @param username {@code String} represents login (username) of the user's account
+     * @param password {@code String} represents password of the user's account. Should be in form
+     *                 that it was provided to the DAO object (encrypted if it stored encrypted)
+     * @return {@code true} if user is valid
+     */
+    @Override
+    public boolean isValidUser(String username, String password) throws ServiceException {
+        try {
+            return userDao.validateUserCredentials(username, password);
+        } catch (DaoException e) {
+            throw new ServiceException("error while deactivating user by username", e);
+        }
     }
 }

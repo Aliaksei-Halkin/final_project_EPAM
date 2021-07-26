@@ -31,4 +31,9 @@ public class Context {
     public static final String REQUEST_LAST_NAME = "lname";
     public static final String REQUEST_PHONE = "phone";
     public static final String REQUEST_EMAIL = "email";
+    public static final String SESSION_USERNAME = "username";
+    public static final String SESSION_USER_ROLE = "userRole";
+    public static final String REQUEST_ERROR = "error";
+
+
 }
