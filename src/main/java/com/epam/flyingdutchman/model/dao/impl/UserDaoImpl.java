@@ -29,7 +29,13 @@ public class UserDaoImpl implements UserDao {
     private static final int UPDATE_USER_USERNAME_COLUMN = 8;
     private static final int LIMIT_CURRENT_INDEX = 1;
     private static final int LIMIT_ON_PAGE_INDEX = 2;
-    protected static final int INVALID_COUNT = -1;
+    private static final int INVALID_COUNT = -1;
+    private static final int USERS_USERNAME_INDEX = 1;
+    private static final int USERS_PASSWORD_INDEX = 2;
+    private static final int USERS_FIRST_NAME_INDEX = 3;
+    private static final int USERS_LAST_NAME_INDEX = 4;
+    private static final int USERS_PHONE_INDEX = 5;
+    private static final int USERS_EMAIL_INDEX = 6;
 
     private UserDaoImpl() {
     }
@@ -52,7 +58,7 @@ public class UserDaoImpl implements UserDao {
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw new DaoException("Error adding a new user to the database", e);
+            throw new DaoException("Error addinprivate w user to the database", e);
         }
     }
 

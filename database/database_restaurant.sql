@@ -27,7 +27,7 @@ CREATE TABLE orders
     username   varchar(50)   not null,
     order_date datetime    default now(),
     order_cost decimal(6, 2) not null,
-    status     varchar(10) default 'new',
+    status     varchar(10) default 'NEW',
     FOREIGN KEY (username) REFERENCES users (username)
 );
 CREATE TABLE orders_details

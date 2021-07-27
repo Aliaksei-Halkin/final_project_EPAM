@@ -7,20 +7,52 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Order implements Entity {
+    /**
+     * Unique identification numeric value to define the order.
+     */
     private long orderId;
+    /**
+     * Name of the {@code User} which is owner of the order.
+     */
     private String userName;
-    private LocalDateTime orderDate;
+    /**
+     * Date and time of order creation.
+     */
+    private LocalDateTime orderDateTime;
+    /**
+     * Total cost of the {@code Order}. The sum of price of all {@code Product} in the order.
+     */
     private BigDecimal orderCost;
+    /**
+     * Status of the order.
+     */
     private Status status;
+    /**
+     * List of products represented by {@code Map} of {@code Product} and {@code Long} that
+     * represents product's number.
+     */
     private Map<Product, Long> listOfProducts;
 
     public Order() {
     }
 
-    public Order(String userName, LocalDateTime orderDate, BigDecimal orderCost, boolean confirmationStatus, Map<Product, Long> listOfProducts) {
+    /**
+     * Constructor with all parameters, used to create instance of {@code Order} which already has
+     * unique {@param orderId} and to retrieve information about user's order from data storage.
+     *
+     * @param orderId        {@code long} value of unique order identification number
+     * @param userName       {@code String} represents name of order's owner
+     * @param orderDateTime  {@code LocalDate} of order creation
+     * @param listOfProducts {@code Map} represents list of orders and its number
+     * @param orderCost      {@code BigDecimal} value of total cost of order's {@code Product}
+     * @param status         {@code Enum} value represents  a status of the order
+     */
+    public Order(long orderId, String userName, LocalDateTime orderDateTime, BigDecimal orderCost, Status status, Map<Product, Long> listOfProducts) {
+        this.orderId = orderId;
         this.userName = userName;
-        this.orderDate = orderDate;
+        this.orderDateTime = orderDateTime;
         this.orderCost = orderCost;
+        this.status = status;
         this.listOfProducts = listOfProducts;
     }
 
@@ -40,12 +72,12 @@ public class Order implements Entity {
         this.userName = userName;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
+    public void setOrderDateTime(LocalDateTime orderDateTime) {
+        this.orderDateTime = orderDateTime;
     }
 
     public BigDecimal getOrderCost() {
@@ -77,12 +109,12 @@ public class Order implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && status == order.status && userName.equals(order.userName) && orderDate.equals(order.orderDate) && orderCost.equals(order.orderCost) && listOfProducts.equals(order.listOfProducts);
+        return orderId == order.orderId && status == order.status && userName.equals(order.userName) && orderDateTime.equals(order.orderDateTime) && orderCost.equals(order.orderCost) && listOfProducts.equals(order.listOfProducts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, orderDate, orderCost, status, listOfProducts);
+        return Objects.hash(userName, orderDateTime, orderCost, status, listOfProducts);
     }
 
     @Override
@@ -90,9 +122,9 @@ public class Order implements Entity {
         StringBuilder sb = new StringBuilder("Order{");
         sb.append("orderId=").append(orderId);
         sb.append(", userName='").append(userName);
-        sb.append(", orderDate=").append(orderDate);
+        sb.append(", orderDate=").append(orderDateTime);
         sb.append(", orderCost=").append(orderCost);
-        sb.append(", confirmationStatus=").append(status);
+        sb.append(", status=").append(status);
         sb.append(", listOfProducts=").append(listOfProducts);
         sb.append('}');
         return sb.toString();

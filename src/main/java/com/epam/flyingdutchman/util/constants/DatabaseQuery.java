@@ -20,7 +20,22 @@ public class DatabaseQuery {
     public static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
     public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
     public static final String SELECT_USER_BY_CREDENTIALS = "SELECT * FROM users WHERE username = ? AND password = ?";
-
+    public static final String SELECT_ORDERS_BY_USER = "SELECT * FROM orders WHERE username = ? LIMIT ?,?";
+    public static final String SELECT_ORDERS_DETAILS = "SELECT * FROM orders_details "
+            + "LEFT JOIN products ON orders_details.product_id = products.product_id "
+            + "WHERE orders_details.order_id = ?";
+    public static final String INSERT_ORDERS_DETAILS = "INSERT INTO orders_details VALUES (?, ?, ?)";
+    private static final String INSERT_ORDER =
+            "INSERT INTO orders (username, order_date, order_cost, status) VALUES (?, ?, ?, ?)";
+    public static final String DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
+    public static final String DELETE_ORDERS_DETAILS = "DELETE FROM orders_details WHERE order_id = ?";
+    public static final String SELECT_IS_APPROVED = "SELECT confirmation_status FROM orders WHERE order_id = ?";
+    public static final String SELECT_ALL_ORDERS = "SELECT * FROM orders LIMIT ?, ?";
+    private static final String SELECT_ORDER_BY_ID = "SELECT * FROM orders WHERE order_id = ?";
+    private static final String UPDATE_ORDER = "UPDATE orders SET username = ?, order_date = ?, order_cost = ?, "
+            + "confirmation_status = ? WHERE order_id = ?";
+    protected static final String COUNT_ORDERS = "SELECT COUNT(*) FROM orders";
+    protected static final String COUNT_ORDERS_BY_USER = "SELECT COUNT(*) FROM orders WHERE username = ?";
 
     private DatabaseQuery() {
     }
