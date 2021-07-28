@@ -4,7 +4,6 @@ import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.PasswordEncryptor;
 import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.exception.ServiceException;
-import com.epam.flyingdutchman.model.service.UserService;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
@@ -20,15 +19,15 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        UserServiceImpl userService = new UserServiceImpl();
+        UserServiceImpl userService = new UserServiceImpl();//fixme private field
         User user;
         String username = request.getParameter(REQUEST_USERNAME);
         String password = request.getParameter(REQUEST_PASSWORD);
         String encryptedPassword = PasswordEncryptor.encryptPassword(password);
         try {
-            if (userService.isValidUser(username, encryptedPassword)) {
+            if (userService.checkIfValidUser(username, encryptedPassword)) {
                 HttpSession session = request.getSession();
-                user = userService.getUserByUsername(username);
+                user = userService.findUserByUsername(username);
                 session.setAttribute(SESSION_USERNAME, user.getUserName());
                 session.setAttribute(SESSION_USER_ROLE, user.getUserRole());
                 return ConfigurationManager.getProperty("page.index");

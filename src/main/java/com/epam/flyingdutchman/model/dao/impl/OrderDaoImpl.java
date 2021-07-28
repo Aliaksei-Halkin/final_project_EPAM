@@ -49,7 +49,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException {
+    public List<Order> findOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException {
         List<Order> orders = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -159,13 +159,12 @@ public class OrderDaoImpl implements OrderDao {
     public int createOrder(Order order) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection()) {
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(false);//fixme setautocommit tru +rollback
             int orderId = insertInTableOrders(connection, order);
             insertInTableOrdersDetails(connection, order, orderId);
             connection.commit();
             return orderId;
-        } catch (
-                SQLException throwables) {
+        } catch (SQLException throwables) {
             logger.error("Error creating new order  ", throwables);
             throw new DaoException("Error creating new order  ", throwables);
         }
@@ -220,7 +219,7 @@ public class OrderDaoImpl implements OrderDao {
             connection.setAutoCommit(false);
             deleteInTableOrdersDetails(connection, orderId);
             deleteRowInTableOrders(connection, orderId);
-            connection.commit();
+            connection.commit();//fixme setautocommit tru +rollback
             return true;
         } catch (SQLException throwables) {
             logger.error("Error deleting a order " + orderId, throwables);
@@ -251,7 +250,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getAll(int currentIndex, int itemsOnPage) throws DaoException {
+    public List<Order> findAllOrders(int currentIndex, int itemsOnPage) throws DaoException {
         List<Order> orders = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();

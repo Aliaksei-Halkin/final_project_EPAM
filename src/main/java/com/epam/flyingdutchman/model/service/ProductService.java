@@ -1,19 +1,18 @@
 package com.epam.flyingdutchman.model.service;
 
 import com.epam.flyingdutchman.entity.Product;
-import com.epam.flyingdutchman.exception.DaoException;
 import com.epam.flyingdutchman.exception.ServiceException;
 
 import java.util.List;
 
 public interface ProductService {
-    Product getById(int productId) throws DaoException, ServiceException;
+    Product findProductById(int productId) throws ServiceException;
 
     List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) throws ServiceException;
 
-    int countSearchResult(String searchString) throws DaoException, ServiceException;
+    int countSearchResultProducts(String searchString) throws ServiceException;
 
-    List<Product> getAll(int currentIndex, int itemsOnPage) throws ServiceException;
+    List<Product> findAllProducts(int currentIndex, int itemsOnPage) throws ServiceException;
 
     int countProducts() throws ServiceException;
 

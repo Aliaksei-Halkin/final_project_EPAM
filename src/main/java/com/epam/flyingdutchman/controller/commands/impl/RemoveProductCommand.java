@@ -26,7 +26,7 @@ public class RemoveProductCommand implements Command {
         try {
             HttpSession session = request.getSession();
             int productId = RequestProcessor.getIntFromRequest(request, REQUEST_PRODUCT);
-            Product product = new ProductServiceImpl().getById(productId);
+            Product product = new ProductServiceImpl().findProductById(productId);
             List<Product> cart = (ArrayList<Product>) session.getAttribute(SESSION_CART);
             CartService.removeProduct(cart, product);
             session.setAttribute(SESSION_CART, cart);

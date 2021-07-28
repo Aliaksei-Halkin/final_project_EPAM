@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int save(Product product) throws DaoException {
+    public int saveProduct(Product product) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT)) {
@@ -104,7 +104,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAll(int currentIndex, int itemsOnPage) throws DaoException {
+    public List<Product> findAllProducts(int currentIndex, int itemsOnPage) throws DaoException {
         List<Product> listOfAllProducts = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -140,7 +140,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Optional<Product> getById(int productId) throws DaoException {
+    public Optional<Product> findProductById(int productId) throws DaoException {
         Product product = new Product();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -159,7 +159,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean update(Product product) throws DaoException {
+    public boolean updateProduct(Product product) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {

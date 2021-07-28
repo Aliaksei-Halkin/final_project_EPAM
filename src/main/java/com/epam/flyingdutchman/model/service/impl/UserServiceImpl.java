@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll(int currentIndex, int itemsOnPage) throws ServiceException {
+    public List<User> findAll(int currentIndex, int itemsOnPage) throws ServiceException {
         try {
-            return userDao.getAll(currentIndex, itemsOnPage);
+            return userDao.findAllUsers(currentIndex, itemsOnPage);
         } catch (DaoException e) {
             throw new ServiceException("Error getting all users", e);
         }
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser;
         User user;
         try {
-            optionalUser = userDao.getByUsername(username);
+            optionalUser = userDao.findUserByUsername(username);
             if (optionalUser.isEmpty()) {
                 throw new ServiceException("The user isn't finding, error");
             }
@@ -85,10 +85,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String userName) throws ServiceException {
+    public User findUserByUsername(String userName) throws ServiceException {
         Optional<User> optionalUser;
         try {
-            optionalUser = userDao.getByUsername(userName);
+            optionalUser = userDao.findUserByUsername(userName);
             if (optionalUser.isEmpty()) {
                 throw new ServiceException("ERROR: The user isn't finding");
             }
@@ -105,14 +105,14 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean isUsernameFree(String username) {
+    public boolean checkIfUsernameFree(String username) {
         Optional<User> optionalUser;
         boolean result = false;
         try {
-            optionalUser = userDao.getByUsername(username);
+            optionalUser = userDao.findUserByUsername(username);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();
+            e.printStackTrace();//fixme will add serviceexception
         }
         return result;
     }
@@ -124,14 +124,14 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean isPhoneFree(String phone) {
+    public boolean checkIfPhoneFree(String phone) {
         Optional<User> optionalUser;
         boolean result = false;
         try {
-            optionalUser = userDao.getByPhone(phone);
+            optionalUser = userDao.findUserByPhone(phone);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();
+            e.printStackTrace();//fixme will add serviceexception
         }
         return result;
     }
@@ -143,14 +143,14 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean isEmailFree(String eMail) {
+    public boolean checkIfEmailFree(String eMail) {
         Optional<User> optionalUser;
         boolean result = false;
         try {
-            optionalUser = userDao.getByEmail(eMail);
+            optionalUser = userDao.findUserByEmail(eMail);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();
+            e.printStackTrace();//fixme will add serviceexception
         }
         return result;
     }
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} if user is valid
      */
     @Override
-    public boolean isValidUser(String username, String password) throws ServiceException {
+    public boolean checkIfValidUser(String username, String password) throws ServiceException {
         try {
             return userDao.validateUserCredentials(username, password);
         } catch (DaoException e) {

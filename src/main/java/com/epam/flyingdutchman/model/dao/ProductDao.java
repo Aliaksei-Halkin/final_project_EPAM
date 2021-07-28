@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductDao {
-    int save(Product product) throws DaoException;
+    int saveProduct(Product product) throws DaoException;
 
     List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) throws DaoException;
 
     int countSearchResults(String searchString) throws DaoException;
 
-    List<Product> getAll(int currentIndex, int itemsOnPage) throws DaoException;
+    List<Product> findAllProducts(int currentIndex, int itemsOnPage) throws DaoException;
 
     int countProducts() throws DaoException;
 
-    Optional<Product> getById(int productId) throws DaoException;
+    Optional<Product> findProductById(int productId) throws DaoException;
 
-    boolean update(Product product) throws DaoException;
+    boolean updateProduct(Product product) throws DaoException;
 }

@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> getByUsername(String username) throws DaoException {
+    public Optional<User> findUserByUsername(String username) throws DaoException {
         User user = null;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> getByPhone(String phoneNumber) throws DaoException {
+    public Optional<User> findUserByPhone(String phoneNumber) throws DaoException {
         User user = null;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -101,7 +101,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> getByEmail(String eMail) throws DaoException {
+    public Optional<User> findUserByEmail(String eMail) throws DaoException {
         User user = null;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
@@ -159,7 +159,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll(int currentIndex, int itemsOnPage) throws DaoException {
+    public List<User> findAllUsers(int currentIndex, int itemsOnPage) throws DaoException {
         List<User> users = new ArrayList<>();
         ConnectionPool pool = ConnectionPool.getInstance();
         try (Connection connection = pool.getConnection();

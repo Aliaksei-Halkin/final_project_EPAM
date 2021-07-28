@@ -14,19 +14,19 @@ public interface UserService {
 
     boolean setUserCookRole(User user) throws ServiceException;
 
-    List<User> getAll(int currentIndex, int itemsOnPage) throws ServiceException;
+    List<User> findAll(int currentIndex, int itemsOnPage) throws ServiceException;
 
     int countUsers() throws ServiceException;
 
     boolean deleteUser(String username) throws ServiceException;
 
-    User getUserByUsername(String userName) throws ServiceException;
+    User findUserByUsername(String userName) throws ServiceException;
 
-    boolean isUsernameFree(String username);
+    boolean checkIfUsernameFree(String username);
 
-    boolean isPhoneFree(String phone);
+    boolean checkIfPhoneFree(String phone);
 
-    boolean isEmailFree(String eMail);
+    boolean checkIfEmailFree(String eMail);
 
-    boolean isValidUser(String username, String password) throws ServiceException;
+    boolean checkIfValidUser(String username, String password) throws ServiceException;
 }

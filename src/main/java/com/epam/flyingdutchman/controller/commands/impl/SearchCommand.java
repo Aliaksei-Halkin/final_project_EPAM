@@ -33,7 +33,7 @@ public class SearchCommand implements Command {
             request.setAttribute(REQUEST_CURRENT_INDEX, currentIndex);
             List<Product> products = productService.searchProducts(searchString, currentIndex, ITEMS_ON_PAGE);
             request.setAttribute(REQUEST_PRODUCTS, products);
-            int numberOfProducts = productService.countSearchResult(searchString);
+            int numberOfProducts = productService.countSearchResultProducts(searchString);
             request.setAttribute(REQUEST_NUMBER_OF_ITEMS, numberOfProducts);
             int numberOfPages = Paginator.countNumberOfPage(numberOfProducts);
             request.setAttribute(REQUEST_NUMBER_OF_PAGES, numberOfPages);

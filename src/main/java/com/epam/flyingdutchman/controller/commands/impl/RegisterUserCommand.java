@@ -16,6 +16,8 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
+    private UserServiceImpl userService;//fixme при создании команды пихаем сервис +констрктор
+
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -72,15 +74,15 @@ public class RegisterUserCommand implements Command {
             status.append(MessageManager.getMessage("msg.notValidEmail"));
             return false;
         }
-        if (!userService.isUsernameFree(userName)) {
+        if (!userService.checkIfUsernameFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
-        if (!userService.isPhoneFree(userName)) {
+        if (!userService.checkIfPhoneFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
-        if (!userService.isEmailFree(userName)) {
+        if (!userService.checkIfEmailFree(userName)) {
             status.append(MessageManager.getMessage("msg.nameNotFree"));
             return false;
         }
