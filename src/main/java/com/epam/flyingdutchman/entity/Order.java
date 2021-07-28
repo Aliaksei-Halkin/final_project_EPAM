@@ -88,7 +88,7 @@ public class Order implements Entity {
         this.orderCost = orderCost;
     }
 
-    public Status isConfirmationStatus() {
+    public Status getStatus() {
         return status;
     }
 
