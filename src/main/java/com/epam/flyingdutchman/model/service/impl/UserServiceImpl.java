@@ -3,6 +3,7 @@ package com.epam.flyingdutchman.model.service.impl;
 import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.exception.DaoException;
 import com.epam.flyingdutchman.exception.ServiceException;
+import com.epam.flyingdutchman.model.dao.UserDao;
 import com.epam.flyingdutchman.model.dao.impl.UserDaoImpl;
 import com.epam.flyingdutchman.model.service.UserService;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private final UserDaoImpl userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
     public boolean registerNewUser(User user) throws ServiceException {

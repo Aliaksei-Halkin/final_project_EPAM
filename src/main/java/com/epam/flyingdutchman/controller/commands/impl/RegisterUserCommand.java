@@ -16,8 +16,11 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    private UserServiceImpl userService;//fixme при создании команды пихаем сервис +констрктор
-
+//    private UserServiceImpl userService;//fixme при создании команды пихаем сервис +констрктор
+//
+//    public RegisterUserCommand(UserServiceImpl userService) {
+//        this.userService = userService;
+//    }
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -28,7 +31,7 @@ public class RegisterUserCommand implements Command {
         String phoneNumber = request.getParameter(REQUEST_PHONE);
         String eMail = request.getParameter(REQUEST_EMAIL);
         StringBuilder validationStatus = new StringBuilder();
-        String registrationStatus = "";
+        String registrationStatus;
         if (validationUserData(userName, password, firstName, lastName, phoneNumber, eMail, validationStatus)) {
             UserServiceImpl userService = new UserServiceImpl();
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
