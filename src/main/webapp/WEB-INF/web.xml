@@ -26,10 +26,10 @@
     <param-name>redirectLink</param-name>
     <param-value>https://github.com/</param-value>
   </context-param>
-<!--  <session-config>-->
-<!--    <session-timeout>90</session-timeout>-->
-<!--  </session-config>-->
-<!--  <welcome-file-list>-->
-<!--    <welcome-file>index.jsp</welcome-file>-->
-<!--  </welcome-file-list>-->
+  <session-config>
+    <session-timeout>90</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>
