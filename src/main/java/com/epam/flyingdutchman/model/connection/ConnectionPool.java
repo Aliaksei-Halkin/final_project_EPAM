@@ -12,11 +12,20 @@ import java.util.Queue;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-
+/**
+ * The type Connection pool.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ConnectionPool {
-    private static final int POOL_SIZE = 10;
-    private static final ConnectionPool pool = new ConnectionPool();
     private final Logger logger = LogManager.getLogger();
+    private static final String DRIVER_DB = ConfigurationManager.getProperty("db.driver");
+    private static final String URL_DB = ConfigurationManager.getProperty("db.url");
+    private static final String USER_DB = ConfigurationManager.getProperty("db.user");
+    private static final String PASSWORD_DB = ConfigurationManager.getProperty("db.password");
+    private static final int POOL_SIZE = 8;
+    private static final ConnectionPool pool = new ConnectionPool();
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenConnections;
 
@@ -24,15 +33,12 @@ public class ConnectionPool {
     ConnectionPool() {
         freeConnection = new LinkedBlockingDeque<>(POOL_SIZE);
         givenConnections = new ArrayDeque<>();
-        String driverDB = ConfigurationManager.getProperty("db.driver");
-        String urlDB = ConfigurationManager.getProperty("db.url");
-        String userDB = ConfigurationManager.getProperty("db.user");
-        String passwordDB = ConfigurationManager.getProperty("db.password");
+
         try {
-            Class.forName(driverDB);
+            Class.forName(DRIVER_DB);
             logger.info("JDBC driver loaded");
             for (int i = 0; i < POOL_SIZE; i++) {
-                Connection connection = DriverManager.getConnection(urlDB, userDB, passwordDB);
+                Connection connection = DriverManager.getConnection(URL_DB, USER_DB, PASSWORD_DB);
                 freeConnection.offer(new ProxyConnection(connection));
                 logger.info("DB connection created");
             }
@@ -50,6 +56,11 @@ public class ConnectionPool {
         return pool;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         ProxyConnection connection = null;
         try {
@@ -62,6 +73,11 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
             freeConnection.offer((ProxyConnection) connection);
@@ -70,6 +86,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Destroy pool.
+     */
     public void destroyPool() {
         for (int i = 0; i < POOL_SIZE; i++) {
             try {

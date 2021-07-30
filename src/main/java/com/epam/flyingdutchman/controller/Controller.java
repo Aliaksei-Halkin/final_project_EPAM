@@ -2,6 +2,7 @@ package com.epam.flyingdutchman.controller;
 
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.factory.CommandFactory;
+import com.epam.flyingdutchman.model.connection.ConnectionPool;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         processRequest(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -42,4 +44,10 @@ public class Controller extends HttpServlet {
                     .forward(req, resp);
         }
     }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.getInstance().destroyPool();
+    }
 }
+
