@@ -30,10 +30,9 @@ public class ConnectionPool {
     private final Queue<ProxyConnection> givenConnections;
 
 
-    ConnectionPool() {
+    private ConnectionPool() {
         freeConnection = new LinkedBlockingDeque<>(POOL_SIZE);
         givenConnections = new ArrayDeque<>();
-
         try {
             Class.forName(DRIVER_DB);
             logger.info("JDBC driver loaded");
@@ -43,7 +42,7 @@ public class ConnectionPool {
                 logger.info("DB connection created");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            logger.error(e.getMessage(), e);
+            logger.error("Error while creating connection pool", e);
         }
     }
 
@@ -68,7 +67,7 @@ public class ConnectionPool {
             givenConnections.offer(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            logger.error(e.getMessage(), e);
+            logger.error("InterruptedException in method getConnection", e);
         }
         return connection;
     }

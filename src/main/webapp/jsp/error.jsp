@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Title</title>
-    <h2>mistake</h2>
+    <h2>500 Internal Server Error.</h2>
 </head>
 <body>
 

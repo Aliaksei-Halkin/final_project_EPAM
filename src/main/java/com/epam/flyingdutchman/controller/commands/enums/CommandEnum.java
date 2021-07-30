@@ -16,7 +16,9 @@ public enum CommandEnum {
     REGISTER_USER(new RegisterUserCommand()),
     LOGIN_PAGE(new LoginPageCommand()),
     LOGIN(new LoginCommand()),
-    LOGOUT(new LogoutCommand())
+    LOGOUT(new LogoutCommand()),
+    ORDERS(new OrdersCommand()),
+    REMOVE_ORDER(new RemoveOrderCommand())
     ;
 
     private final Command command;

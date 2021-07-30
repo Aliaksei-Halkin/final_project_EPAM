@@ -20,7 +20,7 @@ public class Paginator {
         return (currentPage - 1) * ITEMS_ON_PAGE;
     }
 
-    public static int countNumberOfPage(int numberOfItems) {
+    public static int countNumberOfPages(int numberOfItems) {
         if (numberOfItems < 0) {
             return 0;
         }

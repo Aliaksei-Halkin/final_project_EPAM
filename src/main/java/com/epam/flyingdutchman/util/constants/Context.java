@@ -34,6 +34,8 @@ public class Context {
     public static final String SESSION_USERNAME = "username";
     public static final String SESSION_USER_ROLE = "userRole";
     public static final String REQUEST_ERROR = "error";
-
-
+    public static final String REQUEST_ORDERS = "orders";
+    public static final String REQUEST_ORDER = "order";
+    private Context() {
+    }
 }

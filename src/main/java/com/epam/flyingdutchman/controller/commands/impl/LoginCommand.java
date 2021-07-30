@@ -4,6 +4,7 @@ import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.PasswordEncryptor;
 import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.exception.ServiceException;
+import com.epam.flyingdutchman.model.service.UserService;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
@@ -16,10 +17,10 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class LoginCommand implements Command {
     private final Logger logger = LogManager.getLogger();
+    UserService userService = new UserServiceImpl();//fixme private field
 
     @Override
     public String execute(HttpServletRequest request) {
-        UserServiceImpl userService = new UserServiceImpl();//fixme private field
         User user;
         String username = request.getParameter(REQUEST_USERNAME);
         String password = request.getParameter(REQUEST_PASSWORD);
@@ -38,6 +39,6 @@ public class LoginCommand implements Command {
         } catch (ServiceException e) {
             logger.error("Error validate the user", e);
         }
-        return  ConfigurationManager.getProperty("page.login");
+        return ConfigurationManager.getProperty("page.login");
     }
 }

@@ -37,6 +37,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean createOrder(Order order) throws ServiceException {
         try {
+            if (order.getUserName() == null) {
+                return false;
+            }
             return orderDao.createOrder(order) > 0;
         } catch (DaoException e) {
             throw new ServiceException("Error creating Order", e);
@@ -69,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Error counting orders", e);
         }
     }
+
     @Override
     public boolean changeOrderStatus(int orderId, Status status) throws ServiceException {
         Order order;

@@ -28,9 +28,11 @@ public class OrderDaoImpl implements OrderDao {
     private static final int INSERT_ORDERS_DETAILS_ID_COLUMN = 1;
     private static final int INSERT_ORDERS_DETAILS_PRODUCT_ID_COLUMN = 2;
     private static final int INSERT_ORDERS_DETAILS_NUMBER_OF_PRODUCTS = 3;
+    public static final String INSERT_ORDER = "INSERT INTO orders (username,  order_cost) VALUES (?, ?)";
     private static final int INSERT_ORDERS_USERNAME_COLUMN = 1;
     private static final int INSERT_ORDERS_DATE_COLUMN = 2;
     private static final int INSERT_ORDERS_COST_COLUMN = 3;
+    private static final int INSERT_ORDERS_COST_COLUMN_NEW_ORDER = 2;
     private static final int INSERT_ORDERS_STATUS_CONFIRM_COLUMN = 4;
     private static final int SELECT_ALL_LIMIT_CURRENT_INDEX = 1;
     private static final int SELECT_ALL_LIMIT_ON_PAGE_INDEX = 2;
@@ -157,20 +159,34 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int createOrder(Order order) throws DaoException {
+        int orderId = INVALID_ID;
+        Connection connection = null;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection()) {
-            connection.setAutoCommit(false);//fixme setautocommit tru +rollback
-            int orderId = insertInTableOrders(connection, order);
-            insertInTableOrdersDetails(connection, order, orderId);
+        try {
+            connection = connectionPool.getConnection();
+            connection.setAutoCommit(false);
+            orderId = insertInTheTableOrders(connection, order);
+            insertInTheTableOrdersDetails(connection, order, orderId);
             connection.commit();
-            return orderId;
         } catch (SQLException throwables) {
             logger.error("Error creating new order  ", throwables);
             throw new DaoException("Error creating new order  ", throwables);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException throwables) {
+                    logger.error("Error while the connection in the method createOrder of OrderDaoImpl " +
+                            "didn't close or didn't have autocommit", throwables);
+                    throw new DaoException("Completion error of \"connection\"", throwables);
+                }
+            }
         }
+        return orderId;
     }
 
-    private void insertInTableOrdersDetails(Connection connection, Order order, int orderId) throws DaoException {
+    private void insertInTheTableOrdersDetails(Connection connection, Order order, int orderId) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_ORDERS_DETAILS)) {
             for (Map.Entry<Product, Long> product : order.getListOfProducts().entrySet()) {
                 statement.setInt(INSERT_ORDERS_DETAILS_ID_COLUMN, orderId);
@@ -184,32 +200,32 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    private int insertInTableOrders(Connection connection, Order order) throws DaoException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(INSERT_ORDERS_USERNAME_COLUMN, order.getUserName());
-            preparedStatement.setTimestamp(INSERT_ORDERS_DATE_COLUMN, Timestamp.valueOf(order.getOrderDateTime()));
-            preparedStatement.setBigDecimal(INSERT_ORDERS_COST_COLUMN, order.getOrderCost());
-            preparedStatement.setString(INSERT_ORDERS_STATUS_CONFIRM_COLUMN, String.valueOf(order.getStatus()));
-            if (preparedStatement.executeUpdate() > 1) {
-                return getKey(preparedStatement);
-            }
+    private int insertInTheTableOrders(Connection connection, Order order) throws DaoException, SQLException {
+        int orderId = INVALID_ID;
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_ORDER, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(INSERT_ORDERS_USERNAME_COLUMN, order.getUserName());
+            statement.setBigDecimal(INSERT_ORDERS_COST_COLUMN_NEW_ORDER, order.getOrderCost());
+            statement.executeUpdate();
+            orderId = getKey(statement);
         } catch (SQLException throwables) {
+            connection.rollback();
             logger.error("Error inserting row in the table Order", throwables);
             throw new DaoException("Error inserting row in the table Order", throwables);
         }
-        return INVALID_ID;
+        return orderId;
     }
 
     private int getKey(PreparedStatement preparedStatement) throws DaoException {
+        int orderId = INVALID_ID;
         try (ResultSet key = preparedStatement.getGeneratedKeys()) {
             if (key.next()) {
-                return key.getInt(1);
+                orderId = key.getInt(1);
             }
         } catch (SQLException throwables) {
             logger.error("Error getting key after inserting row in a table", throwables);
             throw new DaoException("Error getting key after inserting row in a table", throwables);
         }
-        return INVALID_ID;
+        return orderId;
     }
 
     @Override

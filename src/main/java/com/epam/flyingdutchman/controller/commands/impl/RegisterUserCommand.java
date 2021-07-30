@@ -4,6 +4,7 @@ import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.PasswordEncryptor;
 import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.exception.ServiceException;
+import com.epam.flyingdutchman.model.service.UserService;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.model.validation.UserValidator;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
@@ -16,6 +17,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
+    UserService userService = new UserServiceImpl();
 //    private UserServiceImpl userService;//fixme при создании команды пихаем сервис +констрктор
 //
 //    public RegisterUserCommand(UserServiceImpl userService) {
@@ -33,19 +35,18 @@ public class RegisterUserCommand implements Command {
         StringBuilder validationStatus = new StringBuilder();
         String registrationStatus;
         if (validationUserData(userName, password, firstName, lastName, phoneNumber, eMail, validationStatus)) {
-            UserServiceImpl userService = new UserServiceImpl();
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
             try {
                 if (userService.registerNewUser(user)) {
                     validationStatus.append(MessageManager.getMessage("msg.registeredSuccess"));
-                 logger.info("New user registered success" );
+                    logger.info("New user registered success");
                 } else {
                     validationStatus.append(MessageManager.getMessage("msg.notRegistered"));
-                 logger.info("New user didn't register success");
+                    logger.info("New user didn't register success");
                 }
             } catch (ServiceException e) {
-               logger.error("Mistake in registration", e);
+                logger.error("Mistake in registration", e);
             }
         }
         registrationStatus = validationStatus.toString();

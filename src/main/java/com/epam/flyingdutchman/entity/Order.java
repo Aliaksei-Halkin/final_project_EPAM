@@ -56,6 +56,13 @@ public class Order implements Entity {
         this.listOfProducts = listOfProducts;
     }
 
+    public Order(String userName, BigDecimal orderCost, Map<Product, Long> listOfProducts) {
+        this.userName = userName;
+        this.orderCost = orderCost;
+
+        this.listOfProducts = listOfProducts;
+    }
+
     public long getOrderId() {
         return orderId;
     }
