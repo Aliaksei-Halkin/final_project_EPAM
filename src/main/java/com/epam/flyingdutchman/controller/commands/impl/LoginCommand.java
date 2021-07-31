@@ -17,7 +17,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class LoginCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    UserService userService = new UserServiceImpl();//fixme private field
+    private final UserService userService = new UserServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {

@@ -11,10 +11,10 @@ public class RegisterUserPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String registerStatus = request.getParameter(REQUEST_REGISTRATION_STATUS);
-        if (registerStatus==null){
-            registerStatus="";
+        if (registerStatus == null) {
+            registerStatus = "";
         }
-        request.getSession().setAttribute(SESSION_REGISTRATION_STATUS,registerStatus);
+        request.getSession().setAttribute(SESSION_REGISTRATION_STATUS, registerStatus);
         return ConfigurationManager.getProperty("page.register");
     }
 }

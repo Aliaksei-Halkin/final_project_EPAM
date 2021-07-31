@@ -15,7 +15,7 @@ import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ORDER;
 
 public class RemoveOrderCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    OrderService orderService = new OrderServiceImpl();
+    private final OrderService orderService = new OrderServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {

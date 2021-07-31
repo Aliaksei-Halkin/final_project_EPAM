@@ -18,21 +18,21 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class OrdersCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    OrderService orderService = new OrderServiceImpl();
+    private final OrderService orderService = new OrderServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
         try {
             Integer currentPage = Paginator.getCurrentPage(request);
-            request.setAttribute(REQUEST_PAGE, currentPage);
             int currentIndex = Paginator.countCurrentIndex(currentPage);
-            request.setAttribute(REQUEST_CURRENT_INDEX, currentIndex);
             String username = (String) request.getSession().getAttribute(SESSION_USERNAME);
             List<Order> orders = orderService.findOrdersOfUser(username, currentIndex, ITEMS_ON_PAGE);
-            request.setAttribute(REQUEST_ORDERS, orders);
             int numberOfOrders = orderService.countOrdersOfUser(username);
-            request.setAttribute(REQUEST_NUMBER_OF_ITEMS, numberOfOrders);
             int numberOfPages = Paginator.countNumberOfPages(numberOfOrders);
+            request.setAttribute(REQUEST_PAGE, currentPage);
+            request.setAttribute(REQUEST_CURRENT_INDEX, currentIndex);
+            request.setAttribute(REQUEST_ORDERS, orders);
+            request.setAttribute(REQUEST_NUMBER_OF_ITEMS, numberOfOrders);
             request.setAttribute(REQUEST_NUMBER_OF_PAGES, numberOfPages);
             request.setAttribute(REQUEST_PAGINATOR_COMMAND, request.getParameter(REQUEST_COMMAND));
         } catch (ServiceException e) {

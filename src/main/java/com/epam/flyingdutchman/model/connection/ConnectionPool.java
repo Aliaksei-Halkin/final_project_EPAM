@@ -24,19 +24,19 @@ public class ConnectionPool {
     private static final String URL_DB = ConfigurationManager.getProperty("db.url");
     private static final String USER_DB = ConfigurationManager.getProperty("db.user");
     private static final String PASSWORD_DB = ConfigurationManager.getProperty("db.password");
-    private static final int POOL_SIZE = 8;
+    private static final int DEFAULT_POOL_SIZE = 8;
     private static final ConnectionPool pool = new ConnectionPool();
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final Queue<ProxyConnection> givenConnections;
 
 
     private ConnectionPool() {
-        freeConnection = new LinkedBlockingDeque<>(POOL_SIZE);
+        freeConnection = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         givenConnections = new ArrayDeque<>();
         try {
             Class.forName(DRIVER_DB);
             logger.info("JDBC driver loaded");
-            for (int i = 0; i < POOL_SIZE; i++) {
+            for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = DriverManager.getConnection(URL_DB, USER_DB, PASSWORD_DB);
                 freeConnection.offer(new ProxyConnection(connection));
                 logger.info("DB connection created");
@@ -89,7 +89,7 @@ public class ConnectionPool {
      * Destroy pool.
      */
     public void destroyPool() {
-        for (int i = 0; i < POOL_SIZE; i++) {
+        for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {
                 freeConnection.take().reallyClose();
                 logger.info("DB connection closed");

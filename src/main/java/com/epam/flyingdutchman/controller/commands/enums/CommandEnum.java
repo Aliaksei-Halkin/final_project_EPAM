@@ -19,6 +19,7 @@ public enum CommandEnum {
     LOGOUT(new LogoutCommand()),
     ORDERS(new OrdersCommand()),
     REMOVE_ORDER(new RemoveOrderCommand())
+
     ;
 
     private final Command command;

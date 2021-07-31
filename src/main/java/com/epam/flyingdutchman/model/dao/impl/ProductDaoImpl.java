@@ -17,12 +17,12 @@ import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
 
 public class ProductDaoImpl implements ProductDao {
     private static final ProductDaoImpl INSTANCE = new ProductDaoImpl();
-    public static final int PRODUCT_NAME_INDEX = 1;
-    public static final int PRODUCT_IMG_INDEX = 2;
-    public static final int PRODUCT_COST_INDEX = 3;
-    public static final int PRODUCT_DESCRIPTION_INDEX = 4;
-    public static final int PRODUCT_ACTIVE_INDEX = 5;
-    public static final int PRODUCT_ID_INDEX = 6;
+    private static final int PRODUCT_NAME_INDEX = 1;
+    private static final int PRODUCT_IMG_INDEX = 2;
+    private static final int PRODUCT_COST_INDEX = 3;
+    private static final int PRODUCT_DESCRIPTION_INDEX = 4;
+    private static final int PRODUCT_ACTIVE_INDEX = 5;
+    private static final int PRODUCT_ID_INDEX = 6;
     private static final int SEARCH_PATTERN_INDEX = 1;
     private static final int SELECT_SEARCH_LIMIT_CURRENT_INDEX = 2;
     private static final int SELECT_SEARCH_LIMIT_ON_PAGE_INDEX = 3;

@@ -18,7 +18,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class SearchCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    ProductService productService = new ProductServiceImpl();
+    private final ProductService productService = new ProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {

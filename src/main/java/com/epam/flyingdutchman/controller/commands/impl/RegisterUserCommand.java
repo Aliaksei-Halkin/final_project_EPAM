@@ -17,12 +17,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    UserService userService = new UserServiceImpl();
-//    private UserServiceImpl userService;//fixme при создании команды пихаем сервис +констрктор
-//
-//    public RegisterUserCommand(UserServiceImpl userService) {
-//        this.userService = userService;
-//    }
+    private final UserService userService = new UserServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {

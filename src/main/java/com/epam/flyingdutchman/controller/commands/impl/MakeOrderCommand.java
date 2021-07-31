@@ -3,7 +3,6 @@ package com.epam.flyingdutchman.controller.commands.impl;
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.entity.Order;
 import com.epam.flyingdutchman.entity.Product;
-import com.epam.flyingdutchman.entity.Status;
 import com.epam.flyingdutchman.exception.ServiceException;
 import com.epam.flyingdutchman.model.service.OrderService;
 import com.epam.flyingdutchman.model.service.impl.CartService;
@@ -25,11 +24,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class MakeOrderCommand implements Command {
     private final Logger logger = LogManager.getLogger();
-    OrderService orderService = new OrderServiceImpl();
-
-//    public MakeOrderCommand(OrderService orderService) {
-//        this.orderService = orderService;
-//    } //todo check variants of realisation
+    private final OrderService orderService = new OrderServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -59,6 +54,7 @@ public class MakeOrderCommand implements Command {
         BigDecimal orderCost = CartService.countTotalCost(cart);
         Map<Product, Long> productsMap = CartService.groupProducts(cart);
         order = new Order(username, orderCost, productsMap);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDateTime.now().toLocalDate());//todo check
         return order;
     }
 

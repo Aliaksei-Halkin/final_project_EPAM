@@ -5,6 +5,7 @@ import com.epam.flyingdutchman.controller.commands.util.Paginator;
 import com.epam.flyingdutchman.controller.commands.util.RequestProcessor;
 import com.epam.flyingdutchman.entity.Product;
 import com.epam.flyingdutchman.exception.ServiceException;
+import com.epam.flyingdutchman.model.service.ProductService;
 import com.epam.flyingdutchman.model.service.impl.CartService;
 import com.epam.flyingdutchman.model.service.impl.ProductServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
@@ -21,6 +22,7 @@ import static com.epam.flyingdutchman.util.constants.Context.SESSION_CART;
 
 public class AddProductCommand implements Command {
     private final Logger logger = LogManager.getLogger();
+    private final ProductService productService = new ProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest req) {
@@ -28,7 +30,6 @@ public class AddProductCommand implements Command {
             HttpSession session = req.getSession();
             List<Product> cart = getCart(session);
             int productId = RequestProcessor.getIntFromRequest(req, REQUEST_PRODUCT);
-            ProductServiceImpl productService = new ProductServiceImpl();
             Product product = productService.findProductById(productId);
             CartService.addProduct(cart, product);
             session.setAttribute(SESSION_CART, cart);
