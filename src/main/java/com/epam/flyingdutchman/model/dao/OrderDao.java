@@ -3,6 +3,7 @@ package com.epam.flyingdutchman.model.dao;
 import com.epam.flyingdutchman.entity.Order;
 import com.epam.flyingdutchman.exception.DaoException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface OrderDao {
@@ -12,9 +13,9 @@ public interface OrderDao {
 
     int countOrdersOfUser(String username) throws DaoException;
 
-    int createOrder(Order order) throws DaoException;
+    int createOrder(Order order) throws DaoException, SQLException;
 
-    boolean deleteOrder(int orderId) throws DaoException;
+    boolean deleteOrder(int orderId) throws DaoException, SQLException;
 
     List<Order> findAllOrders(int currentIndex, int itemsOnPage) throws DaoException;
 

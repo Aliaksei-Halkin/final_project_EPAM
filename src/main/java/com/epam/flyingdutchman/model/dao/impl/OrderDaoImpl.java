@@ -154,17 +154,18 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public int createOrder(Order order) throws DaoException {
-        int orderId = INVALID_ID;
+    public int createOrder(Order order) throws DaoException, SQLException {
+        int orderId;
         Connection connection = null;
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
         try {
+            ConnectionPool connectionPool = ConnectionPool.getInstance();
             connection = connectionPool.getConnection();
             connection.setAutoCommit(false);
             orderId = insertInTheTableOrders(connection, order);
             insertInTheTableOrdersDetails(connection, order, orderId);
             connection.commit();
         } catch (SQLException throwables) {
+            connection.rollback();
             logger.error("Error creating new order  ", throwables);
             throw new DaoException("Error creating new order  ", throwables);
         } finally {
@@ -175,7 +176,6 @@ public class OrderDaoImpl implements OrderDao {
                 } catch (SQLException throwables) {
                     logger.error("Error while the connection in the method createOrder of OrderDaoImpl " +
                             "didn't close or didn't have autocommit", throwables);
-                    throw new DaoException("Completion error of \"connection\"", throwables);
                 }
             }
         }
@@ -197,7 +197,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private int insertInTheTableOrders(Connection connection, Order order) throws DaoException, SQLException {
-        int orderId = INVALID_ID;
+        int orderId;
         try (PreparedStatement statement = connection.prepareStatement(INSERT_ORDER, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(INSERT_ORDERS_USERNAME_COLUMN, order.getUserName());
             statement.setBigDecimal(INSERT_ORDERS_COST_COLUMN_NEW_ORDER, order.getOrderCost());
@@ -225,17 +225,30 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean deleteOrder(int orderId) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try (Connection connection = connectionPool.getConnection()) {
+    public boolean deleteOrder(int orderId) throws DaoException, SQLException {
+        Connection connection = null;
+        try {
+            ConnectionPool connectionPool = ConnectionPool.getInstance();
+            connection = connectionPool.getConnection();
             connection.setAutoCommit(false);
             deleteInTableOrdersDetails(connection, orderId);
             deleteRowInTableOrders(connection, orderId);
-            connection.commit();//fixme setautocommit tru +rollback
+            connection.commit();
             return true;
         } catch (SQLException throwables) {
+            connection.rollback();
             logger.error("Error deleting a order " + orderId, throwables);
             throw new DaoException("Error deleting a order", throwables);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException throwables) {
+                    logger.error("Error while the connection in the method deleteOrder of OrderDaoImpl " +
+                            "didn't close or didn't have autocommit", throwables);
+                }
+            }
         }
     }
 

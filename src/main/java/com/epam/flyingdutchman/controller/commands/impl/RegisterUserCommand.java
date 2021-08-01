@@ -50,7 +50,7 @@ public class RegisterUserCommand implements Command {
         request.setAttribute(REQUEST_REGISTRATION_STATUS, registrationStatus);
         return ConfigurationManager.getProperty("page.registerRedirect");
     }
-
+//fixme will refactor to  the service
     private boolean validationUserData(String userName, String password, String firstName, String lastName,
                                        String phoneNumber, String eMail, StringBuilder status) {
         try {
