@@ -1,7 +1,7 @@
 package com.epam.flyingdutchman.controller.factory;
 
 import com.epam.flyingdutchman.controller.commands.Command;
-import com.epam.flyingdutchman.controller.commands.EmptyCommand;
+import com.epam.flyingdutchman.controller.commands.impl.EmptyCommand;
 import com.epam.flyingdutchman.controller.commands.enums.CommandEnum;
 import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
