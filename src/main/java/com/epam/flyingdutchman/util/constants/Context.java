@@ -36,6 +36,7 @@ public class Context {
     public static final String REQUEST_ERROR = "error";
     public static final String REQUEST_ORDERS = "orders";
     public static final String REQUEST_ORDER = "order";
+    public static final String REQUEST_USER = "user";
     private Context() {
     }
 }

@@ -63,7 +63,7 @@ INSERT into orders (username, order_cost)
 values ('maroon', 45.23),
        ('Boby', 52.23),
        ('kitty17', 58.22),
-       ('boris', 585.22);
+       ('boris', 34.52);
 
 INSERT into products (product_name, image_path, cost, description)
 values ('Octopus tentacles', 'images/img1.jpg', 10.14,
