@@ -29,6 +29,18 @@ public class User implements Entity {
     public User() {
     }
 
+    public User(String userName, String password, String firstName, String lastName, String phoneNumber,
+                String eMail, int userRole, boolean active) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.eMail = eMail;
+        this.userRole = userRole;
+        this.active = active;
+    }
+
     public User(String userName, String password, String firstName, String lastName, String phoneNumber, String eMail) {
         this.userName = userName;
         this.password = password;

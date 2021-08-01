@@ -13,6 +13,8 @@ public class DatabaseColumn {
     public static final String USERS_LAST_NAME = "last_name";
     public static final String USERS_PHONE = "phone_number";
     public static final String USERS_EMAIL = "e_mail";
+    public static final String USERS_ROLE = "user_role";
+    public static final String USERS_ACTIVE = "user_role";
     public static final String ORDERS_ORDER_ID = "order_id";
     public static final String ORDERS_USERNAME = "username";
     public static final String ORDERS_ORDER_DATE = "order_date";

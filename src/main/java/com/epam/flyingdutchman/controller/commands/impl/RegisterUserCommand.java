@@ -18,6 +18,8 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();
+    private final UserValidator validator = new UserValidator();
+
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -51,39 +53,41 @@ public class RegisterUserCommand implements Command {
 
     private boolean validationUserData(String userName, String password, String firstName, String lastName,
                                        String phoneNumber, String eMail, StringBuilder status) {
-        UserValidator validator = new UserValidator();
-        UserServiceImpl userService = new UserServiceImpl();
-        if (!validator.validateUserName(userName)) {
-            status.append(MessageManager.getMessage("msg.notValidUsername"));
-            return false;
-        }
-        if (!validator.isValidPassword(password)) {
-            status.append(MessageManager.getMessage("msg.notValidPassword"));
-            return false;
-        }
-        if (!validator.isValidName(firstName) && !validator.isValidName(lastName)) {
-            status.append(MessageManager.getMessage("msg.notValidName"));
-            return false;
-        }
-        if (!validator.isValidPhone(phoneNumber)) {
-            status.append(MessageManager.getMessage("msg.notValidPhone"));
-            return false;
-        }
-        if (!validator.isValidEmail(eMail)) {
-            status.append(MessageManager.getMessage("msg.notValidEmail"));
-            return false;
-        }
-        if (!userService.checkIfUsernameFree(userName)) {
-            status.append(MessageManager.getMessage("msg.nameNotFree"));
-            return false;
-        }
-        if (!userService.checkIfPhoneFree(userName)) {
-            status.append(MessageManager.getMessage("msg.nameNotFree"));
-            return false;
-        }
-        if (!userService.checkIfEmailFree(userName)) {
-            status.append(MessageManager.getMessage("msg.nameNotFree"));
-            return false;
+        try {
+            if (!validator.validateUserName(userName)) {
+                status.append(MessageManager.getMessage("msg.notValidUsername"));
+                return false;
+            }
+            if (!validator.isValidPassword(password)) {
+                status.append(MessageManager.getMessage("msg.notValidPassword"));
+                return false;
+            }
+            if (!validator.isValidName(firstName) && !validator.isValidName(lastName)) {
+                status.append(MessageManager.getMessage("msg.notValidName"));
+                return false;
+            }
+            if (!validator.isValidPhone(phoneNumber)) {
+                status.append(MessageManager.getMessage("msg.notValidPhone"));
+                return false;
+            }
+            if (!validator.isValidEmail(eMail)) {
+                status.append(MessageManager.getMessage("msg.notValidEmail"));
+                return false;
+            }
+            if (!userService.checkIfUsernameFree(userName)) {
+                status.append(MessageManager.getMessage("msg.nameNotFree"));
+                return false;
+            }
+            if (!userService.checkIfPhoneFree(userName)) {
+                status.append(MessageManager.getMessage("msg.nameNotFree"));
+                return false;
+            }
+            if (!userService.checkIfEmailFree(userName)) {
+                status.append(MessageManager.getMessage("msg.nameNotFree"));
+                return false;
+            }
+        } catch (ServiceException e) {
+            logger.error("Mistake in registration", e);
         }
         return true;
     }

@@ -22,11 +22,11 @@ public interface UserService {
 
     User findUserByUsername(String userName) throws ServiceException;
 
-    boolean checkIfUsernameFree(String username);
+    boolean checkIfUsernameFree(String username) throws ServiceException;
 
-    boolean checkIfPhoneFree(String phone);
+    boolean checkIfPhoneFree(String phone) throws ServiceException;
 
-    boolean checkIfEmailFree(String eMail);
+    boolean checkIfEmailFree(String eMail) throws ServiceException;
 
     boolean checkIfValidUser(String username, String password) throws ServiceException;
 }

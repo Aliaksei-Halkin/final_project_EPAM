@@ -110,7 +110,7 @@ public class ProductDaoImpl implements ProductDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS)) {
             statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
-            statement.setInt(SELECT_ALL_LIMIT_ON_PAGE_INDEX, currentIndex);
+            statement.setInt(SELECT_ALL_LIMIT_ON_PAGE_INDEX, itemsOnPage);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     listOfAllProducts.add(createInstanceOfProduct(resultSet));

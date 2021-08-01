@@ -16,7 +16,7 @@ public class LogoutCommand implements Command {
         Optional<Object> optional = Optional.ofNullable(session.getAttribute(SESSION_LANGUAGE));
         session.invalidate();
         if (optional.isEmpty()) {
-            request.getSession().setAttribute(SESSION_LANGUAGE, "en");
+            request.getSession().setAttribute(SESSION_LANGUAGE, "ru");
         } else {
             request.getSession().setAttribute(SESSION_LANGUAGE, optional.get());
         }

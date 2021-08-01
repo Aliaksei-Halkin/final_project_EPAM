@@ -121,18 +121,23 @@ public class UserDaoImpl implements UserDao {
 
     private User createInstanceOfUser(@NotNull ResultSet resultSet) throws DaoException {
         String username, password, firstName, lastName, phone, eMail;
+        int role;
+        boolean active;
         try {
+
             username = resultSet.getString(USERS_USERNAME);
             password = resultSet.getString(USERS_PASSWORD);
             firstName = resultSet.getString(USERS_FIRST_NAME);
             lastName = resultSet.getString(USERS_LAST_NAME);
             phone = resultSet.getString(USERS_PHONE);
             eMail = resultSet.getString(USERS_EMAIL);
+            role = resultSet.getInt(USERS_ROLE);
+            active = resultSet.getBoolean(USERS_ACTIVE);
         } catch (SQLException e) {
             logger.error("Error creating new user", e);
             throw new DaoException("Error creating new user", e);
         }
-        return new User(username, password, firstName, lastName, phone, eMail);
+        return new User(username, password, firstName, lastName, phone, eMail, role, active);
     }
 
     @Override

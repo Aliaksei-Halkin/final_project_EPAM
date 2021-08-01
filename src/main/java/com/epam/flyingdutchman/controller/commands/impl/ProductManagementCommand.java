@@ -25,7 +25,7 @@ public class ProductManagementCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         List<Product> products = new ArrayList<>();
-        Integer currentPage = Paginator.getCurrentPage(request);
+        int currentPage = Paginator.getCurrentPage(request);
         int currentIndex = Paginator.countCurrentIndex(currentPage);
         int numberOfProducts = INVALID_VALUE;
         int numberOfPages = INVALID_VALUE;

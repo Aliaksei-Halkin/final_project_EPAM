@@ -106,14 +106,14 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean checkIfUsernameFree(String username) {
+    public boolean checkIfUsernameFree(String username) throws ServiceException {
         Optional<User> optionalUser;
-        boolean result = false;
+        boolean result;
         try {
             optionalUser = userDao.findUserByUsername(username);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();//fixme will add serviceexception
+            throw new ServiceException("Error while username doesn't free", e);
         }
         return result;
     }
@@ -125,14 +125,14 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean checkIfPhoneFree(String phone) {
+    public boolean checkIfPhoneFree(String phone) throws ServiceException {
         Optional<User> optionalUser;
-        boolean result = false;
+        boolean result;
         try {
             optionalUser = userDao.findUserByPhone(phone);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();//fixme will add serviceexception
+            throw new ServiceException("Error while username doesn't free", e);
         }
         return result;
     }
@@ -144,17 +144,18 @@ public class UserServiceImpl implements UserService {
      * @return {@code true} If a value is not present, otherwise -false
      */
     @Override
-    public boolean checkIfEmailFree(String eMail) {
+    public boolean checkIfEmailFree(String eMail) throws ServiceException {
         Optional<User> optionalUser;
-        boolean result = false;
+        boolean result;
         try {
             optionalUser = userDao.findUserByEmail(eMail);
             result = optionalUser.isEmpty();
         } catch (DaoException e) {
-            e.printStackTrace();//fixme will add serviceexception
+            throw new ServiceException("Error while username doesn't free", e);
         }
         return result;
     }
+
     /**
      * Validate users credentials. User considered valid if DAO object contains information that
      * there is active user account with such username and password
