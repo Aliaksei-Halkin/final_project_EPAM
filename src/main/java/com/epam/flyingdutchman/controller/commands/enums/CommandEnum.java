@@ -19,7 +19,8 @@ public enum CommandEnum {
     LOGOUT(new LogoutCommand()),
     ORDERS(new OrdersCommand()),
     REMOVE_ORDER(new RemoveOrderCommand()),
-    PROFILE(new ProfileCommand())
+    PROFILE(new ProfileCommand()),
+    PRODUCT_MANAGEMENT(new ProductManagementCommand())
 
     ;
 

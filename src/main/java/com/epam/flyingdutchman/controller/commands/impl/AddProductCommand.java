@@ -21,7 +21,7 @@ import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PRODUCT;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_CART;
 
 public class AddProductCommand implements Command {
-    private final Logger logger = LogManager.getLogger();
+    private final static Logger LOGGER = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();
 
     @Override
@@ -35,7 +35,7 @@ public class AddProductCommand implements Command {
             session.setAttribute(SESSION_CART, cart);
             Paginator.transferPageToSession(req);
         } catch (ServiceException e) {
-            logger.error("Error adding products to the cart", e);
+            LOGGER.error("Error adding products to the cart", e);
         }
         return ConfigurationManager.getProperty("page.searchRedirect");
     }
