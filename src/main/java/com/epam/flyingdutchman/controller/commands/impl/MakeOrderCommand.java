@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import java.util.Map;
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class MakeOrderCommand implements Command {
-    private final Logger logger = LogManager.getLogger();
+    private final static Logger LOGGER = LogManager.getLogger();
     private final OrderService orderService = new OrderServiceImpl();
 
     @Override
@@ -42,7 +41,7 @@ public class MakeOrderCommand implements Command {
                 page = ConfigurationManager.getProperty("page.cartRedirect");
             }
         } catch (ServiceException e) {
-            logger.error("Error in MakeOrderCommand", e);
+            LOGGER.error("Error in MakeOrderCommand", e);
         }
         return page;
     }
@@ -54,7 +53,6 @@ public class MakeOrderCommand implements Command {
         BigDecimal orderCost = CartService.countTotalCost(cart);
         Map<Product, Long> productsMap = CartService.groupProducts(cart);
         order = new Order(username, orderCost, productsMap);
-        java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDateTime.now().toLocalDate());//todo check
         return order;
     }
 

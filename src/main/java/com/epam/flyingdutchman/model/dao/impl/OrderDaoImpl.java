@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final int UPDATE_ORDER_ID_COLUMN = 5;
     private static final int INVALID_ID = -1;
     private static final int INVALID_COUNT = -1;
-    private static final String PATTERN_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private final Logger logger = LogManager.getLogger();
 
@@ -72,7 +70,6 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private Order createInstanceOfOrder(Connection connection, ResultSet ordersSet) throws DaoException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PATTERN_DATE_TIME);
         Map<Product, Long> products;
         Order order;
         try (PreparedStatement statement = connection.prepareStatement(SELECT_ORDERS_DETAILS)) {
@@ -81,10 +78,9 @@ public class OrderDaoImpl implements OrderDao {
             ResultSet productsSet = statement.executeQuery();
             products = createMapOfProducts(productsSet);
             String username = ordersSet.getString(ORDERS_USERNAME);
-            LocalDateTime orderDate = LocalDateTime.parse(ordersSet.getTimestamp(ORDERS_ORDER_DATE).toString(), formatter);
-            //TODO WILL CHECK: LocalDateTime orderDate = LocalDateTime.parse(ordersSet.getString(ORDERS_ORDER_DATE), formatter);
+            LocalDateTime orderDate = ordersSet.getTimestamp(ORDERS_ORDER_DATE).toLocalDateTime();
             BigDecimal cost = ordersSet.getBigDecimal(ORDERS_ORDER_COST);
-            Status status = Status.valueOf(ordersSet.getString(ORDERS_STATUS));
+            Status status = Status.valueOf(ordersSet.getString(ORDERS_STATUS).toUpperCase());
             order = new Order(orderId, username, orderDate, cost, status, products);
             productsSet.close();
         } catch (SQLException e) {
@@ -97,7 +93,7 @@ public class OrderDaoImpl implements OrderDao {
     private Map<Product, Long> createMapOfProducts(ResultSet productsSet) throws DaoException {
         Map<Product, Long> productsMap = new HashMap<>();
         try {
-            while (!productsSet.next()) {
+            while (productsSet.next()) {
                 productsMap.put(createInstanceOfProduct(productsSet),
                         productsSet.getLong(ORDERS_DETAILS_NUMBER_OF_PRODUCTS));
             }

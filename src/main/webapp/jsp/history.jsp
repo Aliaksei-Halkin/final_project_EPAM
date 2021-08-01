@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>FD - <fmt:message key="ui.title.myOrders"/></title>
+    <title>FD<fmt:message key="ui.title.myOrders"/></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -36,7 +36,11 @@
                     <tr>
                         <td>${counter.count + index}</td>
                         <td>ID${order.orderId}</td>
-                        <td><fmt:formatDate value="${order.orderDate}"  /></td>
+                        <td>
+                            <fmt:parseDate value="${order.orderDateTime}" pattern="yyyy-MM-dd'T'HH:mm:ss"
+                                           var="parsedDateTime" type="both"/>
+                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${ parsedDateTime }"/>
+                        </td>
                         <td>
                             <table>
                                 <c:forEach items="${order.listOfProducts}" var="product">
@@ -51,18 +55,38 @@
                         </td>
                         <td>$<c:out value="${order.orderCost}"/></td>
                         <td>
-                            <c:if test="${order.confirmed}">
-                                <fmt:message key="ui.orderStatus.approved"/>
-                            </c:if>
-                            <c:if test="${!order.confirmed}">
-                                <fmt:message key="ui.orderStatus.pending"/>
-                                <form action="controller" method="post">
-                                    <input type="hidden" name="command" value="remove_order">
-                                    <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="order" value="${order.orderId}">
-                                    <input type="submit" value='<fmt:message key="ui.removeFromOrders"/>'>
-                                </form>
-                            </c:if>
+                            <c:choose>
+                                <c:when test="${order.status=='CONFIRMED'}">
+                                    <fmt:message key="ui.orderStatusConfirmed"/>
+                                </c:when>
+                                <c:when test="${order.status=='COOKED'}">
+                                    <fmt:message key="ui.orderStatusCooked"/>
+                                </c:when>
+                                <c:when test="${order.status=='CLOSED'}">
+                                    <fmt:message key="ui.orderStatusClosed"/>
+                                </c:when>
+                                <c:when test="${order.status=='NEW'}">
+                                    <fmt:message key="ui.orderStatus.pending"/>
+                                    <form action="controller" method="post">
+                                        <input type="hidden" name="command" value="remove_order">
+                                        <input type="hidden" name="page" value="${page}"/>
+                                        <input type="hidden" name="order" value="${order.orderId}">
+                                        <input type="submit" value='<fmt:message key="ui.removeFromOrders"/>'>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>Undefined</p>
+                                </c:otherwise>
+                            </c:choose>
+<%--                            <c:if test="${order.status='NEW'}">--%>
+<%--                                <fmt:message key="ui.orderStatus.pending"/>--%>
+<%--                                <form action="controller" method="post">--%>
+<%--                                    <input type="hidden" name="command" value="remove_order">--%>
+<%--                                    <input type="hidden" name="page" value="${page}"/>--%>
+<%--                                    <input type="hidden" name="order" value="${order.orderId}">--%>
+<%--                                    <input type="submit" value='<fmt:message key="ui.removeFromOrders"/>'>--%>
+<%--                                </form>--%>
+<%--                            </c:if>--%>
                         </td>
                     </tr>
                 </c:forEach>
