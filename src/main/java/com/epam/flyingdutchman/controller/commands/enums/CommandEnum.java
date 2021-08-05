@@ -20,7 +20,9 @@ public enum CommandEnum {
     ORDERS(new OrdersCommand()),
     REMOVE_ORDER(new RemoveOrderCommand()),
     PROFILE(new ProfileCommand()),
-    PRODUCT_MANAGEMENT(new ProductManagementCommand())
+    PRODUCT_MANAGEMENT(new ProductManagementCommand()),
+    ADD_NEW_PRODUCT_PAGE(new AddNewProductPageCommand()),
+    ADD_NEW_PRODUCT(new AddNewProductCommand())
 
     ;
 

@@ -24,6 +24,7 @@ public class Context {
     public static final String REQUEST_CART_TOTAL_COST = "cartTotalCost";
     public static final String REQUEST_ORDER_STATUS = "orderStatus";
     public static final String REQUEST_REGISTRATION_STATUS = "registrationStatus";
+    public static final String REQUEST_REGISTRATION_STATUS_PRODUCT = "registrationStatusProduct";
     public static final String SESSION_REGISTRATION_STATUS = "registrationStatus";
     public static final String REQUEST_PASSWORD = "password";
     public static final String REQUEST_USERNAME = "username";
@@ -37,6 +38,11 @@ public class Context {
     public static final String REQUEST_ORDERS = "orders";
     public static final String REQUEST_ORDER = "order";
     public static final String REQUEST_USER = "user";
+    public static final String REQUEST_PRODUCT_NAME = "productName";
+    public static final String REQUEST_DESCRIPTION = "description";
+    public static final String REQUEST_COST = "cost";
+    public static final String REQUEST_IMAGE = "image";
+    public static final String REQUEST_CHANGE_IMAGE = "changeImage";
 
     private Context() {
     }

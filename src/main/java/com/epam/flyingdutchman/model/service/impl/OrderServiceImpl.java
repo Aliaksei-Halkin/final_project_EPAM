@@ -8,6 +8,7 @@ import com.epam.flyingdutchman.model.dao.OrderDao;
 import com.epam.flyingdutchman.model.dao.impl.OrderDaoImpl;
 import com.epam.flyingdutchman.model.service.OrderService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
@@ -41,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
                 return false;
             }
             return orderDao.createOrder(order) > 0;
-        } catch (DaoException e) {
+        } catch (DaoException | SQLException e) {
             throw new ServiceException("Error creating Order", e);
         }
     }
@@ -50,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean removeOrder(int orderId) throws ServiceException {
         try {
             return orderDao.deleteOrder(orderId);
-        } catch (DaoException e) {
+        } catch (DaoException | SQLException e) {
             throw new ServiceException("Error deleting order of user", e);
         }
     }
