@@ -7,10 +7,8 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * The type Connection pool.
@@ -26,13 +24,15 @@ public class ConnectionPool {
     private static final String PASSWORD_DB = ConfigurationManager.getProperty("db.password");
     private static final int DEFAULT_POOL_SIZE = 8;
     private static final ConnectionPool pool = new ConnectionPool();
-    private final BlockingDeque<ProxyConnection> freeConnection;
-    private final Queue<ProxyConnection> givenConnections;
+    private final BlockingQueue<ProxyConnection> freeConnection;
+    private final BlockingQueue<ProxyConnection> givenConnections;
 
-
+    /**
+     * Initialize connection pool
+     */
     private ConnectionPool() {
-        freeConnection = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-        givenConnections = new ArrayDeque<>();
+        freeConnection = new ArrayBlockingQueue<>(DEFAULT_POOL_SIZE);
+        givenConnections = new ArrayBlockingQueue<>(DEFAULT_POOL_SIZE);//todo blockingQueue
         try {
             Class.forName(DRIVER_DB);
             logger.info("JDBC driver loaded");
@@ -42,7 +42,7 @@ public class ConnectionPool {
                 logger.info("DB connection created");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            logger.error("Error while creating connection pool", e);
+            logger.fatal("Error while creating connection pool", e);
         }
     }
 
@@ -67,7 +67,7 @@ public class ConnectionPool {
             givenConnections.offer(connection);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            logger.error("InterruptedException in method getConnection", e);
+            logger.fatal("InterruptedException in method getConnection", e);
         }
         return connection;
     }

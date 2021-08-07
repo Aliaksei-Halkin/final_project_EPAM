@@ -6,11 +6,14 @@ import com.epam.flyingdutchman.exception.ServiceException;
 import com.epam.flyingdutchman.model.dao.ProductDao;
 import com.epam.flyingdutchman.model.dao.impl.ProductDaoImpl;
 import com.epam.flyingdutchman.model.service.ProductService;
+import com.epam.flyingdutchman.model.validation.ProductValidator;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
+    private static final int INVALID_ID = -1;
     private final ProductDao productDao = ProductDaoImpl.getInstance();
 
     public ProductServiceImpl() {
@@ -96,10 +99,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int createProduct(Product product) throws ServiceException {
+        int idProduct = INVALID_ID;
         try {
-            return productDao.saveProduct(product);
+            if (isValidDataOfNewProduct(product.getName(), product.getCost()) && !product.getProductImgPath().equals("")) {
+                idProduct = productDao.saveProduct(product);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Error creating a new product");
         }
+        return idProduct;
+    }
+
+    public boolean isValidDataOfNewProduct(String productName, BigDecimal cost) {
+        ProductValidator productValidator = new ProductValidator();
+        boolean resultValidation = false;
+        boolean isValidCost = productValidator.isValidCost(cost);
+        boolean isValidProductName = productValidator.isValidProductName(productName);
+        if (isValidCost && isValidProductName) {
+            resultValidation = true;
+        }
+        return resultValidation;
     }
 }

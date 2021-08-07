@@ -8,7 +8,7 @@ CREATE TABLE products
     image_path   varchar(100) default 'src/main/webapp/images/logo.jpg',
     cost         decimal(5, 2) not null,
     description  text(2000),
-    active       boolean default false
+    active       boolean default true
 );
 CREATE TABLE users
 (

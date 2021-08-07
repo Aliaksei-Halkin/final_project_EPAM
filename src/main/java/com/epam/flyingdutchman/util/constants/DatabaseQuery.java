@@ -1,6 +1,6 @@
 package com.epam.flyingdutchman.util.constants;
 
-public class DatabaseQuery {
+public class DatabaseQuery {//fixme will past to dao and delite class.
     public static final String SELECT_ALL_PRODUCTS = "SELECT * FROM products WHERE active = TRUE LIMIT ?, ?";
     public static final String COUNT_PRODUCTS = "SELECT COUNT(*) FROM products WHERE active = TRUE";
     public static final String COUNT_SEARCH_RESULTS = "SELECT COUNT(*) FROM products WHERE product_name LIKE ? AND active = TRUE";

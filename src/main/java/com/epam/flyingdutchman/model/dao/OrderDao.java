@@ -5,7 +5,7 @@ import com.epam.flyingdutchman.exception.DaoException;
 
 import java.sql.SQLException;
 import java.util.List;
-
+//fixme will do BaseDao
 public interface OrderDao {
     List<Order> findOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException;
 

@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class LoginCommand implements Command {
-    private final Logger logger = LogManager.getLogger();
-    private final UserService userService = new UserServiceImpl();
+    private static Logger logger = LogManager.getLogger();
+    private final UserService userService = new UserServiceImpl();//fixme static?
 
     @Override
     public String execute(HttpServletRequest request) {

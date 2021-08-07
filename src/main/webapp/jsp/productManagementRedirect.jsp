@@ -3,6 +3,5 @@
 <html lang="en">
 <c:redirect url="controller?command=product_management">
     <c:set value="${page}" var="page" scope="session"/>
-    <c:param name="registrationStatusProduct" value="${registrationStatusProduct}"/>
-</c:redirect>
+    </c:redirect>
 </html>

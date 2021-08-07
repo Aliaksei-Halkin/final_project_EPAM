@@ -10,12 +10,12 @@
 <head>
     <link rel="stylesheet" href="css/style.css">
     <meta charset="ISO-8859-1">
-    <title>H+ Sport - <fmt:message key="ui.title.login"/></title>
+    <title>FD - <fmt:message key="ui.title.login"/></title>
 </head>
 <body>
 
 <jsp:include page="header.jsp"/>
-
+<%--fixme--%>
 <%--<section>--%>
 <%--    <app:insertDate/>--%>
 <%--</section>--%>

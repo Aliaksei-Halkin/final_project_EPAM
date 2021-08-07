@@ -22,7 +22,7 @@ public class CommandFactory {
         try {
             command = CommandEnum.valueOf(action.toUpperCase()).getCommand();
         } catch (IllegalArgumentException e) {
-            sendPageNotFound(req);
+            sendPageNotFound(req);//todo maybe you'll need to do redirect to index.jsp?
         }
         return command;
 

@@ -6,6 +6,7 @@ import com.epam.flyingdutchman.model.connection.ConnectionPool;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,11 @@ import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_CODE;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_MESSAGE;
 
 @WebServlet("/controller")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 100)
 public class Controller extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

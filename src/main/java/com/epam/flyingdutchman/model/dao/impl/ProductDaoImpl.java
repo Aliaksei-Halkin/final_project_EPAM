@@ -42,9 +42,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int saveProduct(Product product) throws DaoException {
+        int idProduct = INVALID_ID;
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT)) {
+             PreparedStatement statement = connection.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(PRODUCT_NAME_INDEX, product.getName());
             statement.setString(PRODUCT_IMG_INDEX, product.getProductImgPath());
             statement.setBigDecimal(PRODUCT_COST_INDEX, product.getCost());
@@ -52,14 +53,19 @@ public class ProductDaoImpl implements ProductDao {
             statement.setBoolean(PRODUCT_ACTIVE_INDEX, product.isActive());
             if (statement.executeUpdate() == 1) {
                 try (ResultSet keys = statement.getGeneratedKeys()) {
-                    return keys.getInt(1);
+                    if (keys.next()) {
+                        idProduct = keys.getInt(1);
+                    }
+                } catch (SQLException e) {
+                    logger.error("Didn't generate a ID ofproduct" + e.getMessage());
+                    throw new DaoException("Didn't generate a ID ofproduct", e);
                 }
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             throw new DaoException("Error adding a new product to the database", e);
         }
-        return INVALID_ID;
+        return idProduct;
     }
 
     @Override
