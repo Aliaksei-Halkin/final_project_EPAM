@@ -18,10 +18,13 @@ import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_CODE;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_MESSAGE;
 
 @WebServlet("/controller")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 100)
+@MultipartConfig(fileSizeThreshold = Controller.Mb1,
+        maxFileSize = Controller.Mb10,
+        maxRequestSize = Controller.Mb100)
 public class Controller extends HttpServlet {
+    static final int Mb1 = 1024 * 1024;
+    static final int Mb10 = 1024 * 1024 * 10;
+    static final int Mb100 = 1024 * 1024 * 100;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

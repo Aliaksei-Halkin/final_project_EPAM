@@ -6,14 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
 
 public class ImageProcessor {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
     private static final String IMAGE_FILE_EXPANSION = ".jpg";
 
     private ImageProcessor() {
@@ -26,12 +25,9 @@ public class ImageProcessor {
     public static String uploadFile(Part part, String uniqueFilename) {
         String uploadDir = ConfigurationManager.getProperty("dir.uploads");
         try {
-            Path path = Paths.get(uploadDir);
-            if (Files.notExists(path)) {
-                Files.createDirectories(path);
-            }
-            part.write(uploadDir + uniqueFilename);
-            return uniqueFilename;
+            Path path = Paths.get(uploadDir, uniqueFilename);
+            part.write(path.toString());
+            return ConfigurationManager.getProperty("dir.relativeUploads") + uniqueFilename;
         } catch (IOException e) {
             logger.error("The image didn't write on folder" + e.getMessage());
         }

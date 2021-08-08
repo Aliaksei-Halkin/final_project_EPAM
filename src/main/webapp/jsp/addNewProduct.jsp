@@ -17,12 +17,16 @@
 
 <section id="orders" class="section">
     <div class="container">
+        <c:if test="${sessionScope.registrationStatusProduct != null}">
+            <em>${sessionScope.registrationStatusProduct}</em>
+            ${sessionScope.registrationStatusProduct = null}
+            <br/>
+        </c:if>
         <h2 class="headline"><fmt:message key="ui.addNewProduct"/></h2>
         <form action="controller" method="post" enctype="multipart/form-data">
             <input type="hidden" name="command" value="add_new_product"/>
-            <input type="hidden" name="page" value="${page}"/>
             <label for="productName"><fmt:message key="ui.productName"/></label><br/>
-            <input type="text" minlength="4" maxlength="50" name="productName" id="productName" required>
+            <input type="text" pattern="[\w+\s*\-().]{4,50}" minlength="4" maxlength="50" name="productName" id="productName" required>
             <br/>
             <label for="image"><fmt:message key="ui.image"/></label><br/>
             <input type="file" accept="image/jpg" name="image" id="image" required>
@@ -31,7 +35,7 @@
             <input type="number" min="00.01" max="999" step=".01" name="cost" id="cost" required>
             <br/>
             <label for="description"><fmt:message key="ui.description"/></label><br/>
-            <textarea rows="5" cols="30" name="description" id="description" required></textarea>
+            <textarea pattern="[\w+\s*\-().]{4,200}" rows="5" cols="30" name="description" id="description" required></textarea>
             <br/>
             <input type="submit" value='<fmt:message key="ui.addNewProduct.submit"/>' id="submit">
         </form>

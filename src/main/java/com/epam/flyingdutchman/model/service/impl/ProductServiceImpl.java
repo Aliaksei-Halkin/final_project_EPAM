@@ -101,7 +101,7 @@ public class ProductServiceImpl implements ProductService {
     public int createProduct(Product product) throws ServiceException {
         int idProduct = INVALID_ID;
         try {
-            if (isValidDataOfNewProduct(product.getName(), product.getCost()) && !product.getProductImgPath().equals("")) {
+            if (isValidDataOfNewProduct(product)) {
                 idProduct = productDao.saveProduct(product);
             }
         } catch (DaoException e) {
@@ -110,12 +110,16 @@ public class ProductServiceImpl implements ProductService {
         return idProduct;
     }
 
-    public boolean isValidDataOfNewProduct(String productName, BigDecimal cost) {
+    private boolean isValidDataOfNewProduct(Product product) {
+        String productName = product.getName();
+        BigDecimal cost = product.getCost();
+        String imagePath = product.getProductImgPath();
         ProductValidator productValidator = new ProductValidator();
         boolean resultValidation = false;
         boolean isValidCost = productValidator.isValidCost(cost);
         boolean isValidProductName = productValidator.isValidProductName(productName);
-        if (isValidCost && isValidProductName) {
+        boolean isValidImagePath = productValidator.isValidImage(imagePath);
+        if (isValidCost && isValidProductName && isValidImagePath) {
             resultValidation = true;
         }
         return resultValidation;

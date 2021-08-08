@@ -22,7 +22,7 @@ import static com.epam.flyingdutchman.util.constants.Context.*;
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.PRODUCTS_DESCRIPTION;
 
 public class AddNewProductCommand implements Command {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();
 
     @Override
@@ -31,18 +31,15 @@ public class AddNewProductCommand implements Command {
         String productName = request.getParameter(REQUEST_PRODUCT_NAME);
         BigDecimal cost = RequestProcessor.getBigDecimalFromRequest(request, REQUEST_COST);
         String description = request.getParameter(PRODUCTS_DESCRIPTION);
-        String imageFileName = uploadImage(request);
-        String imagePath = imageFileName;
-        Product product = new Product();
-        product.setName(productName);
-        product.setCost(cost);
-        product.setDescription(description);
-        product.setProductImgPath(imagePath);
-        product.setActive(true);
+        String imagePath = uploadImage(request);
+        Product product = new Product(productName, imagePath, cost, description, true);
         try {
             if (productService.createProduct(product) > 0) {
-                request.setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
+                request.getSession().setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
                         MessageManager.getMessage("msg.registrationStatusProduct"));
+            } else {
+                request.getSession().setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
+                        MessageManager.getMessage("msg.registrationStatusProductFailed"));
             }
         } catch (ServiceException e) {
             logger.error("The product didn't add to database", e);
