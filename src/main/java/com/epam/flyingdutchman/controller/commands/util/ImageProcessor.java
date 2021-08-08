@@ -26,7 +26,9 @@ public class ImageProcessor {
         String uploadDir = ConfigurationManager.getProperty("dir.uploads");
         try {
             Path path = Paths.get(uploadDir, uniqueFilename);
+            Path path2 = Paths.get("D:\\final_project_EPAM\\target\\flying_dutchman\\images\\", uniqueFilename);
             part.write(path.toString());
+            part.write(path2.toString());
             return ConfigurationManager.getProperty("dir.relativeUploads") + uniqueFilename;
         } catch (IOException e) {
             logger.error("The image didn't write on folder" + e.getMessage());

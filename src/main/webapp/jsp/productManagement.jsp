@@ -19,6 +19,11 @@
     <div class="container">
         <h2 class="headline"><fmt:message key="ui.listOfProducts"/></h2>
         <br/>
+        <c:if test="${sessionScope.registrationStatusProduct != null}">
+            <em>${sessionScope.registrationStatusProduct}</em>
+            ${sessionScope.registrationStatusProduct = null}
+            <br/>
+        </c:if>
         <form method="get" action="controller">
             <input type="hidden" name="product" value="${product.productId}">
             <input type="hidden" name="command" value="add_new_product_page">

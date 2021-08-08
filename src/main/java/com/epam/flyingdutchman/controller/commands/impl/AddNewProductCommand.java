@@ -43,7 +43,7 @@ public class AddNewProductCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("The product didn't add to database", e);
-            request.setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
+            request.getSession().setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
                     MessageManager.getMessage("msg.registrationStatusProductFailed"));
         }
         return ConfigurationManager.getProperty("page.productManagementRedirect");

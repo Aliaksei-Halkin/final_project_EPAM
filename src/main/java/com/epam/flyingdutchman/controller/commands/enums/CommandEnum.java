@@ -22,7 +22,8 @@ public enum CommandEnum {
     PROFILE(new ProfileCommand()),
     PRODUCT_MANAGEMENT(new ProductManagementCommand()),
     ADD_NEW_PRODUCT_PAGE(new AddNewProductPageCommand()),
-    ADD_NEW_PRODUCT(new AddNewProductCommand())
+    ADD_NEW_PRODUCT(new AddNewProductCommand()),
+    DELETE_PRODUCT(new DeleteProductCommand())
 
     ;
 
