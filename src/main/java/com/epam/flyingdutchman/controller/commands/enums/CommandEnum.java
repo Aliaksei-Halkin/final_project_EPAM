@@ -23,7 +23,10 @@ public enum CommandEnum {
     PRODUCT_MANAGEMENT(new ProductManagementCommand()),
     ADD_NEW_PRODUCT_PAGE(new AddNewProductPageCommand()),
     ADD_NEW_PRODUCT(new AddNewProductCommand()),
-    DELETE_PRODUCT(new DeleteProductCommand())
+    DELETE_PRODUCT(new DeleteProductCommand()),
+    EDIT_PRODUCT_PAGE(new EditProductPageCommand()),
+    EDIT_PRODUCT(new EditProductCommand())
+
 
     ;
 
