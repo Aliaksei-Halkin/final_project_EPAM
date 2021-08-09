@@ -111,67 +111,6 @@
     </div>
 </section>
 
-<section id="people" class="section">
-    <header class="imageheader"></header>
-    <div class="container">
-        <h2 class="headline"><fmt:message key="ui.people"/></h2>
-        <div class="people-cards">
-            <div class="person-card">
-                <img src="images/employees/HenryTwill.jpg" alt="HenryTwill Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.henryTeill"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.henryTeill.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.henryTeill.about"/></p>
-            </div>
-
-            <div class="person-card">
-                <img src="images/employees/JessicaNewton.jpg" alt="JessicaNewton Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.jessicaNewton"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.jessicaNewton.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.jessicaNewton.about"/></p>
-            </div>
-
-            <div class="person-card">
-                <img src="images/employees/PhiTang.jpg" alt="PhiTang Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.phiTang"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.phiTang.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.phiTang.about"/></p>
-            </div>
-
-            <div class="person-card">
-                <img src="images/employees/MariaSontas.jpg" alt="MariaSontas Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.mariaSontas"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.mariaSontas.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.mariaSontas.about"/></p>
-            </div>
-
-            <div class="person-card">
-                <img src="images/employees/AngelaHaston.jpg" alt="AngelaHaston Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.angelaHashton"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.angelaHashton.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.angelaHashton.about"/></p>
-            </div>
-
-            <div class="person-card">
-                <img src="images/employees/MichaelLewiston.jpg" alt="MichaelLewiston Photo">
-                <div class="card-info">
-                    <h3 class="card-name"><fmt:message key="ui.people.michaelLewiston"/></h3>
-                    <h4 class="card-title"><fmt:message key="ui.people.michaelLewiston.position"/></h4>
-                </div>
-                <p class="card-text"><fmt:message key="ui.people.michaelLewiston.about"/></p>
-            </div>
-        </div>
-    </div>
-</section>
 <section id="history" class="section">
     <div class="container">
         <div class="text-content">

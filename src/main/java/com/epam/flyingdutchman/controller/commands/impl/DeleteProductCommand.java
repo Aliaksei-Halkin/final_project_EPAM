@@ -29,7 +29,7 @@ public class DeleteProductCommand implements Command {
             request.getSession().setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
                     MessageManager.getMessage("msg.StatusDeleted"));
         } catch (ServiceException e) {
-            logger.error("The product has not been removed from the database");
+            logger.error("The product has not been removing from the database");
             request.getSession().setAttribute(REQUEST_REGISTRATION_STATUS_PRODUCT,
                     MessageManager.getMessage("msg.StatusDeletedError"));
         }

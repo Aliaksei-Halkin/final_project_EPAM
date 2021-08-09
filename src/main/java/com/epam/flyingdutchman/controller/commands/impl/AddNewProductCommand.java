@@ -10,12 +10,10 @@ import com.epam.flyingdutchman.model.service.ProductService;
 import com.epam.flyingdutchman.model.service.impl.ProductServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
@@ -31,7 +29,7 @@ public class AddNewProductCommand implements Command {
         String productName = request.getParameter(REQUEST_PRODUCT_NAME);
         BigDecimal cost = RequestProcessor.getBigDecimalFromRequest(request, REQUEST_COST);
         String description = request.getParameter(PRODUCTS_DESCRIPTION);
-        String imagePath = uploadImage(request);
+        String imagePath = ImageProcessor.uploadImage(request);
         Product product = new Product(productName, imagePath, cost, description, true);
         try {
             if (productService.createProduct(product) > 0) {
@@ -48,16 +46,4 @@ public class AddNewProductCommand implements Command {
         }
         return ConfigurationManager.getProperty("page.productManagementRedirect");
     }
-
-    private String uploadImage(HttpServletRequest request) {
-        try {
-            String uniqueFilename = ImageProcessor.generateImageFilename();
-            return ImageProcessor.uploadFile(request.getPart(REQUEST_IMAGE), uniqueFilename);
-        } catch (IOException | ServletException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-
 }

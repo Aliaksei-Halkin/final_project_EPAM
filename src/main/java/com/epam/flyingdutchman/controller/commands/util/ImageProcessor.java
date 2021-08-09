@@ -1,6 +1,8 @@
 package com.epam.flyingdutchman.controller.commands.util;
 
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+
+import static com.epam.flyingdutchman.util.constants.Context.REQUEST_IMAGE;
 
 
 public class ImageProcessor {
@@ -24,7 +28,7 @@ public class ImageProcessor {
 
     public static String uploadFile(Part part, String uniqueFilename) {
         String uploadDir = ConfigurationManager.getProperty("dir.uploads");
-        String targetDir = ConfigurationManager.getProperty("dir.uploads");
+        String targetDir = ConfigurationManager.getProperty("dir.uploadsTarget");
         try {
             Path pathUpload = Paths.get(uploadDir, uniqueFilename);
             Path pathTarget = Paths.get(targetDir, uniqueFilename);
@@ -33,6 +37,16 @@ public class ImageProcessor {
             return ConfigurationManager.getProperty("dir.relativeUploads") + uniqueFilename;
         } catch (IOException e) {
             logger.error("The image didn't write on folder" + e.getMessage());
+        }
+        return "";
+    }
+
+    public static String uploadImage(HttpServletRequest request) {
+        try {
+            String uniqueFilename = generateImageFilename();
+            return uploadFile(request.getPart(REQUEST_IMAGE), uniqueFilename);
+        } catch (IOException | ServletException e) {
+            logger.error("Error uploading image", e);
         }
         return "";
     }

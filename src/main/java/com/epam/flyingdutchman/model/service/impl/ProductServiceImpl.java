@@ -90,11 +90,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean updateProduct(Product product) throws ServiceException {
+        boolean update = false;
         try {
-            return productDao.updateProduct(product);
+            if (isValidDataOfNewProduct(product)) {
+                update = productDao.updateProduct(product);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Error updating information searchProducts", e);
         }
+        return update;
     }
 
     @Override
@@ -105,7 +109,7 @@ public class ProductServiceImpl implements ProductService {
                 idProduct = productDao.saveProduct(product);
             }
         } catch (DaoException e) {
-            throw new ServiceException("Error creating a new product");
+            throw new ServiceException("Error creating a new product", e);
         }
         return idProduct;
     }
