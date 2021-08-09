@@ -23,7 +23,7 @@
       <input type="hidden" name="page" value="${page}"/>
       <input type="hidden" name="product" value="${product.productId}"/>
       <label for="productName"><fmt:message key="ui.productName"/></label><br/>
-      <input type="text" name="productName" id="productName" value="${product.name}" required>
+      <input type="text" pattern="[a-zA-Zа-яА-Я0-9_\s*\-().]{4,50}" name="productName" id="productName" value="${product.name}" required>
       <br/>
       <label for="cost"><fmt:message key="ui.cost"/></label><br/>
       <input type="number" min="00.01" max="999" step=".01" name="cost" id="cost" value="${product.cost}" required>
@@ -36,7 +36,7 @@
       <input type="file" accept="image/jpeg" name="image" id="image">
       <br/>
       <label for="description"><fmt:message key="ui.description"/></label><br/>
-      <textarea rows="5" cols="25" name="description" id="description" required>${product.description}</textarea>
+      <textarea pattern="[a-zA-Zа-яА-Я0-9_\s*\-().]{4,200}" rows="5" cols="30" name="description" id="description" required>${product.description}</textarea>
       <br/>
       <input type="submit" value='<fmt:message key="ui.editProduct.submit"/>' id="submit">
     </form>

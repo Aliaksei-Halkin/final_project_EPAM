@@ -20,6 +20,7 @@
         <h2 class="headline"><fmt:message key="ui.addNewProduct"/></h2>
         <form action="controller" method="post" enctype="multipart/form-data">
             <input type="hidden" name="command" value="add_new_product"/>
+            <input type="hidden" name="page" value="${page}"/>
             <label for="productName"><fmt:message key="ui.productName"/></label><br/>
             <input type="text" pattern="[a-zA-Zа-яА-Я0-9_\s*\-().]{4,50}" minlength="4" maxlength="50" name="productName"
                    id="productName" required>
