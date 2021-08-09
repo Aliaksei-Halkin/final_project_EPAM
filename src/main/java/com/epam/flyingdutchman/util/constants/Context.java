@@ -38,11 +38,13 @@ public class Context {
     public static final String REQUEST_ORDERS = "orders";
     public static final String REQUEST_ORDER = "order";
     public static final String REQUEST_USER = "user";
+    public static final String REQUEST_USERS = "users";
     public static final String REQUEST_PRODUCT_NAME = "productName";
     public static final String REQUEST_DESCRIPTION = "description";
     public static final String REQUEST_COST = "cost";
     public static final String REQUEST_IMAGE = "image";
     public static final String REQUEST_CHANGE_IMAGE = "changeImage";
+    public static final String REQUEST_NEW_ROLE = "newRole";
 
 
     private Context() {
