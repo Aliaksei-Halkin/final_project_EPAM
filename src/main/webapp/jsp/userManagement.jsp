@@ -37,6 +37,8 @@
                     <th><fmt:message key="ui.phone"/></th>
                     <th><fmt:message key="ui.email"/></th>
                     <th><fmt:message key="ui.userRole"/></th>
+                    <th><fmt:message key="ui.active"/></th>
+                    <th><fmt:message key="ui.changeRole"/></th>
                     <th><fmt:message key="ui.manageUser"/></th>
                 </tr>
                 <c:forEach items="${users}" var="user" varStatus="counter">
@@ -53,14 +55,9 @@
                             <c:if test="${user.userRole == 3}"><fmt:message key="ui.role.customer"/></c:if>
                             <c:if test="${user.userRole == 4}"><fmt:message key="ui.role.cook"/></c:if>
                         </td>
-                        <td><br/>
+                        <td><c:out value="${user.userRole}"/></td>
+                        <td>
                             <c:if test="${user.userRole != 1}">
-                                <form action="controller" method="post">
-                                    <input type="hidden" name="command" value="delete_user">
-                                    <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="user" value="${user.userName}">
-                                    <input type="submit" value='<fmt:message key="ui.deleteUser"/>'>
-                                </form>
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_user">
                                     <input type="hidden" name="page" value="${page}"/>
@@ -82,13 +79,29 @@
                                         </c:if>
                                         <c:if test="${user.userRole != 4}">
                                             <label>
-                                                <input type="radio"id="choiceRole" name="newRole" value="4">
+                                                <input type="radio" id="choiceRole" name="newRole" value="4">
                                                 <fmt:message key="ui.role.cook"/>
                                             </label>
                                         </c:if>
                                         <br/>
                                         <input type="submit" value='<fmt:message key="ui.confirm"/>' id="submit">
                                     </label>
+                                </form>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${user.userRole != 1}">
+                                <form action="controller" method="post">
+                                    <input type="hidden" name="command" value="delete_user">
+                                    <input type="hidden" name="page" value="${page}"/>
+                                    <input type="hidden" name="user" value="${user.userName}">
+                                    <input type="submit" value='<fmt:message key="ui.deleteUser"/>'>
+                                </form>
+                                <form action="controller" method="post">
+                                    <input type="hidden" name="command" value="update_user">
+                                    <input type="hidden" name="page" value="${page}"/>
+                                    <input type="hidden" name="user" value="${user.userName}">
+                                    <input type="submit" value='<fmt:message key="ui.updateUser"/>'>
                                 </form>
                             </c:if>
                         </td>

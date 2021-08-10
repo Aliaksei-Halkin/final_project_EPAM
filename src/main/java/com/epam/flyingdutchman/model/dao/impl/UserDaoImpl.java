@@ -14,11 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
 
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger();
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
+    public static final String UPDATE_USER = "UPDATE users SET password = ?, first_name = ?, last_name = ?," +
+            " phone_number = ?, e_mail = ?, user_role = ?, active = ? WHERE username = ?";
     private static final int UPDATE_USER_PASSWORD_COLUMN = 1;
     private static final int UPDATE_USER_FIRST_NAME_COLUMN = 2;
     private static final int UPDATE_USER_LAST_NAME_COLUMN = 3;
@@ -27,15 +28,24 @@ public class UserDaoImpl implements UserDao {
     private static final int UPDATE_USER_ROLE_COLUMN = 6;
     private static final int UPDATE_USER_ACTIVE_COLUMN = 7;
     private static final int UPDATE_USER_USERNAME_COLUMN = 8;
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users WHERE active = TRUE LIMIT ?, ?";
     private static final int LIMIT_CURRENT_INDEX = 1;
     private static final int LIMIT_ON_PAGE_INDEX = 2;
-    private static final int INVALID_COUNT = -1;
+    public static final String INSERT_USER = "INSERT INTO users (username, password, first_Name, last_Name, " +
+            "phone_number, e_mail) VALUES (?,?,?,?,?,?)";
     private static final int USERS_USERNAME_INDEX = 1;
     private static final int USERS_PASSWORD_INDEX = 2;
     private static final int USERS_FIRST_NAME_INDEX = 3;
     private static final int USERS_LAST_NAME_INDEX = 4;
     private static final int USERS_PHONE_INDEX = 5;
     private static final int USERS_EMAIL_INDEX = 6;
+    public static final String COUNT_USERS = "SELECT COUNT(*) FROM users WHERE active = TRUE";
+    public static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
+    public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
+    public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
+    public static final String SELECT_USER_BY_CREDENTIALS = "SELECT * FROM users WHERE username = ? AND password = ?";
+    private static final int INVALID_COUNT = -1;
+
 
     private UserDaoImpl() {
     }
