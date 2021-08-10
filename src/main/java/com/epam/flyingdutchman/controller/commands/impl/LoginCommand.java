@@ -21,17 +21,21 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        User user;
-        String username = request.getParameter(REQUEST_USERNAME);
-        String password = request.getParameter(REQUEST_PASSWORD);
-        String encryptedPassword = PasswordEncryptor.encryptPassword(password);
+        String page = ConfigurationManager.getProperty("page.login");
         try {
+            String username = request.getParameter(REQUEST_USERNAME);
+            String password = request.getParameter(REQUEST_PASSWORD);
+            User user = userService.findUserByUsername(username);
+            if (!user.getActive()) {
+                request.setAttribute(REQUEST_ERROR, MessageManager.getMessage("msg.userIsBlocked"));
+                return page;
+            }
+            String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             if (userService.checkIfValidUser(username, encryptedPassword)) {
                 HttpSession session = request.getSession();
-                user = userService.findUserByUsername(username);
                 session.setAttribute(SESSION_USERNAME, user.getUserName());
                 session.setAttribute(SESSION_USER_ROLE, user.getUserRole());
-                return ConfigurationManager.getProperty("page.index");
+                page = ConfigurationManager.getProperty("page.index");
             } else {
                 logger.info("User tried to login using invalid credentials");
                 request.setAttribute(REQUEST_ERROR, MessageManager.getMessage("msg.invalidCredentials"));
@@ -39,6 +43,6 @@ public class LoginCommand implements Command {
         } catch (ServiceException e) {
             logger.error("Error validate the user", e);
         }
-        return ConfigurationManager.getProperty("page.login");
+        return page;
     }
 }
