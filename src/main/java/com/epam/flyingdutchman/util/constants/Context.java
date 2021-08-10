@@ -45,6 +45,8 @@ public class Context {
     public static final String REQUEST_IMAGE = "image";
     public static final String REQUEST_CHANGE_IMAGE = "changeImage";
     public static final String REQUEST_NEW_ROLE = "newRole";
+    public static final String STATUS_USER_OPERATION = "statusUserOperation";
+
 
 
     private Context() {

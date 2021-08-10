@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     private static final int UPDATE_USER_ROLE_COLUMN = 6;
     private static final int UPDATE_USER_ACTIVE_COLUMN = 7;
     private static final int UPDATE_USER_USERNAME_COLUMN = 8;
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users WHERE active = TRUE LIMIT ?, ?";
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users  LIMIT ?, ?";
     private static final int LIMIT_CURRENT_INDEX = 1;
     private static final int LIMIT_ON_PAGE_INDEX = 2;
     public static final String INSERT_USER = "INSERT INTO users (username, password, first_Name, last_Name, " +
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     private static final int USERS_LAST_NAME_INDEX = 4;
     private static final int USERS_PHONE_INDEX = 5;
     private static final int USERS_EMAIL_INDEX = 6;
-    public static final String COUNT_USERS = "SELECT COUNT(*) FROM users WHERE active = TRUE";
+    public static final String COUNT_USERS = "SELECT COUNT(*) FROM users";
     public static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
     public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
     public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
@@ -134,7 +134,6 @@ public class UserDaoImpl implements UserDao {
         int role;
         boolean active;
         try {
-
             username = resultSet.getString(USERS_USERNAME);
             password = resultSet.getString(USERS_PASSWORD);
             firstName = resultSet.getString(USERS_FIRST_NAME);

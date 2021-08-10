@@ -8,12 +8,12 @@ import com.epam.flyingdutchman.exception.ServiceException;
 import com.epam.flyingdutchman.model.service.UserService;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
+import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.epam.flyingdutchman.util.constants.Context.REQUEST_NEW_ROLE;
-import static com.epam.flyingdutchman.util.constants.Context.REQUEST_USER;
+import static com.epam.flyingdutchman.util.constants.Context.*;
 
 public class ChangeUserRoleCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
@@ -27,8 +27,12 @@ public class ChangeUserRoleCommand implements Command {
             User user = userService.findUserByUsername(username);
             userService.changeRole(user, newRole);
             Paginator.transferPageToSession(request);
+            request.getSession().setAttribute(STATUS_USER_OPERATION,
+                    MessageManager.getMessage("msg.statusUserOperationChangeRole"));
         } catch (ServiceException e) {
-            logger.error("Error changing role of user",e);
+            logger.error("Error while changing role of user ",e);
+            request.getSession().setAttribute(STATUS_USER_OPERATION,
+                    MessageManager.getMessage("msg.statusUserOperationChangeRoleError"));
         }
         return ConfigurationManager.getProperty("page.userManagementRedirect");
     }

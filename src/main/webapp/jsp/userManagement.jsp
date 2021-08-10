@@ -19,6 +19,9 @@
     <div class="container">
         <h2 class="headline"><fmt:message key="ui.listOfUsers"/></h2>
         <br/>
+        <em>${sessionScope.statusUserOperation}</em>
+        ${sessionScope.statusUserOperation = null}
+        <br/>
         <form action="controller" method="get">
             <input type="hidden" name="command" value="register_user_page"/>
             <input type="submit" value='<fmt:message key="ui.header.addNewUser"/>'/>
@@ -55,7 +58,7 @@
                             <c:if test="${user.userRole == 3}"><fmt:message key="ui.role.customer"/></c:if>
                             <c:if test="${user.userRole == 4}"><fmt:message key="ui.role.cook"/></c:if>
                         </td>
-                        <td><c:out value="${user.userRole}"/></td>
+                        <td><c:out value="${user.active}"/></td>
                         <td>
                             <c:if test="${user.userRole != 1}">
                                 <form action="controller" method="post">
@@ -70,20 +73,22 @@
                                                 <input type="radio" id="choiceRole" name="newRole" value="2">
                                                 <fmt:message key="ui.role.manager"/>
                                             </label>
+                                            <br/>
                                         </c:if>
                                         <c:if test="${user.userRole != 3}">
                                             <label>
                                                 <input type="radio" id="choiceRole" name="newRole" value="3">
                                                 <fmt:message key="ui.role.customer"/>
                                             </label>
+                                            <br/>
                                         </c:if>
                                         <c:if test="${user.userRole != 4}">
                                             <label>
                                                 <input type="radio" id="choiceRole" name="newRole" value="4">
                                                 <fmt:message key="ui.role.cook"/>
                                             </label>
+                                            <br/>
                                         </c:if>
-                                        <br/>
                                         <input type="submit" value='<fmt:message key="ui.confirm"/>' id="submit">
                                     </label>
                                 </form>
