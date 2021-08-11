@@ -29,8 +29,7 @@ public class RegisterUserCommand implements Command {
         String lastName = request.getParameter(REQUEST_LAST_NAME);
         String phoneNumber = request.getParameter(REQUEST_PHONE);
         String eMail = request.getParameter(REQUEST_EMAIL);
-        StringBuilder validationStatus = new StringBuilder();
-        String registrationStatus;
+        StringBuilder validationStatus = null;
         if (validationUserData(userName, password, firstName, lastName, phoneNumber, eMail, validationStatus)) {
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);
@@ -45,12 +44,15 @@ public class RegisterUserCommand implements Command {
             } catch (ServiceException e) {
                 logger.error("Mistake in registration", e);
             }
+        } else {
+            validationStatus.append(MessageManager.getMessage("msg.notRegistered"));
         }
-        registrationStatus = validationStatus.toString();
+        String registrationStatus = validationStatus.toString();
         request.setAttribute(REQUEST_REGISTRATION_STATUS, registrationStatus);
         return ConfigurationManager.getProperty("page.registerRedirect");
     }
-//fixme will refactor to  the service
+
+    //fixme will refactor to  the service
     private boolean validationUserData(String userName, String password, String firstName, String lastName,
                                        String phoneNumber, String eMail, StringBuilder status) {
         try {
@@ -78,16 +80,16 @@ public class RegisterUserCommand implements Command {
                 status.append(MessageManager.getMessage("msg.nameNotFree"));
                 return false;
             }
-            if (!userService.checkIfPhoneFree(userName)) {
+            if (!userService.checkIfPhoneFree(phoneNumber)) {
                 status.append(MessageManager.getMessage("msg.nameNotFree"));
                 return false;
             }
-            if (!userService.checkIfEmailFree(userName)) {
+            if (!userService.checkIfEmailFree(eMail)) {
                 status.append(MessageManager.getMessage("msg.nameNotFree"));
                 return false;
             }
         } catch (ServiceException e) {
-            logger.error("Mistake in registration", e);
+            logger.error("Data is exist", e);
         }
         return true;
     }

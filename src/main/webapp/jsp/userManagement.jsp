@@ -22,6 +22,10 @@
         <em>${sessionScope.statusUserOperation}</em>
         ${sessionScope.statusUserOperation = null}
         <br/>
+        <c:if test="${sessionScope.registrationStatus != null}">
+            <h1 class="custom-colored-h1"><em>${sessionScope.registrationStatus}</em></h1>
+            ${sessionScope.registrationStatus=null}
+        </c:if>
         <form action="controller" method="get">
             <input type="hidden" name="command" value="register_user_page"/>
             <input type="submit" value='<fmt:message key="ui.header.addNewUser"/>'/>
@@ -95,17 +99,19 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${user.userRole != 1}">
+                            <c:if test="${user.userRole != 1 && user.active==true}">
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="delete_user">
                                     <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="user" value="${user.userName}">
+                                    <input type="hidden" name="username" value="${user.userName}">
                                     <input type="submit" value='<fmt:message key="ui.deleteUser"/>'>
                                 </form>
+                            </c:if>
+                            <c:if test="${user.userRole != 1 }">
                                 <form action="controller" method="post">
-                                    <input type="hidden" name="command" value="update_user">
+                                    <input type="hidden" name="command" value="edit_user_page">
                                     <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="user" value="${user.userName}">
+                                    <input type="hidden" name="username" value="${user.userName}">
                                     <input type="submit" value='<fmt:message key="ui.updateUser"/>'>
                                 </form>
                             </c:if>

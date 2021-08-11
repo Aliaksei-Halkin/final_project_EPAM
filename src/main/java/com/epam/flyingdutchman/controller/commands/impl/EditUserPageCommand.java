@@ -2,34 +2,32 @@ package com.epam.flyingdutchman.controller.commands.impl;
 
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.util.Paginator;
+import com.epam.flyingdutchman.entity.User;
 import com.epam.flyingdutchman.exception.ServiceException;
 import com.epam.flyingdutchman.model.service.UserService;
 import com.epam.flyingdutchman.model.service.impl.UserServiceImpl;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
-import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
-public class UserDeleteCommand implements Command {
+public class EditUserPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
-        String username = request.getParameter(REQUEST_USERNAME);
+        String userName = request.getParameter(REQUEST_USERNAME);
+        Integer currentPage = Paginator.getCurrentPage(request);
+        request.setAttribute(REQUEST_PAGE, currentPage);
         try {
-            userService.deleteUser(username);
-            Paginator.transferPageToSession(request);
-            request.getSession().setAttribute(STATUS_USER_OPERATION,
-                    MessageManager.getMessage("msg.statusUserOperationDelete"));
+            User user = userService.findUserByUsername(userName);
+            request.setAttribute(REQUEST_USER, user);
         } catch (ServiceException e) {
-            logger.error("Error while deleting user " + username, e);
-            request.getSession().setAttribute(STATUS_USER_OPERATION,
-                    MessageManager.getMessage("msg.statusUserOperationDeleteError"));
+            logger.error("Error searching the user", e);
         }
-        return ConfigurationManager.getProperty("page.userManagementRedirect");
+        return ConfigurationManager.getProperty("page.editUser");
     }
 }

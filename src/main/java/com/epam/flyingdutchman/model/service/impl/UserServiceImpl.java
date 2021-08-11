@@ -156,4 +156,13 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("error while deactivating user by username", e);
         }
     }
+
+    @Override
+    public boolean updateUser(User user) throws ServiceException {
+        try {
+            return userDao.updateUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Error changing user role", e);
+        }
+    }
 }

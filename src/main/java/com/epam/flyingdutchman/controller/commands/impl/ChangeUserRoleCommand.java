@@ -29,6 +29,7 @@ public class ChangeUserRoleCommand implements Command {
             Paginator.transferPageToSession(request);
             request.getSession().setAttribute(STATUS_USER_OPERATION,
                     MessageManager.getMessage("msg.statusUserOperationChangeRole"));
+            logger.info("The role of user changed ");
         } catch (ServiceException e) {
             logger.error("Error while changing role of user ",e);
             request.getSession().setAttribute(STATUS_USER_OPERATION,

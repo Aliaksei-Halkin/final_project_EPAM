@@ -25,4 +25,6 @@ public interface UserService {
     boolean checkIfEmailFree(String eMail) throws ServiceException;
 
     boolean checkIfValidUser(String username, String password) throws ServiceException;
+
+    boolean updateUser(User user) throws ServiceException;
 }
