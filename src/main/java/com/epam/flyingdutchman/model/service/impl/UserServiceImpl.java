@@ -23,30 +23,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean setUserCustomerRole(User user) throws ServiceException {
-        changeRole(user, User.ROLE_CUSTOMER);
-        return true;
-    }
-
-    private void changeRole(User user, int role) throws ServiceException {
+    public boolean changeRole(User user, int role) throws ServiceException {
         user.setUserRole(role);
         try {
-            userDao.updateUser(user);
+            return userDao.updateUser(user);
         } catch (DaoException e) {
             throw new ServiceException("Error changing user role", e);
         }
-    }
-
-    @Override
-    public boolean setUserManagerRole(User user) throws ServiceException {
-        changeRole(user, User.ROLE_MANAGER);
-        return true;
-    }
-
-    @Override
-    public boolean setUserCookRole(User user) throws ServiceException {
-        changeRole(user, User.ROLE_COOK);
-        return true;
     }
 
     @Override
@@ -171,6 +154,15 @@ public class UserServiceImpl implements UserService {
             return userDao.validateUserCredentials(username, password);
         } catch (DaoException e) {
             throw new ServiceException("error while deactivating user by username", e);
+        }
+    }
+
+    @Override
+    public boolean updateUser(User user) throws ServiceException {
+        try {
+            return userDao.updateUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Error changing user role", e);
         }
     }
 }

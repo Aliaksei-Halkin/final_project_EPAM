@@ -8,11 +8,7 @@ import java.util.List;
 public interface UserService {
     boolean registerNewUser(User user) throws ServiceException;
 
-    boolean setUserCustomerRole(User user) throws ServiceException;
-
-    boolean setUserManagerRole(User user) throws ServiceException;
-
-    boolean setUserCookRole(User user) throws ServiceException;
+    boolean changeRole(User user, int role) throws ServiceException;
 
     List<User> findAll(int currentIndex, int itemsOnPage) throws ServiceException;
 
@@ -29,4 +25,6 @@ public interface UserService {
     boolean checkIfEmailFree(String eMail) throws ServiceException;
 
     boolean checkIfValidUser(String username, String password) throws ServiceException;
+
+    boolean updateUser(User user) throws ServiceException;
 }

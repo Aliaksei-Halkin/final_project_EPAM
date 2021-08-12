@@ -28,6 +28,16 @@ public enum CommandEnum {
     EDIT_PRODUCT(new EditProductCommand()),
     ORDER_MANAGEMENT(new OrderManagementCommand()),
     CHANGE_ORDER_STATUS(new ChangeOrderStatusCommand());
+    EDIT_PRODUCT(new EditProductCommand()),
+    USER_MANAGEMENT(new UserManagementCommand()),
+    DELETE_USER(new UserDeleteCommand()),
+    CHANGE_USER(new ChangeUserRoleCommand()),
+    EDIT_USER_PAGE(new EditUserPageCommand()),
+    EDIT_USER(new EditUserCommand())
+
+
+
+    ;
 
     private final Command command;
 

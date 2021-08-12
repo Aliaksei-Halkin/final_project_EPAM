@@ -15,7 +15,7 @@ public class RequestProcessor {
     public static int getIntFromRequest(HttpServletRequest req, String paramName) {
         int number = 0;
         try {
-            if (req.getParameter(paramName) == null) {
+            if (req.getParameter(paramName) == null || req.getParameter(paramName).equals("")) {
                 return number;
             }
             number = Integer.parseInt(req.getParameter(paramName));
