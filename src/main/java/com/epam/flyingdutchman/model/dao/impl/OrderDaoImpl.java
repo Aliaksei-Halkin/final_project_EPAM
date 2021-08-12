@@ -121,7 +121,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public int countOrders() throws DaoException {
+    public int countOrdersWithoutStatusClose() throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
@@ -275,11 +275,11 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findAllOrders(int currentIndex, int itemsOnPage) throws DaoException {
+    public List<Order> findAllOrdersWithoutStatusClose(int currentIndex, int itemsOnPage) throws DaoException {
         List<Order> orders = new ArrayList<>();
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ORDERS)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ORDERS_WITHOUT_STATUS_CLOSE)) {
             statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
             statement.setInt(SELECT_ALL_LIMIT_ON_PAGE_INDEX, itemsOnPage);
             ResultSet resultSet = statement.executeQuery();
@@ -322,11 +322,12 @@ public class OrderDaoImpl implements OrderDao {
             statement.setBigDecimal(INSERT_ORDERS_COST_COLUMN, order.getOrderCost());
             statement.setString(INSERT_ORDERS_STATUS_CONFIRM_COLUMN, order.getStatus().toString());
             statement.setLong(UPDATE_ORDER_ID_COLUMN, order.getOrderId());
+            statement.executeUpdate();
         } catch (SQLException throwables) {
             logger.error("Error updating order by id", throwables);
             throw new DaoException("Error updating order by id", throwables);
         }
-        return false;
+        return true;//todo check
     }
 }
 

@@ -56,7 +56,7 @@
                         <td>$<c:out value="${order.orderCost}"/></td>
                         <td>
                             <c:choose>
-                                <c:when test="${order.status=='CONFIRMED'}">
+                                <c:when test="${order.status=='APPROVED'}">
                                     <fmt:message key="ui.orderStatusConfirmed"/>
                                 </c:when>
                                 <c:when test="${order.status=='COOKED'}">

@@ -57,18 +57,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findOrders(int currentIndex, int itemsOnPage) throws ServiceException {
+    public List<Order> findOrdersWithoutStatusClose(int currentIndex, int itemsOnPage) throws ServiceException {
         try {
-            return orderDao.findAllOrders(currentIndex, itemsOnPage);
+            return orderDao.findAllOrdersWithoutStatusClose(currentIndex, itemsOnPage);
         } catch (DaoException e) {
             throw new ServiceException("Error finding all orders", e);
         }
     }
 
     @Override
-    public int countOrders() throws ServiceException {
+    public int countOrdersWithoutStatusClose() throws ServiceException {
         try {
-            return orderDao.countOrders();
+            return orderDao.countOrdersWithoutStatusClose();
         } catch (DaoException e) {
             throw new ServiceException("Error counting orders", e);
         }

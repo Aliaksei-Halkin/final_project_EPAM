@@ -53,7 +53,7 @@
             <input type="submit" value='<fmt:message key="ui.header.myOrders"/>'/>
           </form>
         </li>
-        <c:if test="${sessionScope.userRole == 2}">
+        <c:if test="${sessionScope.userRole == 2 || sessionScope.userRole == 4}">
           <li>
             <form action="controller" method="get">
               <input type="hidden" name="command" value="order_management"/>

@@ -27,12 +27,13 @@ public class DatabaseQuery {//fixme will past to dao and delite class.
     public static final String INSERT_ORDERS_DETAILS = "INSERT INTO orders_details VALUES (?, ?, ?)";
         public static final String DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
     public static final String DELETE_ORDERS_DETAILS = "DELETE FROM orders_details WHERE order_id = ?";
-    public static final String SELECT_IS_APPROVED = "SELECT confirmation_status FROM orders WHERE order_id = ?";
     public static final String SELECT_ALL_ORDERS = "SELECT * FROM orders LIMIT ?, ?";
+    public static final String SELECT_ALL_ORDERS_WITHOUT_STATUS_CLOSE =
+            "SELECT * FROM orders WHERE status <> 'CLOSED'  ORDER BY order_date DESC  LIMIT ?, ?";
     public static final String SELECT_ORDER_BY_ID = "SELECT * FROM orders WHERE order_id = ?";
     public static final String UPDATE_ORDER = "UPDATE orders SET username = ?, order_date = ?, order_cost = ?, "
-            + "confirmation_status = ? WHERE order_id = ?";
-    public static final String COUNT_ORDERS = "SELECT COUNT(*) FROM orders";
+            + "status = ? WHERE order_id = ?";
+    public static final String COUNT_ORDERS = "SELECT COUNT(*) FROM orders WHERE status <> 'CLOSED' ";
     public static final String COUNT_ORDERS_BY_USER = "SELECT COUNT(*) FROM orders WHERE username = ?";
 
     private DatabaseQuery() {

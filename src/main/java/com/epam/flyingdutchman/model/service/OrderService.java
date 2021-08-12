@@ -15,9 +15,9 @@ public interface OrderService {
 
     boolean removeOrder(int orderId) throws ServiceException;
 
-    List<Order> findOrders(int currentIndex, int itemsOnPage) throws ServiceException;
+    List<Order> findOrdersWithoutStatusClose(int currentIndex, int itemsOnPage) throws ServiceException;
 
-    int countOrders() throws ServiceException;
+    int countOrdersWithoutStatusClose() throws ServiceException;
 
     boolean changeOrderStatus(int orderId, Status status) throws ServiceException;
 }
