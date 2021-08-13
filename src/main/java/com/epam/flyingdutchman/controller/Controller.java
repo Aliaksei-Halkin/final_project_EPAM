@@ -1,7 +1,7 @@
 package com.epam.flyingdutchman.controller;
 
 import com.epam.flyingdutchman.controller.commands.Command;
-import com.epam.flyingdutchman.controller.factory.CommandFactory;
+import com.epam.flyingdutchman.controller.commands.factory.CommandFactory;
 import com.epam.flyingdutchman.util.resources.ConfigurationManager;
 import com.epam.flyingdutchman.util.resources.MessageManager;
 import jakarta.servlet.ServletException;

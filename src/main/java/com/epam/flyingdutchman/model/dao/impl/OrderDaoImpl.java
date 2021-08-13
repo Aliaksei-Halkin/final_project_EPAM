@@ -18,27 +18,39 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
 
 public class OrderDaoImpl implements OrderDao {
+    private static final String SELECT_ORDERS_BY_USER = "SELECT * FROM orders WHERE username = ? LIMIT ?,?";
     private static final int SELECT_BY_USER_USERNAME_INDEX = 1;
     private static final int SELECT_BY_USER_LIMIT_CURRENT_INDEX = 2;
     private static final int SELECT_BY_USER_LIMIT_ON_PAGE_INDEX = 3;
+    private static final String SELECT_ORDERS_DETAILS = "SELECT * FROM orders_details "
+            + "LEFT JOIN products ON orders_details.product_id = products.product_id "
+            + "WHERE orders_details.order_id = ?";
+    private static final String INSERT_ORDERS_DETAILS = "INSERT INTO orders_details VALUES (?, ?, ?)";
     private static final int INSERT_ORDERS_DETAILS_ID_COLUMN = 1;
     private static final int INSERT_ORDERS_DETAILS_PRODUCT_ID_COLUMN = 2;
     private static final int INSERT_ORDERS_DETAILS_NUMBER_OF_PRODUCTS = 3;
-    public static final String INSERT_ORDER = "INSERT INTO orders (username,  order_cost) VALUES (?, ?)";
+    private static final String INSERT_ORDER = "INSERT INTO orders (username,  order_cost) VALUES (?, ?)";
     private static final int INSERT_ORDERS_USERNAME_COLUMN = 1;
     private static final int INSERT_ORDERS_DATE_COLUMN = 2;
     private static final int INSERT_ORDERS_COST_COLUMN = 3;
     private static final int INSERT_ORDERS_COST_COLUMN_NEW_ORDER = 2;
     private static final int INSERT_ORDERS_STATUS_CONFIRM_COLUMN = 4;
+    private static final String SELECT_ALL_ORDERS_WITHOUT_STATUS_CLOSE =
+            "SELECT * FROM orders WHERE status <> 'CLOSED'  ORDER BY order_date DESC  LIMIT ?, ?";
     private static final int SELECT_ALL_LIMIT_CURRENT_INDEX = 1;
     private static final int SELECT_ALL_LIMIT_ON_PAGE_INDEX = 2;
     private static final int UPDATE_ORDER_ID_COLUMN = 5;
-    private static final int INVALID_ID = -1;
-    private static final int INVALID_COUNT = -1;
+    private static final String COUNT_ORDERS_BY_USER = "SELECT COUNT(*) FROM orders WHERE username = ?";
+    private static final String SELECT_ORDER_BY_ID = "SELECT * FROM orders WHERE order_id = ?";
+    private static final String UPDATE_ORDER = "UPDATE orders SET username = ?, order_date = ?, order_cost = ?, "
+            + "status = ? WHERE order_id = ?";
+    private static final String COUNT_ORDERS = "SELECT COUNT(*) FROM orders WHERE status <> 'CLOSED' ";
+    private static final String DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
+    private static final String DELETE_ORDERS_DETAILS = "DELETE FROM orders_details WHERE order_id = ?";
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
+    private final int INVALID_VALUE = -1;
     private final Logger logger = LogManager.getLogger();
 
     private OrderDaoImpl() {
@@ -133,7 +145,7 @@ public class OrderDaoImpl implements OrderDao {
             logger.error("Error counting allOrders from ResultSet", e);
             throw new DaoException("Error counting allOrders from ResultSet", e);
         }
-        return INVALID_COUNT;
+        return INVALID_VALUE;
     }
 
     @Override
@@ -150,7 +162,7 @@ public class OrderDaoImpl implements OrderDao {
             logger.error("Error counting orders of user from ResultSet", e);
             throw new DaoException("Error counting orders of user from ResultSet", e);
         }
-        return INVALID_COUNT;
+        return INVALID_VALUE;
     }
 
     @Override
@@ -212,7 +224,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     private int getKey(PreparedStatement preparedStatement) throws DaoException {
-        int orderId = INVALID_ID;
+        int orderId = INVALID_VALUE;
         try (ResultSet key = preparedStatement.getGeneratedKeys()) {
             if (key.next()) {
                 orderId = key.getInt(1);

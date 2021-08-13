@@ -1,4 +1,4 @@
-package com.epam.flyingdutchman.controller.factory;
+package com.epam.flyingdutchman.controller.commands.factory;
 
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.impl.EmptyCommand;
