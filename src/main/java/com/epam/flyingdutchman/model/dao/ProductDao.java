@@ -6,7 +6,7 @@ import com.epam.flyingdutchman.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductDao {
+public interface ProductDao extends BaseDao<Product> {
     int saveProduct(Product product) throws DaoException;
 
     List<Product> searchProducts(String searchString, int currentIndex, int itemsOnPage) throws DaoException;
@@ -19,5 +19,5 @@ public interface ProductDao {
 
     Optional<Product> findProductById(int productId) throws DaoException;
 
-    boolean updateProduct(Product product) throws DaoException;
+    //boolean update(Product product) throws DaoException;
 }

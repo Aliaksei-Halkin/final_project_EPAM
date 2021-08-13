@@ -8,9 +8,8 @@ import java.util.Objects;
  * @author Aliaksei Halkin
  * @version 1.0
  */
-public class User implements Entity {
+public class User extends Entity {
 
-    private long id;
     private String userName;
     private String password;
     private String firstName;
@@ -45,17 +44,6 @@ public class User implements Entity {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.eMail = eMail;
-    }
-
-    /**
-     * @return
-     */
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUserName() {
@@ -139,13 +127,12 @@ public class User implements Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, password, firstName, lastName, phoneNumber, eMail, userRole, active);
+        return Objects.hash( userName, password, firstName, lastName, phoneNumber, eMail, userRole, active);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("User{");
-        sb.append("id=").append(id);
         sb.append(", userName='").append(userName);
         sb.append(", password='").append(password);
         sb.append(", firstName='").append(firstName);

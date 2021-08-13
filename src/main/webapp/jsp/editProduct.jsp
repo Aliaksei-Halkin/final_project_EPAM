@@ -21,7 +21,7 @@
     <form action="controller" method="post" enctype="multipart/form-data">
       <input type="hidden" name="command" value="edit_product"/>
       <input type="hidden" name="page" value="${page}"/>
-      <input type="hidden" name="product" value="${product.productId}"/>
+      <input type="hidden" name="product" value="${product.id}"/>
       <label for="productName"><fmt:message key="ui.productName"/></label><br/>
       <input type="text" pattern="[a-zA-Zа-яА-Я0-9_\s*\-().]{4,50}" name="productName" id="productName" value="${product.name}" required>
       <br/>

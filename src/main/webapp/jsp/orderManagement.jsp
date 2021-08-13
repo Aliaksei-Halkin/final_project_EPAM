@@ -37,7 +37,7 @@
                     <tr>
                         <td>${counter.count + index}</td>
                         <td><c:out value="${order.userName}"/></td>
-                        <td>ID${order.orderId}</td>
+                        <td>ID${order.id}</td>
                         <td>
                             <fmt:parseDate value="${order.orderDateTime}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                            var="parsedDateTime" type="both"/>
@@ -59,7 +59,7 @@
                             <c:if test="${order.status=='NEW'}">
                                 <fmt:message key="ui.orderStatus.pending"/><br/>
                             </c:if>
-                            <c:if test="${order.status=='APPROVED'&& sessionScope.userRole == 2}">
+                            <c:if test="${order.status=='APPROVED'}">
                                 <fmt:message key="ui.orderStatus.approved"/><br/>
                             </c:if>
                             <c:if test="${order.status=='COOKED'}">
@@ -69,14 +69,14 @@
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="order" value="${order.orderId}">
+                                    <input type="hidden" name="order" value="${order.id}">
                                     <input type="hidden" name="status" value="CLOSED">
                                     <input type="submit" value='<fmt:message key="ui.close"/>'>
                                 </form>
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}">
-                                    <input type="hidden" name="order" value="${order.orderId}">
+                                    <input type="hidden" name="order" value="${order.id}">
                                     <input type="hidden" name="status" value="APPROVED">
                                     <input type="submit" value='<fmt:message key="ui.approve"/>'>
                                 </form>
@@ -87,7 +87,7 @@
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}"/>
-                                    <input type="hidden" name="order" value="${order.orderId}">
+                                    <input type="hidden" name="order" value="${order.id}">
                                     <input type="hidden" name="status" value="CLOSED">
                                     <input type="submit" value='<fmt:message key="ui.close"/>'>
                                 </form>
@@ -97,7 +97,7 @@
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}">
-                                    <input type="hidden" name="order" value="${order.orderId}">
+                                    <input type="hidden" name="order" value="${order.id}">
                                     <input type="hidden" name="status" value="COOKED">
                                     <input type="submit" value='<fmt:message key="ui.orderStatusCooked"/>'>
                                 </form>

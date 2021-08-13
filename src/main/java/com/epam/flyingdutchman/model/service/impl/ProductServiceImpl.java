@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
             }
             productWithId = product.get();
             productWithId.setActive(false);
-            productDao.updateProduct(productWithId);
+            productDao.update(productWithId);
         } catch (DaoException e) {
             throw new ServiceException("Error deactivating the product by ID", e);
         }
@@ -93,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
         boolean update = false;
         try {
             if (isValidDataOfNewProduct(product)) {
-                update = productDao.updateProduct(product);
+                update = productDao.update(product);
             }
         } catch (DaoException e) {
             throw new ServiceException("Error updating information searchProducts", e);

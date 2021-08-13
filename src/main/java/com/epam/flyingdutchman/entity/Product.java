@@ -3,8 +3,7 @@ package com.epam.flyingdutchman.entity;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Product implements Entity {
-    private long productId;
+public class Product extends Entity {
     private String name;
     private String productImgPath;
     private BigDecimal cost;
@@ -20,14 +19,6 @@ public class Product implements Entity {
         this.cost = cost;
         this.description = description;
         this.active = active;
-    }
-
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long productId) {
-        this.productId = productId;
     }
 
     public String getName() {
@@ -57,6 +48,7 @@ public class Product implements Entity {
     public String getDescription() {
         return description;
     }
+
     /**
      * Standard setter method to access private class member.
      *
@@ -66,6 +58,7 @@ public class Product implements Entity {
     public void setDescription(String description) {
         this.description = description;
     }
+
     /**
      * Standard getter method to access private class member.
      *
@@ -76,6 +69,7 @@ public class Product implements Entity {
     public boolean isActive() {
         return active;
     }
+
     /**
      * Standard setter method to access private class member.
      *
@@ -86,11 +80,12 @@ public class Product implements Entity {
     public void setActive(boolean active) {
         this.active = active;
     }
+
     /**
      * Implementation of the equals method. Compare this instance of product to another
      * object.
      *
-     * @param o  {@code Object} to be compared with this {@code Product}
+     * @param o {@code Object} to be compared with this {@code Product}
      * @return {@code true} is object to compare is instance of {@code Product} and it has the same
      * value of all class members
      */
@@ -100,6 +95,7 @@ public class Product implements Entity {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
+        if (!super.equals(o)) return false;
         Product product = (Product) o;
         return name.equals(product.name)
                 && productImgPath.equals(product.productImgPath)
@@ -121,7 +117,6 @@ public class Product implements Entity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Product{");
-        sb.append(" id=").append(productId);
         sb.append(", name=").append(name);
         sb.append(", imagePath='").append(productImgPath);
         sb.append(", cost=").append(cost);

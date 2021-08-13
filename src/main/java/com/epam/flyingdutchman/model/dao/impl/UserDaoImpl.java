@@ -18,7 +18,7 @@ import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
 
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger();
-    public static final String UPDATE_USER = "UPDATE users SET password = ?, first_name = ?, last_name = ?," +
+    private static final String UPDATE_USER = "UPDATE users SET password = ?, first_name = ?, last_name = ?," +
             " phone_number = ?, e_mail = ?, user_role = ?, active = ? WHERE username = ?";
     private static final int UPDATE_USER_PASSWORD_COLUMN = 1;
     private static final int UPDATE_USER_FIRST_NAME_COLUMN = 2;
@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SELECT_ALL_USERS = "SELECT * FROM users  LIMIT ?, ?";
     private static final int LIMIT_CURRENT_INDEX = 1;
     private static final int LIMIT_ON_PAGE_INDEX = 2;
-    public static final String INSERT_USER = "INSERT INTO users (username, password, first_Name, last_Name, " +
+    private static final String INSERT_USER = "INSERT INTO users (username, password, first_Name, last_Name, " +
             "phone_number, e_mail) VALUES (?,?,?,?,?,?)";
     private static final int USERS_USERNAME_INDEX = 1;
     private static final int USERS_PASSWORD_INDEX = 2;
@@ -39,11 +39,11 @@ public class UserDaoImpl implements UserDao {
     private static final int USERS_LAST_NAME_INDEX = 4;
     private static final int USERS_PHONE_INDEX = 5;
     private static final int USERS_EMAIL_INDEX = 6;
-    public static final String COUNT_USERS = "SELECT COUNT(*) FROM users";
-    public static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
-    public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
-    public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
-    public static final String SELECT_USER_BY_CREDENTIALS = "SELECT * FROM users WHERE username = ? AND password = ?";
+    private static final String COUNT_USERS = "SELECT COUNT(*) FROM users";
+    private static final String SELECT_USER_BY_PHONE = "SELECT * FROM users WHERE phone_number = ?";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE e_mail = ?";
+    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
+    private static final String SELECT_USER_BY_CREDENTIALS = "SELECT * FROM users WHERE username = ? AND password = ?";
     private static final int INVALID_COUNT = -1;
     private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
     private static UserDaoImpl instance;
@@ -156,7 +156,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updateUser(User user) throws DaoException {
+    public boolean update(User user) throws DaoException {
         ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {

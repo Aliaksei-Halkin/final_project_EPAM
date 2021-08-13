@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public boolean changeRole(User user, int role) throws ServiceException {
         user.setUserRole(role);
         try {
-            return userDao.updateUser(user);
+            return userDao.update(user);
         } catch (DaoException e) {
             throw new ServiceException("Error changing user role", e);
         }
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
             }
             user = optionalUser.get();
             user.setActive(false);
-            userDao.updateUser(user);
+            userDao.update(user);
         } catch (DaoException e) {
             throw new ServiceException("error while deactivating user by username", e);
         }
@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(User user) throws ServiceException {
         try {
-            return userDao.updateUser(user);
+            return userDao.update(user);
         } catch (DaoException e) {
             throw new ServiceException("Error changing user role", e);
         }

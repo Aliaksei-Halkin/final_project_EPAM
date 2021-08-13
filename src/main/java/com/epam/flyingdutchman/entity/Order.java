@@ -6,11 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Order implements Entity {
-    /**
-     * Unique identification numeric value to define the order.
-     */
-    private long orderId;
+public class Order extends Entity {
+
     /**
      * Name of the {@code User} which is owner of the order.
      */
@@ -47,8 +44,8 @@ public class Order implements Entity {
      * @param orderCost      {@code BigDecimal} value of total cost of order's {@code Product}
      * @param status         {@code Enum} value represents  a status of the order
      */
-    public Order(long orderId, String userName, LocalDateTime orderDateTime, BigDecimal orderCost, Status status, Map<Product, Long> listOfProducts) {
-        this.orderId = orderId;
+    public Order(int orderId, String userName, LocalDateTime orderDateTime, BigDecimal orderCost, Status status, Map<Product, Long> listOfProducts) {
+        super(orderId);
         this.userName = userName;
         this.orderDateTime = orderDateTime;
         this.orderCost = orderCost;
@@ -61,14 +58,6 @@ public class Order implements Entity {
         this.orderCost = orderCost;
 
         this.listOfProducts = listOfProducts;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
     }
 
     public String getUserName() {
@@ -115,8 +104,9 @@ public class Order implements Entity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && status == order.status && userName.equals(order.userName) && orderDateTime.equals(order.orderDateTime) && orderCost.equals(order.orderCost) && listOfProducts.equals(order.listOfProducts);
+        return Objects.equals(userName, order.userName) && Objects.equals(orderDateTime, order.orderDateTime) && Objects.equals(orderCost, order.orderCost) && status == order.status && Objects.equals(listOfProducts, order.listOfProducts);
     }
 
     @Override
@@ -127,7 +117,6 @@ public class Order implements Entity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Order{");
-        sb.append("orderId=").append(orderId);
         sb.append(", userName='").append(userName);
         sb.append(", orderDate=").append(orderDateTime);
         sb.append(", orderCost=").append(orderCost);

@@ -180,7 +180,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean updateProduct(Product product) throws DaoException {
+    public boolean update(Product product) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
@@ -189,7 +189,7 @@ public class ProductDaoImpl implements ProductDao {
             statement.setBigDecimal(PRODUCT_COST_INDEX, product.getCost());
             statement.setString(PRODUCT_DESCRIPTION_INDEX, product.getDescription());
             statement.setBoolean(PRODUCT_ACTIVE_INDEX, product.isActive());
-            statement.setLong(PRODUCT_ID_INDEX, product.getProductId());
+            statement.setLong(PRODUCT_ID_INDEX, product.getId());
             if (statement.executeUpdate() == 1) {
                 return true;
             }
@@ -203,7 +203,7 @@ public class ProductDaoImpl implements ProductDao {
     private Product createInstanceOfProduct(ResultSet resultSet) throws DaoException {
         Product product = new Product();
         try {
-            product.setProductId(resultSet.getLong(PRODUCTS_PRODUCT_ID));
+            product.setId(resultSet.getInt(PRODUCTS_PRODUCT_ID));
             product.setName(resultSet.getString(PRODUCTS_PRODUCT_NAME));
             product.setProductImgPath(resultSet.getString(PRODUCTS_IMAGE_PATH));
             product.setCost(resultSet.getBigDecimal(PRODUCTS_COST));

@@ -55,7 +55,7 @@
                         <td>$<c:out value="${product.cost}"/></td>
                         <td>
                             <form method="get" action="controller">
-                                <input type="hidden" name="product" value="${product.productId}">
+                                <input type="hidden" name="product" value="${product.id}">
                                 <input type="hidden" name="page" value="${page}"/>
                                 <input type="hidden" name="command" value="add_product">
                                 <button><fmt:message key="ui.addToCart"/></button>

@@ -127,7 +127,7 @@ public class OrderDaoImpl implements OrderDao {
     private Product createInstanceOfProduct(ResultSet productsSet) throws DaoException {
         Product product = new Product();
         try {
-            product.setProductId(productsSet.getLong(PRODUCTS_PRODUCT_ID));
+            product.setId(productsSet.getInt(PRODUCTS_PRODUCT_ID));
             product.setName(productsSet.getString(PRODUCTS_PRODUCT_NAME));
             product.setProductImgPath(productsSet.getString(PRODUCTS_IMAGE_PATH));
             product.setCost(productsSet.getBigDecimal(PRODUCTS_COST));
@@ -206,7 +206,7 @@ public class OrderDaoImpl implements OrderDao {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_ORDERS_DETAILS)) {
             for (Map.Entry<Product, Long> product : order.getListOfProducts().entrySet()) {
                 statement.setInt(INSERT_ORDERS_DETAILS_ID_COLUMN, orderId);
-                statement.setLong(INSERT_ORDERS_DETAILS_PRODUCT_ID_COLUMN, product.getKey().getProductId());
+                statement.setLong(INSERT_ORDERS_DETAILS_PRODUCT_ID_COLUMN, product.getKey().getId());
                 statement.setLong(INSERT_ORDERS_DETAILS_NUMBER_OF_PRODUCTS, product.getValue());
                 statement.executeUpdate();
             }
@@ -341,7 +341,7 @@ public class OrderDaoImpl implements OrderDao {
             statement.setTimestamp(INSERT_ORDERS_DATE_COLUMN, Timestamp.valueOf(order.getOrderDateTime()));
             statement.setBigDecimal(INSERT_ORDERS_COST_COLUMN, order.getOrderCost());
             statement.setString(INSERT_ORDERS_STATUS_CONFIRM_COLUMN, order.getStatus().toString());
-            statement.setLong(UPDATE_ORDER_ID_COLUMN, order.getOrderId());
+            statement.setInt(UPDATE_ORDER_ID_COLUMN, order.getId());
             statement.executeUpdate();
         } catch (SQLException throwables) {
             logger.error("Error updating order by id", throwables);

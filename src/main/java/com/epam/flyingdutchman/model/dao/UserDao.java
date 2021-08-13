@@ -6,7 +6,7 @@ import com.epam.flyingdutchman.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDao {
+public interface UserDao extends BaseDao<User> {
     boolean addUser(User user) throws DaoException;
 
     Optional<User> findUserByUsername(String username) throws DaoException;
@@ -14,8 +14,6 @@ public interface UserDao {
     Optional<User> findUserByPhone(String username) throws DaoException;
 
     Optional<User> findUserByEmail(String eMail) throws DaoException;
-
-    boolean updateUser(User user) throws DaoException;
 
     List<User> findAllUsers(int currentIndex, int itemsOnPage) throws DaoException;
 

@@ -35,7 +35,7 @@
                 <c:forEach items="${orders}" var="order" varStatus="counter">
                     <tr>
                         <td>${counter.count + index}</td>
-                        <td>ID${order.orderId}</td>
+                        <td>ID${order.id}</td>
                         <td>
                             <fmt:parseDate value="${order.orderDateTime}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                            var="parsedDateTime" type="both"/>
@@ -70,7 +70,7 @@
                                     <form action="controller" method="post">
                                         <input type="hidden" name="command" value="remove_order">
                                         <input type="hidden" name="page" value="${page}"/>
-                                        <input type="hidden" name="order" value="${order.orderId}">
+                                        <input type="hidden" name="order" value="${order.id}">
                                         <input type="submit" value='<fmt:message key="ui.removeFromOrders"/>'>
                                     </form>
                                 </c:when>
@@ -78,15 +78,6 @@
                                     <p>Undefined</p>
                                 </c:otherwise>
                             </c:choose>
-<%--                            <c:if test="${order.status='NEW'}">--%>
-<%--                                <fmt:message key="ui.orderStatus.pending"/>--%>
-<%--                                <form action="controller" method="post">--%>
-<%--                                    <input type="hidden" name="command" value="remove_order">--%>
-<%--                                    <input type="hidden" name="page" value="${page}"/>--%>
-<%--                                    <input type="hidden" name="order" value="${order.orderId}">--%>
-<%--                                    <input type="submit" value='<fmt:message key="ui.removeFromOrders"/>'>--%>
-<%--                                </form>--%>
-<%--                            </c:if>--%>
                         </td>
                     </tr>
                 </c:forEach>

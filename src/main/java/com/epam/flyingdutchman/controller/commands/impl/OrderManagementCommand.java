@@ -28,7 +28,7 @@ public class OrderManagementCommand implements Command {
             int currentPage = Paginator.getCurrentPage(request);
             int currentIndex = Paginator.countCurrentIndex(currentPage);
             List<Order> orders = orderService.findOrdersWithoutStatusClose(currentIndex, ITEMS_ON_PAGE);
-           // orders.sort(Comparator.comparing(Order::getOrderDateTime).reversed());
+            orders.sort(Comparator.comparing(Order::getOrderDateTime).reversed());
             int numberOfOrders = orderService.countOrdersWithoutStatusClose();
             int numberOfPages = Paginator.countNumberOfPages(numberOfOrders);
             request.setAttribute(REQUEST_PAGE, currentPage);
