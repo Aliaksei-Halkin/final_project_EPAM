@@ -6,7 +6,7 @@ import com.epam.flyingdutchman.exception.DaoException;
 import java.sql.SQLException;
 import java.util.List;
 //fixme will do BaseDao
-public interface OrderDao {
+public interface OrderDao extends BaseDao {
     List<Order> findOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException;
 
     int countOrdersWithoutStatusClose() throws DaoException;
@@ -21,5 +21,5 @@ public interface OrderDao {
 
     Order getOrderById(int orderId) throws DaoException;
 
-    boolean updateOrder(Order order) throws DaoException;
+    boolean update(Order order) throws DaoException;
 }

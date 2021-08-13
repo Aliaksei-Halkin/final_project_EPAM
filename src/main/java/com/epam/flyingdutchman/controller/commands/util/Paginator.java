@@ -25,7 +25,7 @@ public class Paginator {
             return 0;
         }
         int lastPage = numberOfItems % ITEMS_ON_PAGE > 0 ? 1 : 0;
-        return numberOfItems / ITEMS_ON_PAGE + lastPage;//fixme will do more simple
+        return numberOfItems / ITEMS_ON_PAGE + lastPage;
     }
 
     public static void transferPageToSession(HttpServletRequest req) {

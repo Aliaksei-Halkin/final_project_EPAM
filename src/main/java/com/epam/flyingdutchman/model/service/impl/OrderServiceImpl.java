@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             order = orderDao.getOrderById(orderId);
             order.setStatus(status);
-            return orderDao.updateOrder(order);
+            return orderDao.update(order);
         } catch (DaoException e) {
             throw new ServiceException("Error changing order's status", e);
         }

@@ -11,12 +11,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-import static com.epam.flyingdutchman.util.constants.DatabaseQuery.*;
 
 public class ProductDaoImpl implements ProductDao {
-    private static final ProductDaoImpl INSTANCE = new ProductDaoImpl();
     private static final int PRODUCT_NAME_INDEX = 1;
     private static final int PRODUCT_IMG_INDEX = 2;
     private static final int PRODUCT_COST_INDEX = 3;
@@ -40,13 +39,20 @@ public class ProductDaoImpl implements ProductDao {
             "image_path = ?, cost = ?, description = ?, active = ? WHERE product_id = ?";
     private static final String INSERT_PRODUCT = "INSERT INTO products "
             + "(product_name, image_path, cost, description, active) VALUES (?, ?, ?, ?, ?)";
+    private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
+    private static ProductDaoImpl instance;
     private final Logger logger = LogManager.getLogger();
 
     private ProductDaoImpl() {
     }
 
     public static ProductDaoImpl getInstance() {
-        return INSTANCE;
+        while (instance == null) {
+            if (isInitialized.compareAndSet(false, true)) {
+                instance = new ProductDaoImpl();
+            }
+        }
+        return instance;
     }
 
     @Override

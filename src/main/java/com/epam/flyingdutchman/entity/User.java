@@ -9,10 +9,7 @@ import java.util.Objects;
  * @version 1.0
  */
 public class User implements Entity {
-    public static final int ROLE_ADMIN = 1;
-    public static final int ROLE_MANAGER = 2;
-    public static final int ROLE_COOK = 4;
-    public static final int ROLE_CUSTOMER = 3;
+
     private long id;
     private String userName;
     private String password;

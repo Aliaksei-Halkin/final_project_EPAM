@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
 
@@ -49,15 +50,21 @@ public class OrderDaoImpl implements OrderDao {
     private static final String COUNT_ORDERS = "SELECT COUNT(*) FROM orders WHERE status <> 'CLOSED' ";
     private static final String DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
     private static final String DELETE_ORDERS_DETAILS = "DELETE FROM orders_details WHERE order_id = ?";
-    private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private final int INVALID_VALUE = -1;
     private final Logger logger = LogManager.getLogger();
+    private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
+    private static OrderDaoImpl instance;
 
     private OrderDaoImpl() {
     }
 
     public static OrderDaoImpl getInstance() {
-        return INSTANCE;
+        while (instance == null) {
+            if (isInitialized.compareAndSet(false, true)) {
+                instance = new OrderDaoImpl();
+            }
+        }
+        return instance;
     }
 
     @Override
@@ -104,6 +111,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private Map<Product, Long> createMapOfProducts(ResultSet productsSet) throws DaoException {
         Map<Product, Long> productsMap = new HashMap<>();
+
         try {
             while (productsSet.next()) {
                 productsMap.put(createInstanceOfProduct(productsSet),
@@ -325,7 +333,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean updateOrder(Order order) throws DaoException {
+    public boolean update(Order order) throws DaoException {
         ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER)) {

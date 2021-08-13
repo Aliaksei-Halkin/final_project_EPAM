@@ -12,12 +12,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
 
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger();
-    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     public static final String UPDATE_USER = "UPDATE users SET password = ?, first_name = ?, last_name = ?," +
             " phone_number = ?, e_mail = ?, user_role = ?, active = ? WHERE username = ?";
     private static final int UPDATE_USER_PASSWORD_COLUMN = 1;
@@ -45,13 +45,19 @@ public class UserDaoImpl implements UserDao {
     public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
     public static final String SELECT_USER_BY_CREDENTIALS = "SELECT * FROM users WHERE username = ? AND password = ?";
     private static final int INVALID_COUNT = -1;
-
+    private static final AtomicBoolean isInitialized = new AtomicBoolean(false);
+    private static UserDaoImpl instance;
 
     private UserDaoImpl() {
     }
 
     public static UserDaoImpl getInstance() {
-        return INSTANCE;
+        while (instance == null) {
+            if (isInitialized.compareAndSet(false, true)) {
+                instance = new UserDaoImpl();
+            }
+        }
+        return instance;
     }
 
     @Override
