@@ -7,8 +7,8 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * The type Connection pool.
@@ -16,43 +16,35 @@ import java.util.concurrent.BlockingQueue;
  * @author Aliaksei Halkin
  * @version 1.0
  */
-public class ConnectionPool {
+public enum ConnectionPool {
+    INSTANCE;
     private final Logger logger = LogManager.getLogger();
-    private static final String DRIVER_DB = ConfigurationManager.getProperty("db.driver");
-    private static final String URL_DB = ConfigurationManager.getProperty("db.url");
-    private static final String USER_DB = ConfigurationManager.getProperty("db.user");
-    private static final String PASSWORD_DB = ConfigurationManager.getProperty("db.password");
-    private static final int DEFAULT_POOL_SIZE = 8;
-    private static final ConnectionPool pool = new ConnectionPool();
+
+    private final int DEFAULT_POOL_SIZE = 8;
     private final BlockingQueue<ProxyConnection> freeConnection;
     private final BlockingQueue<ProxyConnection> givenConnections;
 
     /**
      * Initialize connection pool
      */
-    private ConnectionPool() {
-        freeConnection = new ArrayBlockingQueue<>(DEFAULT_POOL_SIZE);
-        givenConnections = new ArrayBlockingQueue<>(DEFAULT_POOL_SIZE);//todo blockingQueue
+    ConnectionPool() {
+        final String DRIVER_DB = ConfigurationManager.getProperty("db.driver");
+        final String URL_DB = ConfigurationManager.getProperty("db.url");
+        final String USER_DB = ConfigurationManager.getProperty("db.user");
+        final String PASSWORD_DB = ConfigurationManager.getProperty("db.password");
+        freeConnection = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+        givenConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         try {
             Class.forName(DRIVER_DB);
             logger.info("JDBC driver loaded");
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = DriverManager.getConnection(URL_DB, USER_DB, PASSWORD_DB);
-                freeConnection.offer(new ProxyConnection(connection));
+                freeConnection.put(new ProxyConnection(connection));
                 logger.info("DB connection created");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | InterruptedException e) {
             logger.fatal("Error while creating connection pool", e);
         }
-    }
-
-    /**
-     * Gets instance.
-     *
-     * @return the instance
-     */
-    public static ConnectionPool getInstance() {
-        return pool;
     }
 
     /**
@@ -64,9 +56,8 @@ public class ConnectionPool {
         ProxyConnection connection = null;
         try {
             connection = freeConnection.take();
-            givenConnections.offer(connection);
+            givenConnections.put(connection);
         } catch (InterruptedException e) {
-            e.printStackTrace();
             logger.fatal("InterruptedException in method getConnection", e);
         }
         return connection;
@@ -79,7 +70,11 @@ public class ConnectionPool {
      */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && givenConnections.remove(connection)) {
-            freeConnection.offer((ProxyConnection) connection);
+            try {
+                freeConnection.put((ProxyConnection) connection);
+            } catch (InterruptedException e) {
+                logger.fatal("InterruptedException in method getConnection", e);
+            }
         } else {
             logger.warn("Not original connection returned to the pool");
         }

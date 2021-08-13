@@ -51,7 +51,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException {
         List<Order> orders = new ArrayList<>();
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDERS_BY_USER)) {
             preparedStatement.setString(SELECT_BY_USER_USERNAME_INDEX, username);
@@ -122,7 +122,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int countOrdersWithoutStatusClose() throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
              ResultSet counter = statement.executeQuery(COUNT_ORDERS)) {
@@ -138,7 +138,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int countOrdersOfUser(String username) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ORDERS_BY_USER)) {
             preparedStatement.setString(1, username);
@@ -158,7 +158,7 @@ public class OrderDaoImpl implements OrderDao {
         int orderId;
         Connection connection = null;
         try {
-            ConnectionPool connectionPool = ConnectionPool.getInstance();
+            ConnectionPool connectionPool = ConnectionPool.INSTANCE;
             connection = connectionPool.getConnection();
             connection.setAutoCommit(false);
             orderId = insertInTheTableOrders(connection, order);
@@ -228,7 +228,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean deleteOrder(int orderId) throws DaoException, SQLException {
         Connection connection = null;
         try {
-            ConnectionPool connectionPool = ConnectionPool.getInstance();
+            ConnectionPool connectionPool = ConnectionPool.INSTANCE;
             connection = connectionPool.getConnection();
             connection.setAutoCommit(false);
             deleteInTableOrdersDetails(connection, orderId);
@@ -277,7 +277,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findAllOrdersWithoutStatusClose(int currentIndex, int itemsOnPage) throws DaoException {
         List<Order> orders = new ArrayList<>();
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ORDERS_WITHOUT_STATUS_CLOSE)) {
             statement.setInt(SELECT_ALL_LIMIT_CURRENT_INDEX, currentIndex);
@@ -297,7 +297,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order getOrderById(int orderId) throws DaoException {
         Order order = null;
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ORDER_BY_ID)) {
             statement.setInt(1, orderId);
@@ -314,7 +314,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean updateOrder(Order order) throws DaoException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER)) {
             statement.setString(INSERT_ORDERS_USERNAME_COLUMN, order.getUserName());

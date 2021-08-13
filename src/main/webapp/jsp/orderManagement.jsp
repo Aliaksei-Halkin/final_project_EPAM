@@ -55,11 +55,17 @@
                         </td>
                         <td>$<c:out value="${order.orderCost}"/></td>
                         <td>
+
+                            <c:if test="${order.status=='NEW'}">
+                                <fmt:message key="ui.orderStatus.pending"/><br/>
+                            </c:if>
+                            <c:if test="${order.status=='APPROVED'&& sessionScope.userRole == 2}">
+                                <fmt:message key="ui.orderStatus.approved"/><br/>
+                            </c:if>
                             <c:if test="${order.status=='COOKED'}">
                                 <fmt:message key="ui.orderStatus.cooked"/><br/>
                             </c:if>
                             <c:if test="${order.status=='NEW' && sessionScope.userRole == 2}">
-                                <fmt:message key="ui.orderStatus.pending"/><br/>
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}"/>
@@ -67,7 +73,6 @@
                                     <input type="hidden" name="status" value="CLOSED">
                                     <input type="submit" value='<fmt:message key="ui.close"/>'>
                                 </form>
-
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}">
@@ -87,12 +92,8 @@
                                     <input type="submit" value='<fmt:message key="ui.close"/>'>
                                 </form>
                             </c:if>
-                            <c:if test="${order.status=='APPROVED'&& sessionScope.userRole == 2}">
-                                <fmt:message key="ui.orderStatus.approved"/><br/>
-                            </c:if>
 
                             <c:if test="${order.status=='APPROVED' && sessionScope.userRole == 4}">
-                                <fmt:message key="ui.orderStatus.approved"/><br/>
                                 <form action="controller" method="post">
                                     <input type="hidden" name="command" value="change_order_status">
                                     <input type="hidden" name="page" value="${page}">

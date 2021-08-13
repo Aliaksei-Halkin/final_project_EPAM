@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean addUser(User user) throws DaoException {
-        ConnectionPool pool = ConnectionPool.getInstance();
+        ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_USER)) {
             statement.setString(USERS_USERNAME_INDEX, user.getUserName());
@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findUserByUsername(String username) throws DaoException {
         User user = null;
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_USERNAME)) {
             statement.setString(1, username);
@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findUserByPhone(String phoneNumber) throws DaoException {
         User user = null;
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_PHONE)) {
             statement.setString(1, phoneNumber);
@@ -113,7 +113,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findUserByEmail(String eMail) throws DaoException {
         User user = null;
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        ConnectionPool connectionPool = ConnectionPool.INSTANCE;
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
             statement.setString(1, eMail);
@@ -151,7 +151,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean updateUser(User user) throws DaoException {
-        ConnectionPool pool = ConnectionPool.getInstance();
+        ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
             statement.setString(UPDATE_USER_PASSWORD_COLUMN, user.getPassword());
@@ -175,7 +175,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> findAllUsers(int currentIndex, int itemsOnPage) throws DaoException {
         List<User> users = new ArrayList<>();
-        ConnectionPool pool = ConnectionPool.getInstance();
+        ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS)) {
             statement.setInt(LIMIT_CURRENT_INDEX, currentIndex);
@@ -194,7 +194,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int countUsers() throws DaoException {
-        ConnectionPool pool = ConnectionPool.getInstance();
+        ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(COUNT_USERS)) {
@@ -210,7 +210,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean validateUserCredentials(String username, String password) throws DaoException {
-        ConnectionPool pool = ConnectionPool.getInstance();
+        ConnectionPool pool = ConnectionPool.INSTANCE;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_CREDENTIALS)) {
             statement.setString(1, username);

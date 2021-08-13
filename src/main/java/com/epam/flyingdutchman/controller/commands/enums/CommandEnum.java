@@ -25,19 +25,14 @@ public enum CommandEnum {
     ADD_NEW_PRODUCT(new AddNewProductCommand()),
     DELETE_PRODUCT(new DeleteProductCommand()),
     EDIT_PRODUCT_PAGE(new EditProductPageCommand()),
-    EDIT_PRODUCT(new EditProductCommand()),
     ORDER_MANAGEMENT(new OrderManagementCommand()),
-    CHANGE_ORDER_STATUS(new ChangeOrderStatusCommand());
+    CHANGE_ORDER_STATUS(new ChangeOrderStatusCommand()),
     EDIT_PRODUCT(new EditProductCommand()),
     USER_MANAGEMENT(new UserManagementCommand()),
     DELETE_USER(new UserDeleteCommand()),
     CHANGE_USER(new ChangeUserRoleCommand()),
     EDIT_USER_PAGE(new EditUserPageCommand()),
-    EDIT_USER(new EditUserCommand())
-
-
-
-    ;
+    EDIT_USER(new EditUserCommand());
 
     private final Command command;
 
