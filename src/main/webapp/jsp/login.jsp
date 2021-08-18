@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@taglib uri="http://www.flying_dutchman/apptaglib" prefix="app" %>--%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:if test="${sessionScope.language != null}">
     <fmt:setLocale value="${sessionScope.language}"/>
@@ -15,10 +14,6 @@
 <body>
 
 <jsp:include page="header.jsp"/>
-<%--fixme--%>
-<%--<section>--%>
-<%--    <app:insertDate/>--%>
-<%--</section>--%>
 
 <section id="login" class="section">
     <div class="container tagline">

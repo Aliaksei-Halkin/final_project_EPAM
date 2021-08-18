@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>FD<fmt:message key="ui.title.myOrders"/></title>
+    <title>FD -<fmt:message key="ui.title.myOrders"/></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
