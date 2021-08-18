@@ -15,27 +15,27 @@ public class CustomTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         HttpSession session = pageContext.getSession();
-        String role = (String) session.getAttribute(SESSION_USER_ROLE);
+        Integer role = (Integer) session.getAttribute(SESSION_USER_ROLE);
         String username = (String) session.getAttribute(SESSION_USERNAME);
-        String message = "HELLO";
+        String message ;
         if (role == null) {
             message = "Welcome to our restaurant, QUEST!";
         } else {
             switch (role) {
-                case "1":
+                case 1:
                     message = "Hello dear ADMINISTRATOR! You entered as: " + username;
                     break;
-                case "2":
+                case 2:
                     message = "Hi, MANAGER! You entered as: " + username;
                     break;
-                case "3":
+                case 3:
                     message = "Hi, dear authorized Client!  You entered as: " + username;
                     break;
-                case "4":
+                case 4:
                     message = "Hi, Cook!  You entered as: " + username;
                     break;
                 default:
-                    message = "Welcome to our restaurant, QUEST!";
+                    message = "Welcome to our restaurant, GUEST!";
             }
         }
 

@@ -13,7 +13,6 @@ import java.util.Set;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
-
 @WebFilter("/controller")
 public class UserRoleFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -40,12 +39,21 @@ public class UserRoleFilter implements Filter {
     }
 
     private boolean isRestrictedAction(String action, HttpServletRequest request) {
-        return (isRestrictedResource(action, RestrictedActions.getAdminOnlyActions())
-                && userIsNotInRole(request, ROLE_ADMIN))
-                || (isRestrictedResource(action, RestrictedActions.getManagerOnlyActions())
-                && userIsNotInRole(request, ROLE_MANAGER))
-                || (isRestrictedResource(action, RestrictedActions.getManagerOnlyActions())
-                && userIsNotInRole(request, ROLE_COOK));
+        Integer role = (Integer) request.getSession().getAttribute(SESSION_USER_ROLE);
+        boolean checkManagerRole = false;
+        boolean checkCookRole = false;
+        boolean checkAdminRole = isRestrictedResource(action, RestrictedActions.getAdminOnlyActions())
+                && userIsNotInRole(request, ROLE_ADMIN);
+        if (role != null && role == ROLE_MANAGER) {
+            checkManagerRole = isRestrictedResource(action, RestrictedActions.getManagerOnlyActions())
+                    && userIsNotInRole(request, ROLE_MANAGER);
+        }
+        if (role != null && role == ROLE_COOK) {
+            checkCookRole = isRestrictedResource(action, RestrictedActions.getCookOnlyActions())
+                    && userIsNotInRole(request, ROLE_COOK);
+        }
+
+        return checkAdminRole || checkManagerRole || checkCookRole;
     }
 
     private boolean isRestrictedResource(String action, Set<String> actions) {
