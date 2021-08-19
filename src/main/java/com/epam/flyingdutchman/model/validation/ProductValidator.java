@@ -3,7 +3,7 @@ package com.epam.flyingdutchman.model.validation;
 import java.math.BigDecimal;
 
 public class ProductValidator {
-    private static final String PRODUCT_REGEX = "[a-zA-Zа-яА-Я0-9_\\s*\\-().]{4,50}";
+    private static final String PRODUCT_REGEX = "[a-zA-Zа-яА-Я0-9_\\s\\-().,]{4,50}";
     private static final String JPG = ".jpg";
 
     public boolean isValidProductName(String productName) {

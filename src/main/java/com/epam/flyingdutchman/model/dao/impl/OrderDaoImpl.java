@@ -83,7 +83,7 @@ public class OrderDaoImpl implements OrderDao {
             ordersSet.close();
         } catch (SQLException throwables) {
             logger.error("Error get Orders By User ", throwables);
-            throw new DaoException(throwables.getSQLState(), throwables);//todo chrck method getSQLState
+            throw new DaoException(throwables.getSQLState(), throwables);
         }
         return orders;
     }
@@ -347,7 +347,7 @@ public class OrderDaoImpl implements OrderDao {
             logger.error("Error updating order by id", throwables);
             throw new DaoException("Error updating order by id", throwables);
         }
-        return true;//todo check
+        return true;
     }
 }
 

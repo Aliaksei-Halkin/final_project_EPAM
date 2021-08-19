@@ -17,9 +17,9 @@ public class CustomTag extends TagSupport {
         HttpSession session = pageContext.getSession();
         Integer role = (Integer) session.getAttribute(SESSION_USER_ROLE);
         String username = (String) session.getAttribute(SESSION_USERNAME);
-        String message ;
+        String message;
         if (role == null) {
-            message = "Welcome to our restaurant, QUEST!";
+            message = "Welcome to our restaurant, GUEST!";
         } else {
             switch (role) {
                 case 1:
@@ -38,14 +38,12 @@ public class CustomTag extends TagSupport {
                     message = "Welcome to our restaurant, GUEST!";
             }
         }
-
         try {
             JspWriter out = pageContext.getOut();
             out.write("<hr/>" + message + "<hr/>");
         } catch (IOException e) {
             throw new JspException(e.getMessage());
         }
-
         return SKIP_BODY;
     }
 
