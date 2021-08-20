@@ -1,4 +1,4 @@
-The educational project for the UpskillLab course. 
+The educational project for the UpskillLab course. I used the tomcat v.10 and last LTS JDK v.11
 
 Author: Aliaksei Halkin, contact: pochtax3@gmail.com
 
@@ -111,4 +111,8 @@ Manage users:
 -delete the user(the user has active status = false);
 
 -add new user(it's registration)
+
+ERR diagram of database:
+
+![image](https://user-images.githubusercontent.com/43150082/130261839-8931005f-8296-44bd-ba23-1c6e764617a2.png)
 
