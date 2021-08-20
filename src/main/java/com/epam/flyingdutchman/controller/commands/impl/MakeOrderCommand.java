@@ -20,7 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of make new order
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class MakeOrderCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger();
     private final OrderService orderService = new OrderServiceImpl();

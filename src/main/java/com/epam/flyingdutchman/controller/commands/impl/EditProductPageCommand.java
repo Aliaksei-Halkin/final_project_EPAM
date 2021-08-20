@@ -14,7 +14,12 @@ import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PRODUCT;
-
+/**
+ * The class represents command to go to the page editProduct
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class EditProductPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

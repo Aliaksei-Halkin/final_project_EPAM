@@ -12,7 +12,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ORDER;
-
+/**
+ * The class represents command of remove order
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RemoveOrderCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final OrderService orderService = new OrderServiceImpl();

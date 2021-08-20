@@ -14,7 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of edit user
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class EditUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();

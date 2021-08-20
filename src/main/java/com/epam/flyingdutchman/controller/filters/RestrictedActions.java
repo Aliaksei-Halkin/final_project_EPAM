@@ -3,7 +3,12 @@ package com.epam.flyingdutchman.controller.filters;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
-
+/**
+ * The class represents actions for each role.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RestrictedActions {
     private static final Set<String> ADMIN_ONLY_ACTIONS = new TreeSet<>(Arrays.asList(
             "add_new_product_page",

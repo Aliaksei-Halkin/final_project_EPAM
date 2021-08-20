@@ -14,7 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of change user role
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ChangeUserRoleCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();

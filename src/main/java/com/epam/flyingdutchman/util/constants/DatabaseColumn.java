@@ -1,5 +1,10 @@
 package com.epam.flyingdutchman.util.constants;
-
+/**
+ * The class represents names of columns in the database
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class DatabaseColumn {
     public static final String PRODUCTS_PRODUCT_ID = "product_id";
     public static final String PRODUCTS_PRODUCT_NAME = "product_name";

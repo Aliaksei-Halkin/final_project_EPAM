@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * A service class of model layer, intended to process operations with customer's {@code Cart}.
+ * The service class of model layer, intended to process operations with customer's {@code Cart}.
  */
 public class CartService {
     /**
@@ -36,10 +36,9 @@ public class CartService {
      *
      * @param cart    {@code List} of {@code Product} represents user's cart
      * @param product {@code Product} that needs to be removed from the cart
-     * @return {@code true} if product was successfully removed
      */
-    public static boolean removeProduct(List<Product> cart, Product product) {
-        return cart.remove(product);
+    public static void removeProduct(List<Product> cart, Product product) {
+        cart.remove(product);
     }
 
     /**

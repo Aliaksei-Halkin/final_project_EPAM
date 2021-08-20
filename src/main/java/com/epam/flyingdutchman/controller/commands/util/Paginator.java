@@ -5,7 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PAGE;
-
+/**
+ * The class represents pagination for view.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class Paginator {
     private static final Logger LOGGER = LogManager.getLogger();
     public static final int ITEMS_ON_PAGE = 5;

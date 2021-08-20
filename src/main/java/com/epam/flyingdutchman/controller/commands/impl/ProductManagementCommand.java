@@ -16,7 +16,12 @@ import java.util.List;
 
 import static com.epam.flyingdutchman.controller.commands.util.Paginator.ITEMS_ON_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of product management
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ProductManagementCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger();
     private final static int INVALID_VALUE = -1;

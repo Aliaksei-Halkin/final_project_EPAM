@@ -6,35 +6,44 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * The entity class represents user's order.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class Order extends Entity {
 
     /**
-     * Name of the {@code User} which is owner of the order.
+     * The name of the {@code User} which is owner of the order.
      */
     private String userName;
     /**
-     * Date and time of order creation.
+     * The date and time of order creation.
      */
     private LocalDateTime orderDateTime;
     /**
-     * Total cost of the {@code Order}. The sum of price of all {@code Product} in the order.
+     * The total cost of the {@code Order}. The sum of price of all {@code Product} in the order.
      */
     private BigDecimal orderCost;
     /**
-     * Status of the order.
+     * The status of the order.
      */
     private Status status;
     /**
-     * List of products represented by {@code Map} of {@code Product} and {@code Long} that
+     * The list of products represented by {@code Map} of {@code Product} and {@code Long} that
      * represents product's number.
      */
     private Map<Product, Long> listOfProducts;
 
+    /**
+     * The no-args constructor
+     */
     public Order() {
     }
 
     /**
-     * Constructor with all parameters, used to create instance of {@code Order} which already has
+     * The constructor with all parameters, used to create instance of {@code Order} which already has
      * unique {@param orderId} and to retrieve information about user's order from data storage.
      *
      * @param orderId        {@code long} value of unique order identification number
@@ -53,53 +62,119 @@ public class Order extends Entity {
         this.listOfProducts = listOfProducts;
     }
 
+    /**
+     * The constructor with some parameters, other fields of the Order create database by default
+     *
+     * @param userName       {@code String} represents name of order's owner
+     * @param listOfProducts {@code Map} represents list of orders and its number
+     * @param orderCost      {@code BigDecimal} value of total cost of order's {@code Product}
+     */
     public Order(String userName, BigDecimal orderCost, Map<Product, Long> listOfProducts) {
         this.userName = userName;
         this.orderCost = orderCost;
-
         this.listOfProducts = listOfProducts;
     }
 
+    /**
+     * Standard getter method to access private class member.
+     *
+     * @return {@code String} username represents name of order's owner
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * The standard setter method to access private class member.
+     *
+     * @param userName {@code String} represents name of order's owner
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * The standard getter method to access private class member.
+     *
+     * @return {@code LocalDateTime} of order creation
+     */
     public LocalDateTime getOrderDateTime() {
         return orderDateTime;
     }
 
+    /**
+     * The standard setter method to access private class member.
+     *
+     * @param orderDateTime {@code LocalDateTime}value of the current time and date
+     */
     public void setOrderDateTime(LocalDateTime orderDateTime) {
         this.orderDateTime = orderDateTime;
     }
 
+    /**
+     * The standard getter method to access private class member.
+     *
+     * @return {@code BigDecimal}value of total cost of all order's products
+     */
     public BigDecimal getOrderCost() {
         return orderCost;
     }
 
+    /**
+     * The standard setter method to access private class member.
+     *
+     * @param orderCost {@code BigDecimal} value of total cost of order's {@code Product}
+     */
     public void setOrderCost(BigDecimal orderCost) {
         this.orderCost = orderCost;
     }
 
+    /**
+     * The standard getter method to access private class member.
+     *
+     * @return {@code Status} value that represents  status of the order
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * The standard setter method to access private class member.
+     *
+     * @param status {@code boolean} value represents  status of the order
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    /**
+     * The getter method returns the map of {@code Product} in order to facilitate
+     * process of displaying and processing of data.
+     *
+     * @return {@code HashMap} of  {@code Product} and its number represented by
+     * {@code Long} value
+     */
     public Map<Product, Long> getListOfProducts() {
         return new HashMap<Product, Long>(listOfProducts);
     }
 
+    /**
+     * The standard setter method to access private class member.
+     *
+     * @param listOfProducts {@code Map} represents list of orders and its number
+     */
     public void setListOfProducts(Map<Product, Long> listOfProducts) {
         this.listOfProducts = listOfProducts;
     }
 
+    /**
+     * The implementation of the equals method. Compare this instance of product to another
+     * object.
+     *
+     * @param o {@code Object} to be compared with this {@code Order}
+     * @return {@code true} is object to compare is instance of {@code Order} and it has the same
+     * value of all class members
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,11 +184,22 @@ public class Order extends Entity {
         return Objects.equals(userName, order.userName) && Objects.equals(orderDateTime, order.orderDateTime) && Objects.equals(orderCost, order.orderCost) && status == order.status && Objects.equals(listOfProducts, order.listOfProducts);
     }
 
+    /**
+     * The implementation of the hashCode() method. Uses method hash() of the {@code Objects} class get
+     * the hash value of the class members.
+     *
+     * @return {@code int} value of the hash value fo the all class members
+     */
     @Override
     public int hashCode() {
         return Objects.hash(userName, orderDateTime, orderCost, status, listOfProducts);
     }
 
+    /**
+     * The standard method which represents the Product in the string value
+     *
+     * @return {@code String} the Product
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Order{");

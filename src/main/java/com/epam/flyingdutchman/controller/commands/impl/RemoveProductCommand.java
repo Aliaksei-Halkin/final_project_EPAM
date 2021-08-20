@@ -18,7 +18,12 @@ import java.util.List;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PRODUCT;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_CART;
-
+/**
+ * The class represents command of remove product
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RemoveProductCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

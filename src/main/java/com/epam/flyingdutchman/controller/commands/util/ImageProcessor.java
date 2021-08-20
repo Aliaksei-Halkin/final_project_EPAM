@@ -14,7 +14,12 @@ import java.util.UUID;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_IMAGE;
 
-
+/**
+ * The class represents actions with image such as upload image,generate unique name.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ImageProcessor {
     private static final Logger logger = LogManager.getLogger();
     private static final String IMAGE_FILE_EXPANSION = ".jpg";

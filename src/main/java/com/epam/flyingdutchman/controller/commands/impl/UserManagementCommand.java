@@ -15,7 +15,12 @@ import java.util.List;
 
 import static com.epam.flyingdutchman.controller.commands.util.Paginator.ITEMS_ON_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of user management
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class UserManagementCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();
@@ -23,7 +28,7 @@ public class UserManagementCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         try {
-            Integer currentPage = Paginator.getCurrentPage(request);
+            int currentPage = Paginator.getCurrentPage(request);
             int currentIndex = Paginator.countCurrentIndex(currentPage);
             List<User> users = userService.findAll(currentIndex, ITEMS_ON_PAGE);
             int numberOfUsers = userService.countUsers();

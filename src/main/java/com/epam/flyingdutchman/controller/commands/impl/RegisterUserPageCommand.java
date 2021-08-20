@@ -6,7 +6,12 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_REGISTRATION_STATUS;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_REGISTRATION_STATUS;
-
+/**
+ * The class represents command to go to the registration page
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RegisterUserPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

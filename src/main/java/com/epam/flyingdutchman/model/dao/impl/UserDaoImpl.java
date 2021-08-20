@@ -15,7 +15,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-
+/**
+ * The class represents User dao implementation.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class UserDaoImpl implements UserDao {
     private final Logger logger = LogManager.getLogger();
     private static final String UPDATE_USER = "UPDATE users SET password = ?, first_name = ?, last_name = ?," +

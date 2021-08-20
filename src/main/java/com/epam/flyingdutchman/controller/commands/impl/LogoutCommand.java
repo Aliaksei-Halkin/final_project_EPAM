@@ -8,7 +8,12 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_LANGUAGE;
-
+/**
+ * The class represents command of logout from the personal account
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class LogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

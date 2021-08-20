@@ -1,5 +1,11 @@
 package com.epam.flyingdutchman.exception;
 
+/**
+ * The class represents exceptions in dao layer.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class DaoException extends Exception {
     /**
      * Instantiates a new Dao exception.

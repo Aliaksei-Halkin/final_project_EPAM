@@ -20,6 +20,12 @@ import java.util.List;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PRODUCT;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_CART;
 
+/**
+ * The class represents command of adding product to cart
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class AddProductCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

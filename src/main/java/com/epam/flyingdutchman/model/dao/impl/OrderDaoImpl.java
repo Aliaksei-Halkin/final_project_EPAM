@@ -19,7 +19,12 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-
+/**
+ * The class represents Order dao implementation.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDERS_BY_USER = "SELECT * FROM orders WHERE username = ? LIMIT ?,?";
     private static final int SELECT_BY_USER_USERNAME_INDEX = 1;

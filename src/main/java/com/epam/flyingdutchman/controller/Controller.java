@@ -15,7 +15,12 @@ import java.io.IOException;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_CODE;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR_MESSAGE;
-
+/**
+ * The class represents the main controller
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 @WebServlet("/controller")
 @MultipartConfig(fileSizeThreshold = Controller.Mb1,
         maxFileSize = Controller.Mb10,

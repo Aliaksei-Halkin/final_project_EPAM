@@ -12,7 +12,12 @@ import java.io.IOException;
 import java.util.Set;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents filter for actions for definite role
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 @WebFilter("/controller")
 public class UserRoleFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger();

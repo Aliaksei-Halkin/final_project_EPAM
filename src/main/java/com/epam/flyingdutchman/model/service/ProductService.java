@@ -4,7 +4,12 @@ import com.epam.flyingdutchman.entity.Product;
 import com.epam.flyingdutchman.exception.ServiceException;
 
 import java.util.List;
-
+/**
+ * The interface represents {@code Product} service
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public interface ProductService {
     Product findProductById(int productId) throws ServiceException;
 
@@ -16,9 +21,9 @@ public interface ProductService {
 
     int countProducts() throws ServiceException;
 
-    boolean deactivateProduct(int productId) throws ServiceException;
+    void deactivateProduct(int productId) throws ServiceException;
 
-    boolean updateProduct(Product product) throws ServiceException;
+    void updateProduct(Product product) throws ServiceException;
 
     int createProduct(Product product) throws ServiceException;
 }

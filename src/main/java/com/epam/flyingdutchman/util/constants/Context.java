@@ -1,7 +1,10 @@
 package com.epam.flyingdutchman.util.constants;
 
 /**
- * Here are all the key names from the request URL
+ * The class represents all the key names from the request URL
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
  */
 public class Context {
     public static final String REQUEST_COMMAND = "command";

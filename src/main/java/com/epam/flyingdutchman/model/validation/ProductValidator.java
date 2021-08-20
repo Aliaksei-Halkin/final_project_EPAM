@@ -1,7 +1,12 @@
 package com.epam.flyingdutchman.model.validation;
 
 import java.math.BigDecimal;
-
+/**
+ * The class represents validations for products
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ProductValidator {
     private static final String PRODUCT_REGEX = "[a-zA-Zа-яА-Я0-9_\\s\\-().,]{4,50}";
     private static final String JPG = ".jpg";

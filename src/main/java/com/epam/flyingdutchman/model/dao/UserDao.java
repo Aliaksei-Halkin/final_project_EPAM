@@ -5,7 +5,12 @@ import com.epam.flyingdutchman.exception.DaoException;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * The interface represents {@code User} dao
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public interface UserDao extends BaseDao<User> {
     boolean addUser(User user) throws DaoException;
 

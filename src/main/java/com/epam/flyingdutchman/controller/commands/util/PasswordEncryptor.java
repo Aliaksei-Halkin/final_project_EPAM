@@ -7,7 +7,12 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * The class represents encryption of the password
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class PasswordEncryptor {
     private static final int POSITIVE_SIGN = 1;
     private static final int HEX_RADIX = 16;

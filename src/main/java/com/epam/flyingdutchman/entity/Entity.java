@@ -1,5 +1,11 @@
 package com.epam.flyingdutchman.entity;
 
+/**
+ * The abstract class represents basic entity.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public abstract class Entity {
     private int id;
 
@@ -40,9 +46,7 @@ public abstract class Entity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Entity entity = (Entity) o;
-
         return id == entity.id;
     }
 

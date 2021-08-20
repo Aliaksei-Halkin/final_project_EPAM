@@ -18,7 +18,12 @@ import java.math.BigDecimal;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.PRODUCTS_DESCRIPTION;
-
+/**
+ * The class represents command of adding new product in database
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class AddNewProductCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

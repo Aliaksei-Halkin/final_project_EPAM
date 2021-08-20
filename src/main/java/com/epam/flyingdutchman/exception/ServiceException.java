@@ -1,5 +1,10 @@
 package com.epam.flyingdutchman.exception;
-
+/**
+ * The class represents exceptions in service layer.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ServiceException extends Exception {
     /**
      * Instantiates a new Service Exception.

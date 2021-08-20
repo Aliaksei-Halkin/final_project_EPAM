@@ -9,7 +9,12 @@ import com.epam.flyingdutchman.model.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * The service class of model layer, intended to process operations with {@code User}.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = UserDaoImpl.getInstance();
 
@@ -23,10 +28,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changeRole(User user, int role) throws ServiceException {
+    public void changeRole(User user, int role) throws ServiceException {
         user.setUserRole(role);
         try {
-            return userDao.update(user);
+            userDao.update(user);
         } catch (DaoException e) {
             throw new ServiceException("Error changing user role", e);
         }
@@ -51,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(String username) throws ServiceException {
+    public void deleteUser(String username) throws ServiceException {
         Optional<User> optionalUser;
         User user;
         try {
@@ -65,7 +70,6 @@ public class UserServiceImpl implements UserService {
         } catch (DaoException e) {
             throw new ServiceException("error while deactivating user by username", e);
         }
-        return true;
     }
 
     @Override

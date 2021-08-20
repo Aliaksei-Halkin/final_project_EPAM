@@ -17,7 +17,12 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of edit the product
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class EditProductCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

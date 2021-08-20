@@ -14,7 +14,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
-
+/**
+ * The class represents Product dao implementation.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ProductDaoImpl implements ProductDao {
     private static final int PRODUCT_NAME_INDEX = 1;
     private static final int PRODUCT_IMG_INDEX = 2;

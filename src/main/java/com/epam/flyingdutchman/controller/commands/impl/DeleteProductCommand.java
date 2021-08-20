@@ -15,7 +15,12 @@ import org.apache.logging.log4j.Logger;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_PRODUCT;
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_REGISTRATION_STATUS_PRODUCT;
 
-
+/**
+ * The class represents command of deactivate product
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class DeleteProductCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

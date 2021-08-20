@@ -13,7 +13,12 @@ import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_USER;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_USERNAME;
-
+/**
+ * The class represents command to go to the profile page
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class ProfileCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();

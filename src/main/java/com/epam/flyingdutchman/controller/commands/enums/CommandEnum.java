@@ -3,6 +3,12 @@ package com.epam.flyingdutchman.controller.commands.enums;
 import com.epam.flyingdutchman.controller.commands.Command;
 import com.epam.flyingdutchman.controller.commands.impl.*;
 
+/**
+ * The enum which define all commands in project.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public enum CommandEnum {
     LANGUAGE(new LanguageCommand()),
     HOME(new HomePageCommand()),

@@ -7,7 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_LANGUAGE;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_LANGUAGE;
-
+/**
+ * The class represents command of change language
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class LanguageCommand implements Command {
 
     @Override

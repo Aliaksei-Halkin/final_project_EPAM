@@ -9,7 +9,12 @@ import java.io.IOException;
 
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_USERNAME;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_USER_ROLE;
-
+/**
+ * The class represents the custom tag for this app
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class CustomTag extends TagSupport {
 
     @Override

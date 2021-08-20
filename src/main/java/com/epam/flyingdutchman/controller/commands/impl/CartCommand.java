@@ -13,7 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command to go to the page cart
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class CartCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {

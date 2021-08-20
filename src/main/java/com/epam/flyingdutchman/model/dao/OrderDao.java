@@ -5,7 +5,12 @@ import com.epam.flyingdutchman.exception.DaoException;
 
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * The interface represents {@code Order} dao
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public interface OrderDao extends BaseDao<Order> {
     List<Order> findOrdersByUser(String username, int currentIndex, int itemsOnPage) throws DaoException;
 

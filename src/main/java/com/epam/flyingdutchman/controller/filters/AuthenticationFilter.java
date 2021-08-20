@@ -11,7 +11,12 @@ import java.io.IOException;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_ERROR;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_USERNAME;
-
+/**
+ * The class represents actions for unauthorized user
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 @WebFilter(urlPatterns = "/*")
 public class AuthenticationFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger();

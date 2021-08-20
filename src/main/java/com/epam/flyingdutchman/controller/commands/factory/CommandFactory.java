@@ -8,10 +8,22 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
+/**
+ * The class represents command provider which define command from request.
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class CommandFactory {
     public CommandFactory() {
     }
 
+    /**
+     * Define command.
+     *
+     * @param req the http request
+     * @return the command
+     */
     public static Command defineCommand(HttpServletRequest req) {
         String action = req.getParameter(REQUEST_COMMAND);
         Command command = new EmptyCommand();
@@ -27,6 +39,10 @@ public class CommandFactory {
         return command;
     }
 
+    /**
+     * The method set message 404 if action is not present
+     * @param req the http request
+     */
     private static void sendPageNotFound(HttpServletRequest req) {
         req.setAttribute(REQUEST_ERROR_CODE,
                 MessageManager.getMessage("msg.errorCode404"));

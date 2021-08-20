@@ -15,7 +15,12 @@ import java.util.List;
 
 import static com.epam.flyingdutchman.controller.commands.util.Paginator.ITEMS_ON_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of searching order by user
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class OrdersCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final OrderService orderService = new OrderServiceImpl();
@@ -23,7 +28,7 @@ public class OrdersCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         try {
-            Integer currentPage = Paginator.getCurrentPage(request);
+            int currentPage = Paginator.getCurrentPage(request);
             int currentIndex = Paginator.countCurrentIndex(currentPage);
             String username = (String) request.getSession().getAttribute(SESSION_USERNAME);
             List<Order> orders = orderService.findOrdersOfUser(username, currentIndex, ITEMS_ON_PAGE);

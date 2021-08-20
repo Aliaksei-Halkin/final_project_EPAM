@@ -17,7 +17,12 @@ import java.util.List;
 import static com.epam.flyingdutchman.controller.commands.util.Paginator.ITEMS_ON_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.*;
 
-
+/**
+ * The class represents command of order management
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class OrderManagementCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final OrderService orderService = new OrderServiceImpl();

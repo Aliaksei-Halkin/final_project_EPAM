@@ -15,7 +15,12 @@ import java.util.List;
 
 import static com.epam.flyingdutchman.controller.commands.util.Paginator.ITEMS_ON_PAGE;
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of search products by value
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class SearchCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final ProductService productService = new ProductServiceImpl();

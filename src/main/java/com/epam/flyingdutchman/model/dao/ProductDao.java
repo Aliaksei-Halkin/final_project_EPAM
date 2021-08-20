@@ -5,7 +5,12 @@ import com.epam.flyingdutchman.exception.DaoException;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * The interface represents {@code Product} dao
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public interface ProductDao extends BaseDao<Product> {
     int saveProduct(Product product) throws DaoException;
 
@@ -19,5 +24,4 @@ public interface ProductDao extends BaseDao<Product> {
 
     Optional<Product> findProductById(int productId) throws DaoException;
 
-    //boolean update(Product product) throws DaoException;
-}
+    }

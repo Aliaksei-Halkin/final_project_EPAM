@@ -11,15 +11,17 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- * The type Connection pool.
+ * The class represents connection poll.
  *
  * @author Aliaksei Halkin
  * @version 1.0
  */
 public enum ConnectionPool {
+    /**
+     * Instance connection pool.
+     */
     INSTANCE;
     private final Logger logger = LogManager.getLogger();
-
     private final int DEFAULT_POOL_SIZE = 8;
     private final BlockingQueue<ProxyConnection> freeConnection;
     private final BlockingQueue<ProxyConnection> givenConnections;
@@ -94,7 +96,9 @@ public enum ConnectionPool {
         }
         deregisterDrivers();
     }
-
+    /**
+     * Deregister drivers.
+     */
     private void deregisterDrivers() {
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {

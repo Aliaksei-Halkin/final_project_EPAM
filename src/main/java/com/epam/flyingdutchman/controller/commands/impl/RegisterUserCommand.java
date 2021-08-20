@@ -14,7 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
-
+/**
+ * The class represents command of register new user
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RegisterUserCommand implements Command {
     private final Logger logger = LogManager.getLogger();
     private final UserService userService = new UserServiceImpl();
@@ -52,7 +57,7 @@ public class RegisterUserCommand implements Command {
         return ConfigurationManager.getProperty("page.registerRedirect");
     }
 
-    //fixme will refactor to  the service
+
     private boolean validationUserData(String userName, String password, String firstName, String lastName,
                                        String phoneNumber, String eMail, StringBuilder status) {
         try {

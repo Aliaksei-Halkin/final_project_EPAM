@@ -5,7 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-
+/**
+ * The class represents actions for getting values(int,BigDecimal) from request
+ *
+ * @author Aliaksei Halkin
+ * @version 1.0
+ */
 public class RequestProcessor {
     private static final Logger LOGGER = LogManager.getLogger();
 
