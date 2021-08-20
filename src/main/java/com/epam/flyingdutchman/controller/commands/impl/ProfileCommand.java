@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.REQUEST_USER;
 import static com.epam.flyingdutchman.util.constants.Context.SESSION_USERNAME;
+
 /**
  * The class represents command to go to the profile page
  *
@@ -25,14 +26,13 @@ public class ProfileCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session= request.getSession();
+        HttpSession session = request.getSession();
         String username = (String) session.getAttribute(SESSION_USERNAME);
         try {
             User user = userService.findUserByUsername(username);
             request.setAttribute(REQUEST_USER, user);
         } catch (ServiceException e) {
-            e.printStackTrace();
-            LOGGER.error("Error when searching for user data");
+            LOGGER.error("Error when searching for user data", e);
         }
         return ConfigurationManager.getProperty("page.profile");
     }

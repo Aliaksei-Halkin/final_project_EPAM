@@ -34,11 +34,13 @@ public class MakeOrderCommand implements Command {
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("page.error");
         String orderStatus;
+        int firstPageOfHistory = 1;
         HttpSession session = request.getSession();
         Order order = createInstanceOfOrder(session);
         try {
             if (orderService.createOrder(order)) {
                 clearCart(session);
+                request.setAttribute(REQUEST_PAGE, firstPageOfHistory);
                 page = ConfigurationManager.getProperty("page.historyRedirect");
             } else {
                 orderStatus = MessageManager.getMessage("msg.orderNotCreated");
