@@ -1,12 +1,14 @@
 package com.epam.flyingdutchman.entity;
 
+import java.io.Serializable;
+
 /**
  * The abstract class represents basic entity.
  *
  * @author Aliaksei Halkin
  * @version 1.0
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
     private int id;
 
     /**

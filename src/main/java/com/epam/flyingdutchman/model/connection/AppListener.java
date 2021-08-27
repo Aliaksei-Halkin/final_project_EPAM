@@ -6,6 +6,9 @@ import jakarta.servlet.annotation.WebListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The class represents destroy pool
+ */
 @WebListener
 public class AppListener implements ServletContextListener {
     private static final Logger LOGGER = LogManager.getLogger();
