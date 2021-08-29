@@ -26,6 +26,4 @@ public class DatabaseColumn {
     public static final String ORDERS_ORDER_COST = "order_cost";
     public static final String ORDERS_STATUS = "status";
     public static final String ORDERS_DETAILS_NUMBER_OF_PRODUCTS = "number_of_products";
-
-
 }

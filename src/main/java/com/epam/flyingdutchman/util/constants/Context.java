@@ -52,7 +52,6 @@ public class Context {
     public static final String STATUS_USER_OPERATION = "statusUserOperation";
     public static final String REQUEST_USER_ACTIVE = "active";
 
-
     private Context() {
     }
 }

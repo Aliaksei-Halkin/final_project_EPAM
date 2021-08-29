@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
+
 /**
  * The class represents Order dao implementation.
  *
@@ -116,7 +117,6 @@ public class OrderDaoImpl implements OrderDao {
 
     private Map<Product, Long> createMapOfProducts(ResultSet productsSet) throws DaoException {
         Map<Product, Long> productsMap = new HashMap<>();
-
         try {
             while (productsSet.next()) {
                 productsMap.put(createInstanceOfProduct(productsSet),
@@ -229,7 +229,6 @@ public class OrderDaoImpl implements OrderDao {
             statement.executeUpdate();
             orderId = getKey(statement);
         } catch (SQLException throwables) {
-            connection.rollback();
             logger.error("Error inserting row in the table Order", throwables);
             throw new DaoException("Error inserting row in the table Order", throwables);
         }
@@ -284,7 +283,6 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException throwables) {
             logger.error("Error delete Row In Table Orders", throwables);
             throw new DaoException("Error delete Row In Table Orders", throwables);
-
         }
     }
 
@@ -295,7 +293,6 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException throwables) {
             logger.error("Error deleting in the order_details", throwables);
             throw new DaoException("Error deleting in the order_details", throwables);
-
         }
     }
 
