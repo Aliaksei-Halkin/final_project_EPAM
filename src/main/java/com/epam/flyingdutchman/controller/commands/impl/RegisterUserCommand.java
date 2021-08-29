@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
+
 /**
  * The class represents command of register new user
  *
@@ -34,7 +35,7 @@ public class RegisterUserCommand implements Command {
         String lastName = request.getParameter(REQUEST_LAST_NAME);
         String phoneNumber = request.getParameter(REQUEST_PHONE);
         String eMail = request.getParameter(REQUEST_EMAIL);
-        StringBuilder validationStatus = null;
+        StringBuilder validationStatus = new StringBuilder();
         if (validationUserData(userName, password, firstName, lastName, phoneNumber, eMail, validationStatus)) {
             String encryptedPassword = PasswordEncryptor.encryptPassword(password);
             User user = new User(userName, encryptedPassword, firstName, lastName, phoneNumber, eMail);

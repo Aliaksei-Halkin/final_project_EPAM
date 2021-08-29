@@ -11,6 +11,7 @@ import com.epam.flyingdutchman.model.validation.ProductValidator;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * The service class of model layer, intended to process operations with {@code Product}.
  *
@@ -94,10 +95,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Product product) throws ServiceException {
-        boolean update = false;
         try {
             if (isValidDataOfNewProduct(product)) {
-                update = productDao.update(product);
+                productDao.update(product);
             }
         } catch (DaoException e) {
             throw new ServiceException("Error updating information searchProducts", e);

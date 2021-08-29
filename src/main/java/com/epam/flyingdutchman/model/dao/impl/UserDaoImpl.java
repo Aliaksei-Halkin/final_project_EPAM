@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.epam.flyingdutchman.util.constants.DatabaseColumn.*;
+
 /**
  * The class represents User dao implementation.
  *
@@ -73,13 +74,13 @@ public class UserDaoImpl implements UserDao {
             statement.setString(USERS_USERNAME_INDEX, user.getUserName());
             statement.setString(USERS_PASSWORD_INDEX, user.getPassword());
             statement.setString(USERS_FIRST_NAME_INDEX, user.getFirstName());
-            statement.setString(USERS_LAST_NAME_INDEX, user.getFirstName());
+            statement.setString(USERS_LAST_NAME_INDEX, user.getLastName());
             statement.setString(USERS_PHONE_INDEX, user.getPhoneNumber());
             statement.setString(USERS_EMAIL_INDEX, user.geteMail());
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw new DaoException("Error addinprivate w user to the database", e);
+            throw new DaoException("Error while adding  user to the database", e);
         }
     }
 
