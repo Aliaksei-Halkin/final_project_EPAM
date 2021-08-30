@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.epam.flyingdutchman.util.constants.Context.*;
+
 /**
  * The class represents command of login user
  *
@@ -47,6 +48,7 @@ public class LoginCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Error validate the user", e);
+            request.setAttribute(REQUEST_ERROR, MessageManager.getMessage("msg.notFindUser"));
         }
         return page;
     }
