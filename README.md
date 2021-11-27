@@ -1,4 +1,5 @@
-The educational project for the UpskillLab course. I used the tomcat v.10 and last LTS JDK v.11
+The educational project for the UpskillLab course. I used the tomcat v.10 and last LTS JDK v.11. 
+This project built on Servlets and JSP pages, I've used the custom connection pool, pattern Command, Singletons, MVC layered architecture, JDBC, Log4J2, JSTL, 2 Locales(RU/EN), unit tests, written JavaDoc and etc.
 
 Author: Aliaksei Halkin, contact: pochtax3@gmail.com
 
